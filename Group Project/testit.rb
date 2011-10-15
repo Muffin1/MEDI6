@@ -1,1 +1,1 @@
- puts "ole!!!"
+ puts "MEDI6"
