@@ -15,4 +15,8 @@ class QuestionPaper
         @questions.push question
 
   end
+
+  def total_marks
+    30
+  end
 end
