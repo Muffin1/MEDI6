@@ -1,6 +1,6 @@
 class QuestionPaper
   # To change this template use File | Settings | File Templates.
-  attr_accessor :questions
+  attr_accessor :questions, :mark;
     def initialize
 
         @questions = []
@@ -17,6 +17,10 @@ class QuestionPaper
   end
 
   def total_marks
-    30
+     @mark = 0;
+    @questions.each do |element|
+      @mark  = @mark + element.mark
+    end
+    @mark
   end
 end
