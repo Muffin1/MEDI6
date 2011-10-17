@@ -1,9 +1,10 @@
 require 'doctor.rb'
 
 class Admin
-  attr_accessor :userName, :password
+  attr_accessor :user_name, :password
 
-  def initialize
+  def initialize()
+
 
   end
 
