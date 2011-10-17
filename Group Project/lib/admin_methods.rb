@@ -1,9 +1,8 @@
 require 'csv'
 
-class Users
+class Admin
 
-
-  def addUser(id, name, surname, privileges)
+  def addUser(surname, privileges)
     file = CSV.open("../csv/user.csv", "w")
     file << [id, name, surname, privileges]
   end

@@ -19,18 +19,28 @@ describe "Administrator" do
     adminPassword.should == "pass"
   end
 
-  it "Admin should have a inserDoctor method" do
+    it "Admin should have an id" do
     admin = Admin.new
+    admin.id = "2"
+    adminID = admin.id
+
+    adminID.should == "2"
+  end
+
+  it "Admin should have a insertDoctor method" do
+    admin = Admin.new
+    admin.userName = "adminuser"
+    admin.password = "adminpass"
     doctor = Doctor.new
-    doctor.firstName = "Alex"
-    doctor.lastName  = "Zorzovilis"
+    doctor.firstName = "alex"
+    doctor.lastName  = "zorzovilis"
     doctor.id = "01"
-    doctor.userName= "Alex"
-    doctor.password = "Alex"
-    admin.password = "pass"
+    doctor.userName= "drUser"
+    doctor.password = "drpass"
+
     adminPassword = admin.password
 
-    adminPassword.should == "pass"
+    adminPassword.should == "adminpass"
   end
 
 end

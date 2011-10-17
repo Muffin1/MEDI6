@@ -1,5 +1,9 @@
 require 'person.rb'
 
 class Receptionist < Person
-  # To change this template use File | Settings | File Templates.
+
+  def addPatient
+    patient = Patient.new
+
+  end
 end

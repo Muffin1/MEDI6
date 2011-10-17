@@ -65,7 +65,8 @@ it "Doctor should have a speciality" do
     doctorspeciality = doctor1.speciality
 
     doctorspeciality.should == "Heart Surgeon"
-  end
+end
+
 
 
 end

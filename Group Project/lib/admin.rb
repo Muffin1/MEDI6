@@ -3,14 +3,14 @@ require 'receptionist.rb'
 
 
 class Admin
-  attr_accessor :userName, :password
+  attr_accessor :userName, :password, :id
 
   def initialize
 
   end
 
   def insertDoctor(doctor)
-
+    doctor = Doctor.new()
   end
 
   def deleteDoctor(doctor)
@@ -18,7 +18,7 @@ class Admin
   end
 
   def insertReceptionist(receptionist)
-
+    receptionist = Receptionist.new()
   end
 
   def deleteReceptionist(receptionist)
