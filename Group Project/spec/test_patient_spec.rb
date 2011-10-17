@@ -2,6 +2,7 @@ require 'rspec'
 require 'csv'
 require '../lib/patient_method.rb'
 
+
 describe Patient do
   it "should add the info of a Patient" do
     add=Patient.new
