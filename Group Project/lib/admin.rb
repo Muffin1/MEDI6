@@ -5,7 +5,7 @@ require 'receptionist.rb'
 class Admin
   attr_accessor :userName, :password, :id
 
-  def initialize
+  def initialize()
 
   end
 
