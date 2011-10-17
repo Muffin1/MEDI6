@@ -1,6 +1,6 @@
 require 'rspec'
 require 'csv'
-require '../spec/users.rb'
+require '../lib/users.rb'
 
 describe Users do
   it "should open a new file and write the given info in it" do
