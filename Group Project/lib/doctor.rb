@@ -5,5 +5,12 @@ class Doctor < Person
   def initialize()
 
   end
+
+  def addDoctor(id, name, surname, address, phoneNumber, specialization, idNumber, password)
+    file = CSV.open("../csv/doctor.csv", "w")
+    file << [id, name, surname, address, phoneNumber, specialization, idNumber, password]
+  end
+
+
   # To change this template use File | Settings | File Templates.
 end

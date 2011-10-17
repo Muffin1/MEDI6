@@ -1,6 +1,6 @@
 require 'csv'
 
-class Users
+class Admin
 
 
   def addUser(id, name, surname, privileges)
