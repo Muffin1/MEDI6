@@ -1,7 +1,7 @@
 require 'doctor.rb'
 
 class Admin
-  attr_accessor :user_name, :password
+  attr_accessor :userName, :password, :id
 
   def initialize()
 
