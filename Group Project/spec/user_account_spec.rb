@@ -7,10 +7,16 @@ require '../lib/receptionist.rb'
 
 describe LogIn do
 
-  subject {LogIn.new(Doctor.new("borel","borel1",1002),Receptionist.new,Admin.new)}
+  doctor = Doctor.new()
+  doctor.userName = "baidy"
+  doctor.password = "baidy1"
+  doctor.id = "1"
+
+
+  subject {LogIn.new(doctor,Receptionist.new,Admin.new)}
 
   it "should validate the user details"   do
-    subject.validate("borel","borel1",1002).should be_an_instance_of(Doctor)
+    subject.validate("baidy","baidy1","1").should be_an_instance_of(Doctor)
   end
 
 end
