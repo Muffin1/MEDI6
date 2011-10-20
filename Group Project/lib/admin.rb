@@ -13,15 +13,17 @@ class Admin < Person
   def addDoctor(idNumber,firstName, lastName, address, phoneNumber, specialization,  password)
     doctor = Doctor.new()
     doctor.addDoctor("nil", idNumber, firstName, lastName, address, phoneNumber, specialization,  password)
-
+    doctor.setPrivileges("nil",password,"d")
   end
 
   def deleteDoctor(doctor)
 
   end
 
-  def insertReceptionist(receptionist)
+  def addReceptionist(idNumber, firstName, lastName, address, phoneNumber, password)
     receptionist = Receptionist.new()
+    receptionist.addReception("nil",idNumber, firstName, lastName, address, phoneNumber, password)
+    receptionist.setPrivileges("nil", password,"r")
   end
 
   def deleteReceptionist(receptionist)

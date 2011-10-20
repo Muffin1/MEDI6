@@ -9,6 +9,16 @@ class Person
   end
 
 
+  def setPrivileges(uniqueId,password,privileges)
+    file = File.open("../csv/user.csv", "a+")
+
+    CSV::Writer.generate(file) do |csv|
+    csv << [uniqueId,password, privileges]
+    end
+
+  file.close
+  end
+
   def searchByID(personID, file)
    csv_contents = CSV.read(file)
    csv_contents.each do |row|
