@@ -8,15 +8,15 @@ require '../lib/user_account.rb'
 describe LogIn do
   it "should validate the user details"   do
     doctor = mock('Doctor')
-    doctor.stub!(:userName).and_return("baidy")
+    doctor.stub!(:id).and_return("baidy")
     doctor.stub!(:password).and_return("baidy1")
 
     receptionist = mock('Receptionist')
-    receptionist.stub!(:userName).and_return("jery")
+    receptionist.stub!(:id).and_return("jery")
     receptionist.stub!(:password).and_return("jery1")
 
     admin = mock('Admin')
-    admin.stub!(:userName).and_return("alex")
+    admin.stub!(:id).and_return("alex")
     admin.stub!(:password).and_return("al1")
 
     subject = LogIn.new(doctor,receptionist,admin)
