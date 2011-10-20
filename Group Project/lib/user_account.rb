@@ -11,17 +11,27 @@ class LogIn
   end
 
   #check if the user is a valid user
-  def validate(user_name, password)
-        if(user_name == @doctor.userName && password == @doctor.password) then
+  def validate(id, password)
+        if(id == @doctor.id && password == @doctor.password) then
            return "doctor"
-        elsif(user_name == @receptionist.userName && password == @receptionist.password) then
+        elsif(id == @receptionist.id && password == @receptionist.password) then
            return "receptionist"
-        elsif(user_name == @admin.userName && password == @admin.password) then
+        elsif(id == @admin.id && password == @admin.password) then
            return "admin"
         else return nil
 
         end
 
   end
+
+
+def val(file,userName=nil,password=nil)
+   csv_contents = CSV.read(file)
+   csv_contents.each do |row|
+    if(row[0] == personID.to_s)
+      return row
+    end
+   end
+end
 
 end
