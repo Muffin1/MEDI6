@@ -21,7 +21,6 @@ class LogIn
         else return nil
 
         end
-
   end
 
 
