@@ -1,19 +1,25 @@
 require 'person.rb'
 
+
 class Doctor < Person
-  attr_accessor :speciality
 <<<<<<< HEAD
 
-  def initialize()
+def addDoctor(doctorId,idNumber, firstName, lastName, address, phoneNumber, specialization,  password)
+
+    file = File.open("../csv/doctor.csv", "a+")
+
+    CSV::Writer.generate(file) do |csv|
+    csv << [doctorId,idNumber, firstName, lastName, address, phoneNumber, specialization, password]
+    end
 =======
+  attr_accessor :speciality
+
   def initialize()
 
->>>>>>> 67eb16a729747ab37767d9e5c56e203330a864e3
   end
+>>>>>>> 3f164b2b7a61a03984c397856e7ba2c635f36852
 
-  def addDoctor(id, name, surname, address, phoneNumber, specialization, idNumber, password)
-    file = CSV.open("../csv/doctor.csv", "w")
-    file << [id, name, surname, address, phoneNumber, specialization, idNumber, password]
-  end
+  file.close
+end
 
 end
