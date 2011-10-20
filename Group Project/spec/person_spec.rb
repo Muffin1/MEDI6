@@ -58,4 +58,10 @@ describe "Person" do
 
      personphoneNumber.should == "123456789"
    end
+
+   it "generated_id  should have default value" do
+     person1 = Person.new()
+     person1.id.should == person1.idGenerator()
+   end
+
 end

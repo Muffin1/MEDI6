@@ -5,7 +5,27 @@ class Person
 
   def initialize()
 
+  end
 
+  def idGenerator()
+
+    if File.exists?('../lib/id_file.txt')
+      file = File.open('../lib/id_file.txt','r')
+      file.each {|line|
+        @id = line.to_i
+      }
+      @id += 1
+      file.close
+
+      file = File.open('../lib/id_file.txt','w+')
+      file.write(@id)
+      file.close
+    else
+      file = File.open('../lib/id_file.txt','w+')
+      @id = 5000
+      file.write(@id)
+      file.close
+    end
   end
 
 
@@ -21,20 +41,22 @@ class Person
 
 
 
-def searchByName(file,firstName=nil,lastName=nil)
+  def searchByName(file,firstName=nil,lastName=nil)
 
-    csv_contents = CSV.read(file)
-    person = []
-    $count=0
-    csv_contents.each do |row|
-      if((row[2] == firstName) or (row[3] == lastName))
-        person[$count]= CSV.generate_line(row)
+      csv_contents = CSV.read(file)
+      person = []
+      $count=0
+      csv_contents.each do |row|
+        if((row[2] == firstName) or (row[3] == lastName))
+          person[$count]= CSV.generate_line(row)
+        end
+        $count+=1
       end
-      $count+=1
+    if(person.length>0)
+        return  person
+    return nil
     end
-  if(person.length>0)
-      return  person
-  return nil
+  end
+
 end
-end
-end
+
