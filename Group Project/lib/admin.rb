@@ -12,8 +12,11 @@ class Admin < Person
 
   def addDoctor(idNumber,firstName, lastName, address, phoneNumber, specialization,  password)
     doctor = Doctor.new()
-    doctor.addDoctor("nil", idNumber, firstName, lastName, address, phoneNumber, specialization,  password)
-    doctor.setPrivileges("nil",password,"d")
+
+    aID = doctor.idGenerator()
+
+    doctor.addDoctor(aID, idNumber, firstName, lastName, address, phoneNumber, specialization,  password)
+    doctor.setPrivileges(aID,password,"d")
   end
 
   def deleteDoctor(doctor)
@@ -22,8 +25,11 @@ class Admin < Person
 
   def addReceptionist(idNumber, firstName, lastName, address, phoneNumber, password)
     receptionist = Receptionist.new()
-    receptionist.addReception("nil",idNumber, firstName, lastName, address, phoneNumber, password)
-    receptionist.setPrivileges("nil", password,"r")
+
+    aID = receptionist.idGenerator()
+
+    receptionist.addReception(aID,idNumber, firstName, lastName, address, phoneNumber, password)
+    receptionist.setPrivileges(aID, password,"r")
   end
 
   def deleteReceptionist(receptionist)

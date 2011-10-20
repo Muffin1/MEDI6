@@ -26,6 +26,8 @@ class Person
       file.write(@id)
       file.close
     end
+    return @id
+
   end
 
 

@@ -7,7 +7,10 @@ class Receptionist < Person
   def addPatient(firstName, lastName, address, dateOfBirth, phoneNumber, email, idNumber)
 
     patient = Patient.new
-    patient.addPatient("nil", "nil", firstName, lastName, address, dateOfBirth, phoneNumber, email, idNumber)
+
+    aID = patient.idGenerator()
+
+    patient.addPatient(aID, "nil", firstName, lastName, address, dateOfBirth, phoneNumber, email, idNumber)
   end
 
   def addReception(receptionistId,idNumber, firstName, lastName, address, phoneNumber, password)
