@@ -9,8 +9,8 @@ class Person
   end
 
 
-  def searchByID(personID)
-   csv_contents = CSV.read("../csv/patient.csv")
+  def searchByID(personID, file)
+   csv_contents = CSV.read(file)
    csv_contents.each do |row|
     if(row[0] == personID.to_s)
       return row
@@ -21,9 +21,10 @@ class Person
 
 
 
-def searchByName(firstName=nil,lastName=nil)
-  csv_contents = CSV.read("../csv/patient.csv")
-  person = []
+def searchByName(file,firstName=nil,lastName=nil)
+
+    csv_contents = CSV.read(file)
+    person = []
     $count=0
     csv_contents.each do |row|
       if((row[2] == firstName) or (row[3] == lastName))

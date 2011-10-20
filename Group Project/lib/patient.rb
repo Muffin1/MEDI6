@@ -1,5 +1,5 @@
 require 'person.rb'
-#require 'receptionist.rb'
+
 
 class Patient < Person
 

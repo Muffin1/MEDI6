@@ -63,7 +63,7 @@ describe "Receptionist" do
      it "Receptionist should add a patient" do
      receptionist = Receptionist.new
      receptionist.addPatient("brasidas","dsfds","address", "dateOfBirth", "phoneNumber", "email", "idNumber")
-     receptionist.searchByName("brasidas").should == ["nil,nil,brasidas,dsfds,address,dateOfBirth,phoneNumber,email,idNumber"]
+     receptionist.searchByName("../csv/patient.csv","brasidas").should == ["nil,nil,brasidas,dsfds,address,dateOfBirth,phoneNumber,email,idNumber"]
    end
 
 end
