@@ -8,12 +8,12 @@ class Doctor < Person
 
   end
 
-def addDoctor(doctorId,idNumber, firstName, lastName, address, phoneNumber, specialization,  password)
+def add_doctor(doctor_id,id_number, first_name, last_name, address, phone_number, specialization,  password)
 
     file = File.open("../csv/doctor.csv", "a+")
 
     CSV::Writer.generate(file) do |csv|
-    csv << [doctorId,idNumber, firstName, lastName, address, phoneNumber, specialization, password]
+    csv << [doctor_id,id_number, first_name, last_name, address, phone_number, specialization, password]
     end
 
 

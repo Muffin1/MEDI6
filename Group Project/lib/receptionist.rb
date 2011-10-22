@@ -4,21 +4,21 @@ require 'csv'
 
 class Receptionist < Person
 
-  def addPatient(firstName, lastName, address, dateOfBirth, phoneNumber, email, idNumber)
+  def add_patient(first_name, last_name, address, date_of_birth, phone_number, email, id_number)
 
     patient = Patient.new
 
-    aID = patient.idGenerator()
+    a_id = patient.id_generator()
 
-    patient.addPatient(aID, "nil", firstName, lastName, address, dateOfBirth, phoneNumber, email, idNumber)
+    patient.add_patient(a_id, "nil", first_name, last_name, address, date_of_birth, phone_number, email, id_number)
   end
 
-  def addReception(receptionistId,idNumber, firstName, lastName, address, phoneNumber, password)
+  def add_reception(receptionist_id,id_number, first_name, last_name, address, phone_number, password)
 
     file = File.open("../csv/receptionist.csv", "a+")
 
     CSV::Writer.generate(file) do |csv|
-    csv << [receptionistId,idNumber, firstName, lastName, address, phoneNumber, password]
+    csv << [receptionist_id,id_number, first_name, last_name, address, phone_number, password]
     end
 
   file.close
