@@ -27,15 +27,15 @@ class Main
   end
 
   # Test the user input (concerning ID and password))
-  main = Main.new()
-  main.get_user_ID_Password
-
-
-  userLogin  = Login.new
-
-  privilege = userLogin.validate("../csv/user.csv",main.id,main.password)
-
-  main.user_login(privilege)
+  #main = Main.new()
+  #main.get_user_ID_Password
+  #
+  #
+  #userLogin  = Login.new
+  #
+  #privilege = userLogin.validate("../csv/user.csv",main.id,main.password)
+  #
+  #main.user_login(privilege)
 
 
 
