@@ -4,21 +4,21 @@ class Main
 
   attr_accessor :id , :password
 
-  def getUserIDPassword
+  def get_user_ID_Password
     puts "ID: "
     @id = gets.chomp
     puts "Password: "
     @password = gets.chomp
   end
 
-  def loadMenuforUser(userType)
-    if userType == "a" then
+  def user_login(user_type)
+    if user_type == "a" then
       puts 'Welcome admin'
 
-    elsif userType == "d" then
+    elsif user_type == "d" then
       puts 'Welcome doctor'
 
-    elsif userType == "r" then
+    elsif user_type == "r" then
       puts 'Welcome receptionist'
 
     else puts 'Error! wrong input'
@@ -28,14 +28,14 @@ class Main
 
   # Test the user input (concerning ID and password))
   main = Main.new()
-  main.getUserIDPassword
+  main.get_user_ID_Password
 
 
-  userLogin  = LogIn.new
+  userLogin  = Login.new
 
   privilege = userLogin.validate("../csv/user.csv",main.id,main.password)
 
-  main.loadMenuforUser(privilege)
+  main.user_login(privilege)
 
 
 

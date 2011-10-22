@@ -1,6 +1,6 @@
 require "csv"
 
-class LogIn
+class Login
 
 
   #check if the user is a valid user

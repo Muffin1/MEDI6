@@ -1,13 +1,13 @@
 require 'csv'
 class Person
 
-  attr_accessor :firstName, :lastName, :address, :dateOfBirth, :phoneNumber, :email, :idNumber
+  attr_accessor :first_name, :last_name, :address, :date_of_birth, :phone_number, :email, :id_number
 
   def initialize()
 
   end
 
-  def idGenerator()
+  def id_generator()
 
     if File.exists?('../lib/id_file.txt')
       file = File.open('../lib/id_file.txt','r')
@@ -31,20 +31,20 @@ class Person
   end
 
 
-  def setPrivileges(uniqueId,password,privileges)
+  def set_privileges(unique_id,password,privileges)
     file = File.open("../csv/user.csv", "a+")
 
     CSV::Writer.generate(file) do |csv|
-    csv << [uniqueId,password, privileges]
+    csv << [unique_id,password, privileges]
     end
 
   file.close
   end
 
-  def searchByID(personID, file)
+  def search_by_id(person_id, file)
    csv_contents = CSV.read(file)
    csv_contents.each do |row|
-    if(row[0] == personID.to_s)
+    if(row[0] == person_id.to_s)
       return row
     end
    end
@@ -53,13 +53,13 @@ class Person
 
 
 
-  def searchByName(file,firstName=nil,lastName=nil)
+  def search_by_name(file,first_name=nil,last_name=nil)
 
       csv_contents = CSV.read(file)
       person = []
       $count=0
       csv_contents.each do |row|
-        if((row[2] == firstName) or (row[3] == lastName))
+        if((row[2] == first_name) or (row[3] == last_name))
           person[$count]= CSV.generate_line(row)
         end
         $count+=1
