@@ -68,12 +68,12 @@ describe "Person" do
   # end
 
   it "Receptionist should be able to search for a patient by id" do
-    result = person.searchByID("5058",patient_file)
+    result = person.search_by_id("5058",patient_file)
     result.should_not == nil
   end
 
   it "Receptionist should be able to search for patients by name" do
-    result = person.searchByName( patient_file,"sandra")
+    result = person.search_by_name( patient_file,"sandra")
     result.should_not == nil
   end
 

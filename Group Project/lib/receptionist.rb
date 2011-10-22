@@ -13,7 +13,7 @@ class Receptionist < Person
     patient.add_patient(a_id, "nil", first_name, last_name, address, date_of_birth, phone_number, email, id_number)
   end
 
-  def add_reception(receptionist_id,id_number, first_name, last_name, address, phone_number, password)
+  def add_receptionist(receptionist_id,id_number, first_name, last_name, address, phone_number, password)
 
     file = File.open("../csv/receptionist.csv", "a+")
 
