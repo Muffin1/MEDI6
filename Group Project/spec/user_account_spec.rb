@@ -1,28 +1,19 @@
 #user_account_spec.rb
 require 'rspec'
 require '../lib/user_account.rb'
-#require '../lib/admin.rb'
-#require '../lib/doctor.rb'
-#require '../lib/receptionist.rb'
+require 'csv'
+
 
 describe LogIn do
-  it "should validate the user details"   do
-    doctor = mock('Doctor')
-    doctor.stub!(:id).and_return("baidy")
-    doctor.stub!(:password).and_return("baidy1")
+  it "should validate the user login details"   do
+    user = mock('User')
+    user.stub!(:id).and_return("1")
+    user.stub!(:password).and_return("baidy1")
+    subject = LogIn.new
 
-    receptionist = mock('Receptionist')
-    receptionist.stub!(:id).and_return("jery")
-    receptionist.stub!(:password).and_return("jery1")
-
-    admin = mock('Admin')
-    admin.stub!(:id).and_return("alex")
-    admin.stub!(:password).and_return("al1")
-
-    subject = LogIn.new(doctor,receptionist,admin)
-    subject.validate("baidy","baidy1").should =="doctor"
-    subject.validate("jery","jery1").should =="receptionist"
-    subject.validate("alex","al1").should =="admin"
+    subject.validate("../csv/user.csv","5000","baidy1").should =="a"
+    subject.validate("../csv/user.csv","5012","rec8898").should =="d"
+    subject.validate("../csv/user.csv","5011","rec8898").should =="r"
   end
 
 end
