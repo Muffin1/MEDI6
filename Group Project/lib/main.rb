@@ -12,25 +12,31 @@ class Main
   end
 
   def loadMenuforUser(userType)
-    if userType == 1 then
+    if userType == "a" then
       puts 'Welcome admin'
 
-    elsif userType == 2 then
+    elsif userType == "d" then
       puts 'Welcome doctor'
 
-    elsif userType == 3 then
+    elsif userType == "r" then
       puts 'Welcome receptionist'
 
-     else puts 'Error! wrong input'
+    else puts 'Error! wrong input'
 
     end
   end
 
   # Test the user input (concerning ID and password))
-  #main = Main.new()
-  #main.getUserIDPassword
-  #
-  #puts main.id
-  #puts main.password
+  main = Main.new()
+  main.getUserIDPassword
+
+
+  userLogin  = LogIn.new
+
+  privilege = userLogin.validate("../csv/user.csv",main.id,main.password)
+
+  main.loadMenuforUser(privilege)
+
+
 
 end

@@ -11,9 +11,7 @@ describe LogIn do
     user.stub!(:password).and_return("baidy1")
     subject = LogIn.new
 
-    subject.validate("../csv/user.csv","5000","baidy1").should =="a"
-    subject.validate("../csv/user.csv","5012","rec8898").should =="d"
-    subject.validate("../csv/user.csv","5011","rec8898").should =="r"
+    subject.validate("../csv/user.csv","5000","baidy").should =="a"
   end
 
 end
