@@ -27,7 +27,6 @@ class Person
 
   end
 
-
   def set_privileges(unique_id,password,privileges)
     file = File.open("../csv/user.csv", "a+")
 
@@ -75,6 +74,7 @@ class Person
       end
       end
    end
+
 
 
 

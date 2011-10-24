@@ -14,5 +14,4 @@ describe "Receptionist" do
     receptionist_fname.should == "Farhad"
   end
 
-
-end
+  end

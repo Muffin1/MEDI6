@@ -28,7 +28,7 @@ class Admin < Person
 
     a_id = receptionist.id_generator()
 
-    receptionist.add_reception(a_id,idNumber, firstName, lastName, address, phoneNumber, password)
+    receptionist.add_receptionist(a_id,idNumber, firstName, lastName, address, phoneNumber, password)
     receptionist.set_privileges(a_id, password,"r")
   end
 
