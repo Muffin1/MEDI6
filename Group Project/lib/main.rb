@@ -1,10 +1,12 @@
 require 'user_account.rb'
+require 'admin.rb'
 require 'csv'
 
 class Main
 
   def initialize
     @login = LogIn.new
+    @admin = Admin.new
     @filename = "../csv/user.csv"
     @log_in_attempts = 0
   end
@@ -26,6 +28,7 @@ class Main
   end
 
   def perform_user_login
+
     id = ask_user_for_id
     password = ask_user_for_password
     setPrivilege()
@@ -33,6 +36,13 @@ class Main
 
     if not(@privilege==nil) then
       puts @login.user_login(@privilege)
+
+      if(@privilege == "a") then
+        puts @admin.display_admin_options()
+        option = gets.chomp
+        @admin.select_user_to_add(option)
+
+      end
 
     else
       if (@log_in_attempts < 3) then

@@ -8,7 +8,7 @@ describe Main do
   let(:stdout){StringIO.new}
   filename = "../csv/user.csv"
 
-  subject { Main.new(stdin, stdout) }
+  subject { Main.new() }
 
   context "ask user information" do
 
@@ -31,15 +31,14 @@ describe Main do
     context "perform user login" do
       it "should perform login " do
         log_in = LogIn.new
-        stdin.stub!(:gets).and_return("my id")
-        id = subject.ask_user_for_id
-        stdin.stub!(:gets).and_return("mypassword")
-        password = subject.ask_user_for_password
+        stdin.stub!(:gets).and_return("5007")
+        id = stdin.gets
+        stdin.stub!(:gets).and_return("admin")
+        password = stdin.gets
 
         privilege = log_in.validate(filename, id, password)
-        if not(false) then
-          log_in.user_login(privilege).should_not == nil
-        end
+
+        privilege.should_not == nil
 
       end
 
