@@ -25,13 +25,15 @@ class Admin < Person
 
   end
 
-  def add_receptionist(idNumber, firstName, lastName, address, phoneNumber, password)
+  def add_receptionist(idNumber, firstName, lastName, address, date_of_birth, phoneNumber, email, password)
     receptionist = Receptionist.new()
 
     a_id = receptionist.id_generator()
 
-    receptionist.add_receptionist(a_id,idNumber, firstName, lastName, address, phoneNumber, password)
+    receptionist.add_receptionist(a_id,idNumber, firstName, lastName, address, date_of_birth, phoneNumber, email, password)
     receptionist.set_privileges(a_id, password,"r")
+
+    return receptionist
   end
 
   def deleteReceptionist(receptionist)
@@ -41,11 +43,36 @@ class Admin < Person
 
   def select_user_to_add(option)
     if (option == "1") then
-      create_doctor()
+      boolean = true
+
+      while (boolean)
+        create_doctor()
+        puts "\n"
+        puts "----------------------"
+        puts "\n"
+        puts 'add another doctor : press "y" or "n" to exit'
+        answer = gets.chomp()
+        if  (answer=="n")
+          boolean = false
+
+        end
+      end
 
     elsif(option == "2") then
+     boolean = true
 
-      return "Adding a receptionist.."
+      while (boolean)
+        create_receptionist()
+        puts "\n"
+        puts "----------------------"
+        puts "\n"
+        puts 'add another receptionist : press "y" or "n" to exit'
+        answer = gets.chomp()
+        if  (answer=="n")
+          boolean = false
+
+        end
+      end
 
     else
       puts "\n"
@@ -87,5 +114,33 @@ class Admin < Person
     puts  "Doctor #{first_name} added!"
 
   end
+
+  def create_receptionist()
+      puts "Adding a receptionist.."
+      puts "Please provide the values.."
+      puts "\n"
+      puts "receptionist id number: "
+      id = gets.chomp()
+      puts "receptionist first name: "
+      first_name = gets.chomp()
+      puts "receptionist last name: "
+      last_name  = gets.chomp()
+      puts "receptionist address: "
+      address = gets.chomp()
+      puts "receptionist date of birth: "
+      date_of_birth = gets.chomp()
+      puts "receptionist phone number: "
+      phone_number = gets.chomp()
+      puts "receptionist email: "
+      email = gets.chomp()
+      puts "receptionist password"
+      password = gets.chomp()
+
+      add_receptionist(id,first_name, last_name, address, date_of_birth ,phone_number, email, password)
+      puts "\n"
+      puts  "Receptionist #{first_name} added!"
+
+    end
+
 
 end
