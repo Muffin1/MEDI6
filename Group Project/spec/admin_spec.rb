@@ -29,5 +29,18 @@ describe "Administrator" do
     end
   end
 
+  it "checking receptionist insertion" do
+
+      admin.add_receptionist("104144", "Yiannis", "Jacobson", "22 Mambo Street", "0123456789", "34m43")
+      csv_contents = CSV.read("../csv/receptionist.csv")
+
+      found_it=nil
+      csv_contents.each do |row|
+      if(row[1] == "104144")
+         found_it= row[1]
+      end
+      end
+      found_it.should =="104144"
+    end
 
 end
