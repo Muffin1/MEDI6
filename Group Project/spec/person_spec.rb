@@ -22,9 +22,17 @@ describe "Person" do
      person_fname = person.id_number
      person_fname.should == "886677"
    end
+   end
+
+    it "person.id_generator should return a unique id number" do
+
+     person.stub!(:id_generator).and_return(5000)
+     person.id_generator.should == 5000
+
+     end
 
 
  end
 
-  end
+
 
