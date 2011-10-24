@@ -31,7 +31,7 @@ describe Main do
     context "perform user login" do
       it "should perform login " do
         log_in = LogIn.new
-        stdin.stub!(:gets).and_return("5007")
+        stdin.stub!(:gets).and_return("5000")
         id = stdin.gets
         stdin.stub!(:gets).and_return("admin")
         password = stdin.gets
