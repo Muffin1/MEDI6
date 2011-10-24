@@ -1,7 +1,7 @@
 require 'csv'
 class Person
 
-  attr_accessor :first_name, :last_name, :address, :date_of_birth, :phone_number, :email, :id_number
+  attr_accessor :first_name, :last_name, :address, :date_of_birth, :phone_number, :email, :id_number, :password
 
 
   def id_generator()
@@ -37,6 +37,9 @@ class Person
 
     file.close
   end
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 00ba7247ca0f25e0f8ed6df28f3e574f59a6a270
 end

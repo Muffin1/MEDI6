@@ -1,5 +1,5 @@
 require "rspec"
-require "../lib/main.rb"
+require '../lib/main.rb'
 require '../lib/user_account.rb'
 require "csv"
 
@@ -8,7 +8,7 @@ describe Main do
   let(:stdout){StringIO.new}
   filename = "../csv/user.csv"
 
-  subject { Main.new(stdin, stdout) }
+  subject { Main.new() }
 
   context "ask user information" do
 
@@ -22,7 +22,7 @@ describe Main do
 
     context "asking for password" do
       it "should get data from the standard input stream" do
-        stdin.stub!(:gets).and_return("maypassword")
+        stdin.stub!(:gets).and_return("mypassword")
         subject.ask_user_for_password
         puts stdout.string
       end
@@ -31,7 +31,14 @@ describe Main do
     context "perform user login" do
       it "should perform login " do
         log_in = LogIn.new
-        subject.perform_user_login(log_in.user_login(log_in.validate(filename, "5000","ydgtwyy")).should =='Welcome admin')
+        stdin.stub!(:gets).and_return("5007")
+        id = stdin.gets
+        stdin.stub!(:gets).and_return("admin")
+        password = stdin.gets
+
+        privilege = log_in.validate(filename, id, password)
+
+        privilege.should_not == nil
 
       end
 
