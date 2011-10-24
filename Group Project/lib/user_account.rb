@@ -4,10 +4,7 @@ require 'receptionist'
 require 'admin'
 class LogIn
 
-  def initialize(doctor, receptionist, admin)
-    @doctor = doctor
-    @receptionist = receptionist
-    @admin = admin
+  def initialize()
   end
 
   #check user
