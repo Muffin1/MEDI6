@@ -41,7 +41,23 @@ describe "Person" do
        File.stub!(:write).with(1, "5000", "d").and_return("1,5000,d")
        File.write(1,"5000","d") == "1,5000,d"
 
-   end
+     end
+
+   it "person.set_privileges should get (unique id number, password, privileges) and add a new user to the login list" do
+
+
+       person.set_privileges(4000, "doctor_who", "d")
+
+       csv_contents = CSV.read("../csv/user.csv")
+
+       found_it=nil
+       csv_contents.each do |row|
+        if(row[0] == "4000")
+          found_it= row[0]
+        end
+       end
+        found_it.should =="4000"
+     end
 
  end
 
