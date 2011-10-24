@@ -10,26 +10,26 @@ class Admin < Person
 
   end
 
-  def addDoctor(idNumber,firstName, lastName, address, phoneNumber, specialization,  password)
+  def add_doctor(idNumber,firstName, lastName, address, phoneNumber, specialization,  password)
     doctor = Doctor.new()
 
-    aID = doctor.idGenerator()
+    a_id = doctor.id_generator()
 
-    doctor.addDoctor(aID, idNumber, firstName, lastName, address, phoneNumber, specialization,  password)
-    doctor.setPrivileges(aID,password,"d")
+    doctor.add_doctor(a_id, idNumber, firstName, lastName, address, phoneNumber, specialization,  password)
+    doctor.set_privileges(aID,password,"d")
   end
 
-  def deleteDoctor(doctor)
+  def delete_doctor(doctor)
 
   end
 
-  def addReceptionist(idNumber, firstName, lastName, address, phoneNumber, password)
+  def add_receptionist(idNumber, firstName, lastName, address, phoneNumber, password)
     receptionist = Receptionist.new()
 
-    aID = receptionist.idGenerator()
+    a_id = receptionist.id_generator()
 
-    receptionist.addReception(aID,idNumber, firstName, lastName, address, phoneNumber, password)
-    receptionist.setPrivileges(aID, password,"r")
+    receptionist.add_reception(a_id,idNumber, firstName, lastName, address, phoneNumber, password)
+    receptionist.set_privileges(a_id, password,"r")
   end
 
   def deleteReceptionist(receptionist)
