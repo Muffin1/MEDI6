@@ -16,6 +16,14 @@ describe "Person" do
      person_fname.should == "John"
    end
 
+   it "person should have an id number" do
+
+     person.id_number = "886677"
+     person_fname = person.id_number
+     person_fname.should == "886677"
+   end
+
+
  end
 
   end
