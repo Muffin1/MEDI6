@@ -14,11 +14,28 @@ class LogIn
 
     csv_contents.each do |row|
       if(row[0] == id.to_s && row[1] == password.to_s)
+
         return row[2].to_s
       end
     end
 
     return nil
+  end
+
+  def user_login(user_type)
+    if user_type == "a" then
+      return 'Welcome admin'
+
+    elsif user_type == "d" then
+      return 'Welcome doctor'
+
+    elsif user_type == "r" then
+
+      return 'Welcome receptionist'
+
+    else return 'Error! wrong input'
+
+    end
   end
 
 end

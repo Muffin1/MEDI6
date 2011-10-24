@@ -1,15 +1,18 @@
 require "rspec"
-require "main.rb"
+require "../lib/main.rb"
+require '../lib/user_account.rb'
+require "csv"
 
 describe Main do
   let(:stdin){mock('stdin')}
   let(:stdout){StringIO.new}
+  filename = "../csv/user.csv"
 
   subject { Main.new(stdin, stdout) }
 
   context "ask user information" do
 
-     context "asking for id" do
+    context "asking for id" do
       it "should get data from the standard input stream" do
         stdin.stub!(:gets).and_return("my id")
         subject.ask_user_for_id
@@ -25,28 +28,13 @@ describe Main do
       end
     end
 
+    context "perform user login" do
+      it "should perform login " do
+        log_in = LogIn.new
+        subject.perform_user_login(log_in.user_login(log_in.validate(filename, "5000","ydgtwyy")).should =='Welcome admin')
 
+      end
+
+    end
   end
-
-
-  it "should get ID and password" do
-
-    #
-    #main.get_user_id_password
-    #
-    #main.id.should == 5000
-    #main.password.should == "apassword"
-
-  end
-
-  it "should print according " do
-
-
-  end
-
-  it "should get according " do
-
-
-  end
-
 end
