@@ -32,6 +32,17 @@ describe "Person" do
      end
 
 
+     it "person.set_privileges should get (unique id number, password, privileges) and add a new user to the login list" do
+
+       person.stub!(:set_privileges).with(1, "5000", "d")
+       person.set_privileges(1, "5000", "d")
+       file = mock('file')
+       File.stub!(:open).with("filename", "privilege").and_yield(file)
+       File.stub!(:write).with(1, "5000", "d").and_return("1,5000,d")
+       File.write(1,"5000","d") == "1,5000,d"
+
+   end
+
  end
 
 
