@@ -1,10 +1,10 @@
 require "rspec"
-require "../lib/doctor"
+require "../lib/doctor.rb"
 
 describe "Doctor" do
 
   doctor = Doctor.new
-
+  let(:doctor){mock('Doctor')}
   context "attributes of class doctor" do
     it "Doctor should have a speciality" do
       doctor.speciality = "pathologist"
@@ -13,7 +13,7 @@ describe "Doctor" do
   end
 
   describe "methods of class doctor" do
-    doctor = mock ("Doctor")
+
 
     it "should register a new doctor to the system" do
       doctor.stub!(:add_doctor)
@@ -25,5 +25,6 @@ describe "Doctor" do
       File.write(1,2, "John", "James", "27 Cherry Street", "12345678910", "pathologist",  "34m43") == "1,2,John,James,27Cherry Street,12345678910,pathologist,34m43"
     end
   end
+
 
 end

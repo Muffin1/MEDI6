@@ -16,7 +16,7 @@ class Admin < Person
     a_id = doctor.id_generator()
 
     doctor.add_doctor(a_id, idNumber, firstName, lastName, address, phoneNumber, specialization,  password)
-    doctor.set_privileges(aID,password,"d")
+    doctor.set_privileges(a_id,password,"d")
   end
 
   def delete_doctor(doctor)

@@ -57,7 +57,12 @@ describe "Person" do
         end
        end
         found_it.should =="4000"
-     end
+   end
+
+   it "person.id_generator should generate unique id number > 0" do
+      person.id_generator.should > 0
+
+   end
 
  end
 
