@@ -24,16 +24,16 @@ class LogIn
 
   def user_login(user_type)
     if user_type == "a" then
-      return 'Welcome admin'
+      return 'Welcome admin!'
 
     elsif user_type == "d" then
-      return 'Welcome doctor'
+      return 'Welcome doctor!'
 
     elsif user_type == "r" then
 
-      return 'Welcome receptionist'
+      return 'Welcome receptionist!'
 
-    else return 'Error! wrong input'
+    else return nil
 
     end
   end
