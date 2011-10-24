@@ -31,4 +31,15 @@ describe "Receptionist" do
     receptionist.phone_number.should == "123456789"
   end
 
+it "should register a new patient to the system" do
+      receptionist = mock("Receptionist")
+      receptionist.stub!(:add_patient)
+      receptionist.add_patient("jerry","cheng","12 oxford street", "14/12/1985", "3251353", "email", "654321")
+
+      file = mock('file')
+      File.stub!(:open).with("filename", "privilege").and_yield(file)
+      File.stub!(:write).with("jerry","cheng","12 oxford street", "14/12/1985", "3251353", "email", "654321").and_return("jerry,cheng,12 oxford street,14/12/1985,3251353, email,654321")
+      File.write("jerry","cheng","12 oxford street", "14/12/1985", "3251353", "email", "654321")== "jerry,cheng,12 oxford street,14/12/1985,3251353, email,654321"
+    end
+
 end
