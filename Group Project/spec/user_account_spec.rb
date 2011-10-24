@@ -1,44 +1,42 @@
 #user_account_spec.rb
 require 'rspec'
 require '../lib/user_account.rb'
-
 require 'csv'
+describe LogIn do
+  subject {LogIn.new()}
 
- # doctor = Doctor.new()
- # doctor.userName = "baidy"
-  #doctor.password = "baidy1"
-  #doctor.id = "01"
+  filename = "../csv/user.csv"
 
-  #receptionist = Receptionist.new()
-  #receptionist.userName = "jerry"
-  #receptionist.password = "jerry1"
-  #receptionist.id = "02"
-
-  #admin = Admin.new()
-  #admin.userName = "alex"
-  #admin.password = "alex1"
-  #admin.id = "03"
-
-  it "should return a doctor instance"   do
-     doctor =   mock('Doctor')
-
-  doctor.stub!(:userName).and_return("baidy")
-
-
-  subject {LogIn.new(doctor,receptionist,admin)}
-
-    subject.validate("baidy","baidy1","01").should be_an_instance_of(Doctor)
-
-describe Login do
-  it "should validate the user login details"   do
-    user = mock('User')
-    user.stub!(:id).and_return("1")
-    user.stub!(:password).and_return("baidy1")
-    subject = Login.new
-
-    subject.validate("../csv/user.csv","5000","baidy").should =="a"
-
+  it "should validate a receptionist user"   do
+    id = "5011"
+    password = "rec8898"
+    #user = mock('User')
+    subject.stub!(:id).and_return(id)
+    subject.stub!(:password).and_return(password)
+    subject.validate(filename,id,password).should =="r"
   end
+
+  it "should validate a doctor user"   do
+    id = "5031"
+    password = "rec8412"
+    subject.stub!(:id).and_return(id)
+    subject.stub!(:password).and_return(password)
+    subject.validate(filename,id,password).should =="d"
   end
+
+  it "should validate a admin user"   do
+    id = "5000"
+    password = "ydgtwyy"
+    subject.stub!(:id).and_return(id)
+    subject.stub!(:password).and_return(password)
+    subject.validate(filename,id,password).should =="a"
+  end
+
+  it "should load the menu according to the privilege"   do
+    subject.user_login(subject.validate(filename, "5000","ydgtwyy")).should =='Welcome admin'
+    subject.user_login(subject.validate(filename, "5031","rec8412")).should =='Welcome doctor'
+    subject.user_login(subject.validate(filename, "5011","rec8898")).should =='Welcome receptionist'
+  end
+
 
 end
