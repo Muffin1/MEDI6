@@ -3,9 +3,6 @@ class Person
 
   attr_accessor :first_name, :last_name, :address, :date_of_birth, :phone_number, :email, :id_number
 
-  def initialize()
-
-  end
 
   def id_generator()
 
@@ -35,47 +32,49 @@ class Person
 
     CSV::Writer.generate(file) do |csv|
 
-      #csv << [uniqueId,password, privileges]
-
       csv << [unique_id,password, privileges]
     end
 
     file.close
   end
 
-  def search_by_id(person_id, file)
-    boolean = false
-    csv_contents = CSV.read(file)
-    csv_contents.each do |row|
-      if(row[0] == person_id.to_s)
-        boolean = true
-        return row
+
+
+    def search_by_id(person_id, file)
+      csv_contents = CSV.read(file)
+      csv_contents.each do |row|
+        if(row[0] == person_id.to_s)
+          return row
+
+        end
+        if not(boolean)
+          return nil
+        end
       end
     end
-    if not(boolean)
-      return nil
-    end
-  end
 
-  def search_by_name(file,first_name=nil,last_name=nil)
+      def search_by_name(file,first_name=nil,last_name=nil)
 
-    csv_contents = CSV.read(file)
-    person = []
-    $count=0
-    csv_contents.each do |row|
-      if((row[2] == first_name) or (row[3] == last_name))
-        person[$count]= CSV.generate_line(row)
+        csv_contents = CSV.read(file)
+        person = []
+        $count=0
+        csv_contents.each do |row|
+          if((row[2] == first_name) or (row[3] == last_name))
+            person[$count]= CSV.generate_line(row)
+          end
+          $count+=1
+        end
+
+
+
+      if(person.length>0)
+        return  person
+      else
+        return nil
       end
-      $count+=1
-    end
-    $count+=1
+      end
+   end
 
-    if(person.length>0)
-      return  person
-    else
-      return nil
-    end
-  end
-end
+
 
 
