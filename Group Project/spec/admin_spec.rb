@@ -6,9 +6,9 @@ require "../lib/receptionist.rb"
 describe "Administrator" do
 
   admin = Admin.new
-  let(:receptionist){mock('Receptionist')}
+  let(:doctor){mock('Doctor')}
 
-  context "the admin should be able to register new doctors or receptionist in the system" do
+  context "the admin should be able to register new doctors in the system" do
     it "defining add_doctor method and assign privileges" do
 
       id = doctor.stub!(:id_generator).and_return(1)
