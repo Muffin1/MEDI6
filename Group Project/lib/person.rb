@@ -37,9 +37,5 @@ class Person
 
     file.close
   end
-<<<<<<< HEAD
 
-
-=======
->>>>>>> 00ba7247ca0f25e0f8ed6df28f3e574f59a6a270
 end

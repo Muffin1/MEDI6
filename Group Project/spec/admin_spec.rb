@@ -55,12 +55,6 @@ describe "Administrator" do
     found_it.should =="2323"
   end
 
-  it "should choose which user to add" do
-    admin.select_user_to_add(1).should == "Adding a doctor.."
-    admin.select_user_to_add(2).should == "Adding a receptionist.."
-
-  end
-
   it "should get the user details for doctor" do
 
     stdin.stub!(:gets).and_return("AI555200")
