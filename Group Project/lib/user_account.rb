@@ -2,40 +2,24 @@
 require 'doctor'
 require 'receptionist'
 require 'admin'
+require "csv"
 class LogIn
 
   def initialize()
   end
 
-  #check user
-  def check_user(id)
-    if(id == @doctor.id) then
-      return "doctor"
-    elsif(id == @receptionist.id)then
-      return "receptionist"
-    elsif(id == @admin.id) then
-      return "admin"
-    end
-  end
   #check if the user is a valid user
-  def validate(user_name, password, id)
-    if(check_user(id) == "doctor") then
-        if(user_name == @doctor.userName && password == @doctor.password) then
-           return @doctor
-        else return nil
-        end
-      elsif(check_user(id) == "receptionist") then
-        if(user_name == @receptionist.userName && password == @receptionist.password) then
-           return @receptionist
-        else return nil
-        end
-      elsif(check_user(id) == "admin") then
-        if(user_name == @admin.userName && password == @admin.password) then
-           return @admin
-        else return nil
-        end
+  def validate(file,id, password)
+    csv_contents = CSV.read(file)
+
+    csv_contents.each do |row|
+      if(row[0] == id.to_s && row[1] == password.to_s)
+        return row[2].to_s
+      end
     end
 
+    return nil
   end
 
 end
+
