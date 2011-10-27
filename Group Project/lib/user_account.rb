@@ -3,7 +3,7 @@ require 'doctor'
 require 'receptionist'
 require 'admin'
 require "csv"
-class LogIn
+class Login
 
   def initialize()
   end

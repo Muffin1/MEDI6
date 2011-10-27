@@ -2,7 +2,7 @@
 require 'rspec'
 require '../lib/user_account.rb'
 require 'csv'
-describe LogIn do
+describe Login do
 let(:subject){mock('login')}
 
   filename = "../csv/user.csv"
@@ -11,7 +11,9 @@ let(:subject){mock('login')}
     id = "5011"
     password = "rec8898"
     subject.stub!(:id).and_return(id)
-    subject.stub!(:password).and_return(password)
+    subject.stub_chain(:MD5,:hexdigest).with(password).and_return("hexdigest_password")
+    encrypted_password = subject.MD5.hexdigest(password)
+    subject.stub!(:password).and_return(encrypted_password)
     subject.stub!(:validate).and_return('r')
     subject.validate(filename,id,password).should =="r"
   end
