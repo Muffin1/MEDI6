@@ -1,4 +1,5 @@
 require "rspec"
+require "md5"
 require '../lib/admin.rb'
 require "../lib/doctor.rb"
 require "../lib/receptionist.rb"
@@ -75,7 +76,7 @@ describe "Administrator" do
     email = stdin.gets
     stdin.stub!(:gets).and_return("Surgeon")
     specialization = stdin.gets
-    stdin.stub!(:gets).and_return("bolton")
+    stdin.stub!(:gets).and_return(MD5.hexdigest("bolton"))
     password = stdin.gets
 
     doctor = admin.add_doctor(id, first_name, last_name, address, date_of_birth, phone_number, email, specialization, password)
@@ -88,7 +89,7 @@ describe "Administrator" do
     doctor.phone_number.should == "1234567890"
     doctor.email.should == "anyname@yahoo.com"
     doctor.specialization.should == "Surgeon"
-    doctor.password.should == "bolton"
+    doctor.password.should == MD5.hexdigest(password)
 
   end
 
