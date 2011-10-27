@@ -40,7 +40,6 @@ class Admin < Person
 
   end
 
-
   def select_user_to_add(option)
     if (option == "1") then
       boolean = true

@@ -38,4 +38,18 @@ class Person
     file.close
   end
 
+  def search_by_id(person_id, filename)
+    csv_contents = CSV.read(filename)
+    boolean = false
+    csv_contents.each do |row|
+      if(row[0] == person_id.to_s)
+        boolean = true
+        return row
+      end
+    end
+    if not(boolean)
+      return nil
+    end
+  end
+
 end
