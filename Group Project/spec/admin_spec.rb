@@ -24,9 +24,11 @@ describe "Administrator" do
 
     it "defining add_receptionist method and assign privileges" do
       id = receptionist.stub!(:id_generator).and_return(1)
-      receptionist.stub!(:add_receptionist).with(id, "Marina", "Jacobson", "22 Mambo Street", "0123456789", "34m43")
+      doctor.stub_chain(:MD5,:hexdigest).with("password").and_return("hexdigest_password")
+      encrypted_password = doctor.MD5.hexdigest("password")
+      receptionist.stub!(:add_receptionist).with(id, "Marina", "Jacobson", "22 Mambo Street", "0123456789", encrypted_password)
       receptionist.stub!(:set_privileges).with(id, "5000", "r")
-      receptionist.add_receptionist(id, "Marina", "Jacobson", "22 Mambo Street", "0123456789", "34m43")
+      receptionist.add_receptionist(id, "Marina", "Jacobson", "22 Mambo Street", "0123456789", encrypted_password)
       receptionist.set_privileges(id, "5000", "r")
     end
   end
