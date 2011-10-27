@@ -13,9 +13,11 @@ describe "Administrator" do
   context "the admin should be able to register new doctors or receptionists in the system" do
     it "defining add_doctor method and assign privileges" do
       id = doctor.stub!(:id_generator).and_return(1)        #stub: create a fake method which return 1
-      doctor.stub!(:add_doctor).with(id,2, "John", "James", "27 Cherry Street", "12345678910", "pathologist",  "34m43")
+      doctor.stub_chain(:MD5,:hexdigest).with("password").and_return("hexdigest_password")
+      encrypted_password = doctor.MD5.hexdigest("password")
+      doctor.stub!(:add_doctor).with(id,2, "John", "James", "27 Cherry Street", "12345678910", "pathologist",  encrypted_password)
       doctor.stub!(:set_privileges).with(id, "5000", "d")
-      doctor.add_doctor(id,2, "John", "James", "27 Cherry Street", "12345678910", "pathologist",  "34m43")
+      doctor.add_doctor(id,2, "John", "James", "27 Cherry Street", "12345678910", "pathologist",  encrypted_password)
       doctor.set_privileges(id, "5000", "d")
     end
 
