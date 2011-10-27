@@ -15,16 +15,18 @@ let(:subject){mock('login')}
     encrypted_password = subject.MD5.hexdigest(password)
     subject.stub!(:password).and_return(encrypted_password)
     subject.stub!(:validate).and_return('r')
-    subject.validate(filename,id,password).should =="r"
+    subject.validate(filename,id,encrypted_password).should =="r"
   end
 
   it "should validate a doctor user"   do
     id = "5031"
     password = "rec8412"
     subject.stub!(:id).and_return(id)
-    subject.stub!(:password).and_return(password)
-     subject.stub!(:validate).and_return('d')
-    subject.validate(filename,id,password).should =="d"
+    subject.stub_chain(:MD5,:hexdigest).with(password).and_return("hexdigest_password")
+    encrypted_password = subject.MD5.hexdigest(password)
+    subject.stub!(:password).and_return(encrypted_password)
+    subject.stub!(:validate).and_return('d')
+    subject.validate(filename,id,encrypted_password).should =="d"
   end
 
   it "should validate a admin user"   do
