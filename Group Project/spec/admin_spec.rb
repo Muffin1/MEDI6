@@ -1,4 +1,5 @@
 require "rspec"
+require "md5"
 require '../lib/admin.rb'
 require "../lib/doctor.rb"
 require "../lib/receptionist.rb"
@@ -13,17 +14,21 @@ describe "Administrator" do
   context "the admin should be able to register new doctors or receptionists in the system" do
     it "defining add_doctor method and assign privileges" do
       id = doctor.stub!(:id_generator).and_return(1)        #stub: create a fake method which return 1
-      doctor.stub!(:add_doctor).with(id,2, "John", "James", "27 Cherry Street", "12345678910", "pathologist",  "34m43")
+      doctor.stub_chain(:MD5,:hexdigest).with("password").and_return("hexdigest_password")
+      encrypted_password = doctor.MD5.hexdigest("password")
+      doctor.stub!(:add_doctor).with(id,2, "John", "James", "27 Cherry Street", "12345678910", "pathologist",  encrypted_password)
       doctor.stub!(:set_privileges).with(id, "5000", "d")
-      doctor.add_doctor(id,2, "John", "James", "27 Cherry Street", "12345678910", "pathologist",  "34m43")
+      doctor.add_doctor(id,2, "John", "James", "27 Cherry Street", "12345678910", "pathologist",  encrypted_password)
       doctor.set_privileges(id, "5000", "d")
     end
 
     it "defining add_receptionist method and assign privileges" do
       id = receptionist.stub!(:id_generator).and_return(1)
-      receptionist.stub!(:add_receptionist).with(id, "Marina", "Jacobson", "22 Mambo Street", "0123456789", "34m43")
+      doctor.stub_chain(:MD5,:hexdigest).with("password").and_return("hexdigest_password")
+      encrypted_password = doctor.MD5.hexdigest("password")
+      receptionist.stub!(:add_receptionist).with(id, "Marina", "Jacobson", "22 Mambo Street", "0123456789", encrypted_password)
       receptionist.stub!(:set_privileges).with(id, "5000", "r")
-      receptionist.add_receptionist(id, "Marina", "Jacobson", "22 Mambo Street", "0123456789", "34m43")
+      receptionist.add_receptionist(id, "Marina", "Jacobson", "22 Mambo Street", "0123456789", encrypted_password)
       receptionist.set_privileges(id, "5000", "r")
     end
   end
@@ -73,7 +78,7 @@ describe "Administrator" do
     email = stdin.gets
     stdin.stub!(:gets).and_return("Surgeon")
     specialization = stdin.gets
-    stdin.stub!(:gets).and_return("bolton")
+    stdin.stub!(:gets).and_return(MD5.hexdigest("bolton"))
     password = stdin.gets
 
     doctor = admin.add_doctor(id, first_name, last_name, address, date_of_birth, phone_number, email, specialization, password)
@@ -86,7 +91,7 @@ describe "Administrator" do
     doctor.phone_number.should == "1234567890"
     doctor.email.should == "anyname@yahoo.com"
     doctor.specialization.should == "Surgeon"
-    doctor.password.should == "bolton"
+    doctor.password.should == MD5.hexdigest(password)
 
   end
 
@@ -105,7 +110,7 @@ describe "Administrator" do
     phone_number = stdin.gets
     stdin.stub!(:gets).and_return("anyname@yahoo.com")
     email = stdin.gets
-    stdin.stub!(:gets).and_return("bolton")
+    stdin.stub!(:gets).and_return(MD5.hexdigest("bolton"))
     password = stdin.gets
 
     receptionist = admin.add_receptionist(id, first_name, last_name, address, date_of_birth, phone_number, email, password)
@@ -117,7 +122,7 @@ describe "Administrator" do
     receptionist.date_of_birth.should  == "01/01/1953"
     receptionist.phone_number.should == "1234567890"
     receptionist.email.should == "anyname@yahoo.com"
-    receptionist.password.should == "bolton"
+    receptionist.password.should == MD5.hexdigest(password)
 
   end
 end

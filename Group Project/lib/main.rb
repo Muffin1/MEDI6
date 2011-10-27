@@ -1,5 +1,6 @@
 require 'user_account.rb'
 require 'admin.rb'
+require "doctor.rb"
 require 'csv'
 
 class Main
@@ -7,6 +8,7 @@ class Main
   def initialize
     @login = LogIn.new
     @admin = Admin.new
+    @doctor = Doctor.new
     @filename = "../csv/user.csv"
     @log_in_attempts = 0
   end
@@ -41,6 +43,12 @@ class Main
         puts @admin.display_admin_options()
         option = gets.chomp
         @admin.select_user_to_add(option)
+      elsif (@privilege == "d") then
+         @doctor.display_doctor_data(@id)
+         @doctor.display_doctor_options()
+         option = gets.chomp
+
+      elsif (@privilege == "r") then
 
       end
 
