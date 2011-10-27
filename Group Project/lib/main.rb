@@ -6,7 +6,7 @@ require 'csv'
 class Main
 
   def initialize
-    @login = LogIn.new
+    @login = Login.new
     @admin = Admin.new
     @doctor = Doctor.new
     @filename = "../csv/user.csv"
