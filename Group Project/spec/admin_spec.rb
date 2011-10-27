@@ -110,7 +110,7 @@ describe "Administrator" do
     phone_number = stdin.gets
     stdin.stub!(:gets).and_return("anyname@yahoo.com")
     email = stdin.gets
-    stdin.stub!(:gets).and_return("bolton")
+    stdin.stub!(:gets).and_return(MD5.hexdigest("bolton"))
     password = stdin.gets
 
     receptionist = admin.add_receptionist(id, first_name, last_name, address, date_of_birth, phone_number, email, password)
@@ -122,7 +122,7 @@ describe "Administrator" do
     receptionist.date_of_birth.should  == "01/01/1953"
     receptionist.phone_number.should == "1234567890"
     receptionist.email.should == "anyname@yahoo.com"
-    receptionist.password.should == "bolton"
+    receptionist.password.should == MD5.hexdigest(password)
 
   end
 end

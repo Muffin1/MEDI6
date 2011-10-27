@@ -29,11 +29,11 @@ class Admin < Person
 
   def add_receptionist(idNumber, firstName, lastName, address, date_of_birth, phoneNumber, email, password)
     receptionist = Receptionist.new()
-
+    encrypted_password = MD5.hexdigest(password)
     a_id = receptionist.id_generator()
 
-    receptionist.add_receptionist(a_id,idNumber, firstName, lastName, address, date_of_birth, phoneNumber, email, password)
-    receptionist.set_privileges(a_id, password,"r")
+    receptionist.add_receptionist(a_id,idNumber, firstName, lastName, address, date_of_birth, phoneNumber, email, encrypted_password)
+    receptionist.set_privileges(a_id, encrypted_password,"r")
 
     return receptionist
   end
