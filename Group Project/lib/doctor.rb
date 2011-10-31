@@ -29,11 +29,17 @@ class Doctor < Person
 
   end
 
+<<<<<<< HEAD
   def update_doctor_data(new_doctor, id)
+=======
+
+def update_doctor_data(new_doctor, id)
+>>>>>>> 88c1170657ebbe805cf7e73bf3e45e088032360b
     csv_contents = CSV.read("../csv/doctor.csv")
     file = File.open("../csv/doctor.csv", "w+")
     return_updated_row = nil
 
+    return_updated_row=nil
     csv_contents.each do |row|
       CSV::Writer.generate(file) do |csv|
 
@@ -73,6 +79,7 @@ class Doctor < Person
           csv << [row[0] ,new_doctor.id_number, new_doctor.first_name, new_doctor.last_name, new_doctor.address, new_doctor.date_of_birth, new_doctor.phone_number, new_doctor.email, new_doctor.specialization, new_doctor.password]
 
         end
+<<<<<<< HEAD
       end
     end
     file.close
@@ -118,6 +125,8 @@ class Doctor < Person
         puts "\n"
 
       else puts "Error! Record not found!"
+=======
+>>>>>>> 88c1170657ebbe805cf7e73bf3e45e088032360b
       end
     end
 
