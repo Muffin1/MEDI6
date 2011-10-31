@@ -28,33 +28,7 @@ describe "Doctor" do
     end
   end
 
-  describe "methods of class doctor" do
 
-    it "should update doctor data" do
-      doctor1 = Doctor.new
-
-    file = File.open("../csv/doctor.csv", "a+")
-    CSV::Writer.generate(file) do |csv|
-      csv << ["1000","2000", "Sandra", "Alkivias", "my address you know", "can't tell'", "2222212222", "sandra@hotmail.com", "dentist",MD5.hexdigest("sandra")]
-    end
-    file.close
-
-      doctor1.id_number = "2000"
-      doctor1.first_name = "Sandra"
-      doctor1.last_name=  "Alkivias"
-      doctor1.address = "Oxford Str"
-      doctor1.date_of_birth = "18/10/1980"
-      doctor1.phone_number= "6984573957"
-      doctor1.email = "sandra@hotmail.com"
-      doctor1.specialization = "Dental"
-      doctor1.password="sandra"
-
-      new_data = ["1000",doctor1.id_number, doctor1.first_name, doctor1.last_name,doctor1.address,doctor1.date_of_birth, doctor1.phone_number,doctor1.email,doctor1.specialization,doctor1.password]
-
-      doctor.update_doctor_data(doctor1, 1000)[2].should ==new_data
-
-    end
-  end
 
 
   it "add exam results to patient" do
