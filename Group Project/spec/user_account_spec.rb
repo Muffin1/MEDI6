@@ -46,7 +46,6 @@ it "should validate the implementation of login with authorization check on an e
 
   #adding a doctor to verify by login in he is authorized
   encrypted_password = MD5.hexdigest(password)
-
   doctor.add_doctor(static_id, "idNumber", "firstName", "lastName", "address", "date_of_birth", "phoneNumber", "email", "specialization",  encrypted_password)
   doctor.set_privileges(static_id,encrypted_password,"d")
 
@@ -63,7 +62,6 @@ end
 
   #adding a doctor to verify by login in he is authorized
   encrypted_password = MD5.hexdigest(password)
-
   receptionist.add_receptionist(static_id, "idNumber", "firstName", "lastName", "address", "date_of_birth", "phoneNumber", "email", encrypted_password)
   receptionist.set_privileges(static_id,encrypted_password,"r")
 

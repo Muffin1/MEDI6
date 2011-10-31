@@ -64,6 +64,16 @@ describe "Person" do
 
    end
 
+     it "person.change_password should change the password of the user" do
+      person.stub!(:change_password).with(5000, "old password", "new password").and_return("new password encrypted")
+      new_encrypted_password = person.change_password(5000, "old password", "new password")
+      file = mock('file')
+      File.stub!(:open).with("user.csv").and_yield(file)
+      File.stub!(:write).with(5000,new_encrypted_password, "privilege").and_return("5000,new password encrypted,privilege")
+      File.write(5000,new_encrypted_password, "privilege") == "5000,new password encrypted,privilege"
+
+   end
+
  end
 
 
