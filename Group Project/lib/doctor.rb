@@ -31,54 +31,53 @@ class Doctor < Person
 
 
 
-
-
-
-
   def update_doctor_data(new_doctor, id)
-     csv_contents = CSV.read("../csv/doctor.csv")
-     file = File.open("../csv/doctor.csv", "w+")
+    csv_contents = CSV.read("../csv/doctor.csv")
+    file = File.open("../csv/doctor.csv", "w+")
 
-     csv_contents.each do |row|
-       CSV::Writer.generate(file) do |csv|
+    return_updated_row=nil
+    csv_contents.each do |row|
+      CSV::Writer.generate(file) do |csv|
 
-          if not(row[0] == id)
-             csv << row
-          else
+        if not(row[0] == id)
+          csv << row
+        else
 
-            if(new_doctor.id_number == nil)
-               new_doctor.id_number =row[1]
-            end
-            if(new_doctor.first_name == nil)
-               new_doctor.first_name =row[2]
-            end
-            if(new_doctor.last_name == nil)
-               new_doctor.last_name =row[3]
-            end
-            if(new_doctor.address == nil)
-               new_doctor.address =row[4]
-            end
-            if(new_doctor.date_of_birth == nil)
-               new_doctor.date_of_birth =row[5]
-            end
-            if(new_doctor.phone_number == nil)
-               new_doctor.phone_number =row[6]
-            end
-            if(new_doctor.email == nil)
-               new_doctor.email =row[7]
-            end
-            if(new_doctor.specialization == nil)
-               new_doctor.specialization =row[8]
-            end
-              if(new_doctor.password == nil)
-               new_doctor.password =row[9]
-            end
-            csv << [row[0] ,new_doctor.id_number, new_doctor.first_name, new_doctor.last_name, new_doctor.address, new_doctor.date_of_birth, new_doctor.phone_number, new_doctor.email, new_doctor.specialization, new_doctor.password]
+          if(new_doctor.id_number == nil)
+            new_doctor.id_number =row[1]
           end
-       end
-     end
-    file.close
+          if(new_doctor.first_name == nil)
+            new_doctor.first_name =row[2]
+          end
+          if(new_doctor.last_name == nil)
+            new_doctor.last_name =row[3]
+          end
+          if(new_doctor.address == nil)
+            new_doctor.address =row[4]
+          end
+          if(new_doctor.date_of_birth == nil)
+            new_doctor.date_of_birth =row[5]
+          end
+          if(new_doctor.phone_number == nil)
+            new_doctor.phone_number =row[6]
+          end
+          if(new_doctor.email == nil)
+            new_doctor.email =row[7]
+          end
+          if(new_doctor.specialization == nil)
+            new_doctor.specialization =row[8]
+          end
+          if(new_doctor.password == nil)
+            new_doctor.password =row[9]
+          end
+          return_updated_row  = [row[0] ,new_doctor.id_number, new_doctor.first_name, new_doctor.last_name, new_doctor.address, new_doctor.date_of_birth, new_doctor.phone_number, new_doctor.email, new_doctor.specialization, new_doctor.password]
+          csv << [row[0] ,new_doctor.id_number, new_doctor.first_name, new_doctor.last_name, new_doctor.address, new_doctor.date_of_birth, new_doctor.phone_number, new_doctor.email, new_doctor.specialization, new_doctor.password]
 
+        end
+      end
+    end
+    file.close
+    return_updated_row
   end
 
 
@@ -124,7 +123,9 @@ class Doctor < Person
   end
 
   def display_doctor_options()
-    puts 'Please enter "m" to modify your details'
+    puts 'Options:/n-------------------'
+    puts '1)Please enter "m" to modify your details'
+    puts "2)Please enter 'p' to add a patient' s diagnosis"
   end
 
   def modify_details(modify_data, doctor_id)
@@ -138,6 +139,11 @@ class Doctor < Person
       end
 
     end
+
+    if (modify_data=="p") or (modify_data=="P") then
+      add_exam_result_interface()
+    end
+
   end
 
   def display_modify_options()
@@ -208,16 +214,15 @@ class Doctor < Person
     end
   end
 
+
+
   def add_exam_result(patient_system_id, doctor_system_id, exam_results)
 
     csv_contents = CSV.read("../csv/patient.csv")
     file = File.open("../csv/patient.csv", "w+")
     inserted = false
-    patient  = nil
+
     csv_contents.each do |row|
-        if (row[0]==patient_system_id.to_s)
-          patient = row
-        end
 
       if (row[0]==patient_system_id.to_s && row[1]== 'nil')
 
@@ -234,14 +239,38 @@ class Doctor < Person
     file.close
 
 
-     if(inserted==false)
-       file = File.open("../csv/patient.csv", "a+")
-       CSV::Writer.generate(file) do |csv|
-          csv <<  [patient[0],doctor_system_id,patient[2], patient[3], patient[4], patient[5], patient[6],patient[7], patient[8], exam_results]
-       end
-       file.close
-     end
+    if(inserted==false)
+      csv_contents = CSV.read("../csv/patient.csv")
+      file = File.open("../csv/patient.csv", "w+")
 
+
+      csv_contents.each do |row|
+        if (row[0]==patient_system_id.to_s && row[1]== doctor_system_id.to_s)
+          CSV::Writer.generate(file) do |csv|
+            csv <<  [patient_system_id,doctor_system_id,row[2], row[3], row[4], row[5], row[6], row[7], row[8],exam_results]
+          end
+        else
+          CSV::Writer.generate(file) do |csv|
+            csv << row
+          end
+        end
+      end
+      file.close
+    end
+
+  end
+
+  def add_exam_result_interface()
+    puts "Insert Patient system id :"
+    patient_id = gets.chomp
+
+    puts "Insert Doctor system id :"
+    doctor_id = gets.chomp
+
+    puts "Insert your diagnosis :"
+    diagnosis = gets.chomp
+
+    add_exam_result(patient_id,doctor_id,diagnosis)
   end
 
 end
