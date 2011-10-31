@@ -1,9 +1,7 @@
 require 'person.rb'
 
-
 class Doctor < Person
   attr_accessor :specialization
-
 
   def add_doctor(doctor_id,id_number, first_name, last_name, address, date_of_birth, phone_number, email, specialization,  password)
 
@@ -67,6 +65,20 @@ class Doctor < Person
       end
     end
 
+  def update_doctor_data(doctor)
+     csv_contents = CSV.read("../csv/doctor.csv")
+     file = File.open("../csv/doctor.csv", "w+")
+
+     csv_contents.each do |row|
+       CSV::Writer.generate(file) do |csv|
+          if not(row[1] == doctor.id_number)
+             csv << row
+          else
+             csv << [row[0],doctor.id_number, doctor.first_name, doctor.last_name, doctor.address, doctor.date_of_birth, doctor.phone_number, doctor.email, doctor.specialization, doctor.password]
+          end
+       end
+     end
+
   end
 
   def display_doctor_data(aID)
@@ -88,7 +100,6 @@ class Doctor < Person
       puts "\n"
     else puts "Error! Record not found!"
     end
-
   end
 
   def display_doctor_options()
@@ -176,4 +187,6 @@ class Doctor < Person
     end
   end
 
+  end
+    #comment
 end
