@@ -74,4 +74,6 @@ class Doctor < Person
 
   end
 
+  #comment
+
 end
