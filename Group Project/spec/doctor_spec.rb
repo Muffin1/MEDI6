@@ -1,6 +1,7 @@
 require "rspec"
 require "../lib/doctor.rb"
 require "csv"
+require "md5"
 
 describe "Doctor" do
 
@@ -32,19 +33,25 @@ describe "Doctor" do
     it "should update doctor data" do
       doctor1 = Doctor.new
 
-      doctor1.id_number = "xcvbynui"
-      doctor1.first_name = "onis"
-      doctor1.last_name=  "Ghavam"
+    file = File.open("../csv/doctor.csv", "a+")
+    CSV::Writer.generate(file) do |csv|
+      csv << ["1000","2000", "Sandra", "Alkivias", "my address you know", "can't tell'", "2222212222", "sandra@hotmail.com", "dentist",MD5.hexdigest("sandra")]
+    end
+    file.close
+
+      doctor1.id_number = "2000"
+      doctor1.first_name = "Sandra"
+      doctor1.last_name=  "Alkivias"
       doctor1.address = "Oxford Str"
       doctor1.date_of_birth = "18/10/1980"
       doctor1.phone_number= "6984573957"
-      doctor1.email = "diawbaidy.com"
+      doctor1.email = "sandra@hotmail.com"
       doctor1.specialization = "Dental"
-      doctor1.password="baiay222"
+      doctor1.password="sandra"
 
-      new_data = ["5008",doctor1.id_number, doctor1.first_name, doctor1.last_name,doctor1.address,doctor1.date_of_birth, doctor1.phone_number,doctor1.email,doctor1.specialization,doctor1.password]
+      new_data = ["1000",doctor1.id_number, doctor1.first_name, doctor1.last_name,doctor1.address,doctor1.date_of_birth, doctor1.phone_number,doctor1.email,doctor1.specialization,doctor1.password]
 
-      #doctor.update_doctor_data(doctor1, 5008)[2].should ==new_data
+      doctor.update_doctor_data(doctor1, 1000)[2].should ==new_data
 
     end
   end
@@ -59,6 +66,31 @@ describe "Doctor" do
 
   end
 
+   it "doctor adds exam results to patient" do
+    file = File.open("../csv/doctor.csv", "a+")
+    CSV::Writer.generate(file) do |csv|
+      csv << ["1000","2000", "Sandra", "Alkivias", "my address you know", "can't tell'", "2222212222", "sandra@hotmail.com", "dentist",MD5.hexdigest("sandra")]
+    end
+    file.close
+
+    file = File.open("../csv/patient.csv", "a+")
+    CSV::Writer.generate(file) do |csv|
+    csv << ["500", "nil", "Bill", "Gates", "Microsoft", "10/10/1950", "$$$$$$$$$", "Bill@gmail.com", "1212123"]
+    end
+    file.close
+
+    doctor.add_exam_result(500,1000,"aponeurosis")
+
+    csv_contents = CSV.read("../csv/patient.csv")
+
+    found_it=nil
+    csv_contents.each do |row|
+      if(row[0] == "500")
+        found_it= row[0]
+      end
+    end
+    found_it.should =="500"
+   end
 
 
 end

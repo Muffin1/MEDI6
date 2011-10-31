@@ -66,18 +66,18 @@ class Doctor < Person
     end
   end
   def update_doctor_data(doctor, id)
-     csv_contents = CSV.read("../csv/doctor.csv")
-     file = File.open("../csv/doctor.csv", "w+")
+    csv_contents = CSV.read("../csv/doctor.csv")
+    file = File.open("../csv/doctor.csv", "w+")
 
-     csv_contents.each do |row|
-       CSV::Writer.generate(file) do |csv|
-          if not(row[0] == id)
-             csv << row
-          else
-             csv << [row[0],doctor.id_number, doctor.first_name, doctor.last_name, doctor.address, doctor.date_of_birth, doctor.phone_number, doctor.email, doctor.specialization, doctor.password]
-          end
-       end
-     end
+    csv_contents.each do |row|
+      CSV::Writer.generate(file) do |csv|
+        if not(row[0] == id)
+          csv << row
+        else
+          csv << [row[0],doctor.id_number, doctor.first_name, doctor.last_name, doctor.address, doctor.date_of_birth, doctor.phone_number, doctor.email, doctor.specialization, doctor.password]
+        end
+      end
+    end
 
   end
 
@@ -187,6 +187,40 @@ class Doctor < Person
     end
   end
 
+  def add_exam_result(patient_system_id, doctor_system_id, exam_results)
 
+    csv_contents = CSV.read("../csv/patient.csv")
+    file = File.open("../csv/patient.csv", "w+")
+    inserted = false
+    patient  = nil
+    csv_contents.each do |row|
+        if (row[0]==patient_system_id.to_s)
+          patient = row
+        end
+
+      if (row[0]==patient_system_id.to_s && row[1]== 'nil')
+
+        inserted=true
+        CSV::Writer.generate(file) do |csv|
+          csv <<  [patient_system_id,doctor_system_id,row[2], row[3], row[4], row[5], row[6], row[7], row[8],exam_results]
+        end
+      else
+        CSV::Writer.generate(file) do |csv|
+          csv << row
+        end
+      end
+    end
+    file.close
+
+
+     if(inserted==false)
+       file = File.open("../csv/patient.csv", "a+")
+       CSV::Writer.generate(file) do |csv|
+          csv <<  [patient[0],doctor_system_id,patient[2], patient[3], patient[4], patient[5], patient[6],patient[7], patient[8], exam_results]
+       end
+       file.close
+     end
+
+  end
 
 end
