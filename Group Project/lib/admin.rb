@@ -16,7 +16,6 @@ class Admin < Person
 
     encrypted_password = MD5.hexdigest(password)
     a_id = doctor.id_generator()
-
     doctor.add_doctor(a_id, idNumber, firstName, lastName, address, date_of_birth, phoneNumber, email, specialization,  encrypted_password)
     doctor.set_privileges(a_id,encrypted_password,"d")
 

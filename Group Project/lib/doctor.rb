@@ -28,6 +28,7 @@ class Doctor < Person
     @specialization = specialization
     @password = password
 
+
   end
 
 
@@ -75,25 +76,46 @@ class Doctor < Person
        end
      end
     file.close
+
   end
 
   def display_doctor_data(aID)
     filename = "../csv/doctor.csv"
     record = search_by_id(aID, filename)
+
     puts "----------------------------"
     puts "Doctor details :\n"
     if not(record==nil)
       puts "\n"
-      puts "ID number : " + record[1]
-      puts "First name : " + record[2]
-      puts "Last name : " + record[3]
-      puts "Address : "+ record[4]
-      puts "Date of birth : "+ record[5]
-      puts "Phone number : "+ record[6]
-      puts "Email : "+ record[7]
-      puts "Speciality : " + record[8]
-      puts "Password : " + record[9]
+      if not(record[1] == nil)
+        puts "ID number : " + record[1]
+      end
+      if not(record[2] == nil)
+        puts "First name : " + record[2]
+      end
+      if not(record[3] == nil)
+        puts "Last name : " + record[3]
+      end
+      if not(record[4] == nil)
+        puts "Address : "+ record[4]
+      end
+      if not(record[5] == nil)
+        puts "Date of birth : "+ record[5]
+      end
+      if not(record[6] == nil)
+        puts "Phone number : "+ record[6]
+      end
+      if not(record[7] == nil)
+        puts "Email : "+ record[7]
+      end
+      if not(record[8] == nil)
+        puts "Speciality : " + record[8]
+      end
+      if not(record[9] == nil)
+        puts "Password : " + record[9]
+      end
       puts "\n"
+
     else puts "Error! Record not found!"
     end
   end
@@ -134,7 +156,7 @@ class Doctor < Person
 
   end
 
-  def modify_selections (modify_selection,doctor_id)
+  def modify_selections (modify_selection,system_id)
     puts "\n"
     more_changes = true
     doctor = Doctor.new
@@ -169,8 +191,8 @@ class Doctor < Person
     else more_changes=false
     end
 
-    #TODO Here we should call the method to update the record
-    update_doctor_data(doctor, id_number)
+    #Call update_doctor_data to update the doctor record with the new values
+    update_doctor_data(doctor, system_id)
 
     if (more_changes)
       puts"\n"
@@ -178,9 +200,11 @@ class Doctor < Person
       selection = gets.chomp()
       if selection == "y" or selection == "Y"
         modify_selection = display_modify_options()
-        modify_selections(modify_selection, doctor_id)
+        modify_selections(modify_selection, system_id)
       end
     end
   end
+
+
 
 end
