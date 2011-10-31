@@ -159,12 +159,12 @@ class Doctor < Person
     else puts "Wrong key value!"
     end
 
+    #TODO Here we should call the method to update the record
 
     puts"\n"
     puts "Do you want to make other changes? (Y/N) "
     selection = gets.chomp()
     if selection == "y" or selection == "Y"
-      #TODO Here we should call the method to update the record
       modify_selection = display_modify_options()
       modify_selections(modify_selection)
     end
