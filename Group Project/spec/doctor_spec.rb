@@ -31,20 +31,19 @@ describe "Doctor" do
 
     it "should update doctor data" do
       doctor1 = Doctor.new
+      doctor1.id_number = nil
+      doctor1.first_name = "baidy"
+      doctor1.last_name=  nil
+      doctor1.address = "rochdale road"
+      doctor1.date_of_birth = "3123/123/123"
+      doctor1.phone_number= "078376766"
+      doctor1.email = nil
+      doctor1.specialization = "mamadou"
+      doctor1.password="password"
 
-      doctor1.id_number = "xcvbynui"
-      doctor1.first_name = "onis"
-      doctor1.last_name=  "Ghavam"
-      doctor1.address = "Oxford Str"
-      doctor1.date_of_birth = "18/10/1980"
-      doctor1.phone_number= "6984573957"
-      doctor1.email = "diawbaidy.com"
-      doctor1.specialization = "Dental"
-      doctor1.password="baiay222"
+      new_data = ["5005",doctor1.id_number, doctor1.first_name, doctor1.last_name,doctor1.address,doctor1.date_of_birth, doctor1.phone_number,doctor1.email,doctor1.specialization,doctor1.password]
 
-      new_data = ["5008",doctor1.id_number, doctor1.first_name, doctor1.last_name,doctor1.address,doctor1.date_of_birth, doctor1.phone_number,doctor1.email,doctor1.specialization,doctor1.password]
-
-      #doctor.update_doctor_data(doctor1, 5008)[2].should ==new_data
+      doctor.update_doctor_data(doctor1,"5005")
 
     end
   end
