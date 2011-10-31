@@ -56,7 +56,7 @@ class Person
   def change_password(user_id, new_password)
 
     csv_contents = CSV.read("../csv/user.csv")
-    file = File.open("../csv/user_temp.csv", "w+")
+    file = File.open("../csv/user.csv", "w+")
     encrypted_password  = MD5.hexdigest(new_password)
 
     csv_contents.each do |row|
