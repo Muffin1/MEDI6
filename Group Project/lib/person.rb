@@ -1,4 +1,5 @@
 require 'csv'
+require 'md5'
 class Person
 
   attr_accessor :first_name, :last_name, :address, :date_of_birth, :phone_number, :email, :id_number, :password
@@ -52,4 +53,29 @@ class Person
     end
   end
 
-end
+  def change_password(user_id, new_password)
+    file = File.open("../csv/user_temp.csv", "a+")
+    csv_contents = CSV.read("../csv/user.csv")
+
+    encrypted_password  = MD5.hexdigest(new_password)
+
+    csv_contents.each do |row|
+    if (row[0]==user_id.to_s)
+
+        CSV::Writer.generate(file) do |csv|
+            csv <<  [user_id,encrypted_password,row[2]]
+        end
+    else
+         CSV::Writer.generate(file) do |csv|
+           csv << row
+         end
+       end
+    end
+
+
+    file.close
+    File.delete("../csv/user.csv")
+    File.rename("../csv/user_temp.csv","../csv/user.csv")
+    encrypted_password
+  end
+  end

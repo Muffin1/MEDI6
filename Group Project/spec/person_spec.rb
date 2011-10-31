@@ -1,6 +1,7 @@
 require "rspec"
 require "person.rb"
 require 'csv'
+require 'md5'
 
 describe "Person" do
   patient_file = "../csv/patient.csv"
@@ -59,7 +60,18 @@ describe "Person" do
         found_it.should =="4000"
    end
 
-   it "person.id_generator should generate unique id number > 0" do
+   it "person.search_by_id should find a row in a file given user's' system id" do
+      person.stub!(:search_by_id).with(5000,"filename").and_return("user_row")
+      person.search_by_id(5000,"filename").should ==  "user_row"
+   end
+
+    it "person.search_by_id should find a row in a file given user's' system id" do
+
+      row = person.search_by_id(5000,"../csv/user.csv")
+      row[0].should == '5000'
+   end
+
+     it "person.id_generator should generate unique id number > 0" do
       person.id_generator.should > 0
 
    end
@@ -72,9 +84,13 @@ describe "Person" do
       File.stub!(:write).with(5000,new_encrypted_password, "privilege").and_return("5000,new password encrypted,privilege")
       File.write(5000,new_encrypted_password, "privilege") == "5000,new password encrypted,privilege"
 
+     end
+
+  it "person.change_password should create a new user.scv file and add the new password of thew user" do
+      new_password = person.change_password(5000, "admin")
+      new_password.should == MD5.hexdigest("admin")
    end
 
- end
-
+   end
 
 
