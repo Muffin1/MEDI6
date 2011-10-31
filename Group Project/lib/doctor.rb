@@ -138,7 +138,7 @@ class Doctor < Person
 
   end
 
-  def modify_selections (modify_selection,doctor_id)
+  def modify_selections (modify_selection,system_id)
     puts "\n"
     more_changes = true
     doctor = Doctor.new
@@ -173,8 +173,8 @@ class Doctor < Person
     else more_changes=false
     end
 
-    #TODO Here we should call the method to update the record
-    update_doctor_data(doctor, id_number)
+    #Call update_doctor_data to update the doctor record with the new values
+    update_doctor_data(doctor, system_id)
 
     if (more_changes)
       puts"\n"
@@ -182,7 +182,7 @@ class Doctor < Person
       selection = gets.chomp()
       if selection == "y" or selection == "Y"
         modify_selection = display_modify_options()
-        modify_selections(modify_selection, doctor_id)
+        modify_selections(modify_selection, system_id)
       end
     end
   end
