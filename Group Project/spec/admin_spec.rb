@@ -48,7 +48,7 @@ describe "Administrator" do
 
 
   it "checking doctor insertion" do
-    admin.add_doctor("2323","John", "James", "27 Cherry Street", "01/01/1953", "12345678910", "anyname@yahoo.com", "pathologist",  "34m43")
+    admin.add_doctor("2323","John", "James", "27 Cherry Street", "01/01/1953", "12345678910", "anyname@yahoo.com", "pathologist",  "admin")
     csv_contents = CSV.read("../csv/doctor.csv")
 
     found_it=nil
