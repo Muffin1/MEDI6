@@ -38,7 +38,7 @@ class Doctor < Person
 
      csv_contents.each do |row|
        CSV::Writer.generate(file) do |csv|
-          if not(row[1] == doctor.id_number)
+          if not(row[1] == doctor.id)
              csv << row
           else
              csv << [row[0],doctor.id_number, doctor.first_name, doctor.last_name, doctor.address, doctor.date_of_birth, doctor.phone_number, doctor.email, doctor.specialization, doctor.password]
