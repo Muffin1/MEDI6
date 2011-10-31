@@ -32,12 +32,12 @@ class Doctor < Person
 
   end
 
-  def update_doctor_data(doctor)
+  def update_doctor_data(doctor, id)
 
     csv_contents = CSV.read("../csv/doctor.csv")
     old_data = Array.new
     csv_contents.each do |row|
-      if(row[1] == doctor.id_number)
+      if(row[0] == id)
         old_data = [row[1],row[2],row[3],row[4],row[5],row[6],row[7],row[8],row[9]]
       end
     end
@@ -95,14 +95,14 @@ class Doctor < Person
     puts 'Please enter "m" to modify your details'
   end
 
-  def modify_details(modify_data)
+  def modify_details(modify_data, doctor_id)
     if (modify_data=="m") or (modify_data=="M") then
       modify_selection = display_modify_options()
 
       if (modify_selection =="1" or modify_selection =="2" or modify_selection =="3" or modify_selection =="4" or modify_selection =="5" or
           modify_selection =="6" or modify_selection =="7" or modify_selection =="8" or modify_selection =="9")
 
-        modify_selections(modify_selection)
+        modify_selections(modify_selection,doctor_id)
       end
 
     end
@@ -127,48 +127,53 @@ class Doctor < Person
 
   end
 
-  def modify_selections (modify_selection)
+  def modify_selections (modify_selection,doctor_id)
     puts "\n"
+    more_changes = true
+    doctor = Doctor.new
+
     if (modify_selection == "1")
       puts "Changing ID number.. Please type the new value :"
-
+      doctor.id_number = gets.chomp
     elsif (modify_selection == "2")
       puts "Changing First name.. Please type the new value :"
-
+      doctor.first_name = gets.chomp
     elsif (modify_selection == "3")
       puts "Changing Last name.. Please type the new value :"
-
+      doctor.last_name = gets.chomp
     elsif (modify_selection == "4")
       puts "Changing Address.. Please type the new value :"
-
+      doctor.address = gets.chomp
     elsif (modify_selection == "5")
       puts "Changing Date of birth.. Please type the new value :"
-
+      doctor.date_of_birth = gets.chomp
     elsif (modify_selection == "6")
       puts "Changing Phone number.. Please type the new value :"
-
+      doctor.phone_number = gets.chomp
     elsif (modify_selection == "7")
       puts "Changing Email.. Please type the new value :"
-
+      doctor.email = gets.chomp
     elsif (modify_selection == "8")
       puts "Changing Speciality.. Please type the new value :"
-
+      doctor.specialization = gets.chomp
     elsif (modify_selection == "9")
       puts "Changing Password.. Please type the new value :"
-
-    else puts "Wrong key value!"
+      doctor.password = gets.chomp
+    else more_changes=false
     end
 
     #TODO Here we should call the method to update the record
+    update_doctor_data(doctor, id_number)
 
-    puts"\n"
-    puts "Do you want to make other changes? (Y/N) "
-    selection = gets.chomp()
-    if selection == "y" or selection == "Y"
-      modify_selection = display_modify_options()
-      modify_selections(modify_selection)
+    if (more_changes)
+      puts"\n"
+      puts "Do you want to make other changes? (Y/N) "
+      selection = gets.chomp()
+      if selection == "y" or selection == "Y"
+        modify_selection = display_modify_options()
+        modify_selections(modify_selection, doctor_id)
+      end
     end
-
   end
 
 end

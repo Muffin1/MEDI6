@@ -44,10 +44,10 @@ class Main
         option = gets.chomp
         @admin.select_user_to_add(option)
       elsif (@privilege == "d") then
-         @doctor.display_doctor_data(@id)
+         doctor_record_data = @doctor.display_doctor_data(@id)
          @doctor.display_doctor_options()
          option = gets.chomp
-         @doctor.modify_details(option)
+         @doctor.modify_details(option,@id)
 
       elsif (@privilege == "r") then
 
