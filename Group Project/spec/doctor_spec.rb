@@ -51,6 +51,7 @@ describe "Doctor" do
       doctor1.address = "rochdale road"
       doctor1.date_of_birth = "3123/123/123"
       doctor1.phone_number= "078376766"
+
       doctor1.email = "sandra@hotmail.com"
       doctor1.specialization = "dentist"
       doctor1.password=MD5.hexdigest("sandra")
@@ -58,6 +59,15 @@ describe "Doctor" do
       new_data = ["1000",doctor1.id_number, doctor1.first_name, doctor1.last_name,doctor1.address,doctor1.date_of_birth, doctor1.phone_number,doctor1.email,doctor1.specialization,doctor1.password]
 
       doctor.update_doctor_data(doctor1,"1000").should == new_data
+
+      doctor1.email = nil
+      doctor1.specialization = "mamadou"
+      doctor1.password=nil
+
+      new_data = ["5003",doctor1.id_number, doctor1.first_name, doctor1.last_name,doctor1.address,doctor1.date_of_birth, doctor1.phone_number,doctor1.email,doctor1.specialization,doctor1.password]
+
+      doctor.update_doctor_data(doctor1,"5003")
+
 
     end
   end
@@ -73,7 +83,9 @@ describe "Doctor" do
 
   end
 
+
   it "doctor adds exam results to patient" do
+
     file = File.open("../csv/doctor.csv", "a+")
     CSV::Writer.generate(file) do |csv|
       csv << ["1000","2000", "Sandra", "Alkivias", "my address you know", "can't tell'", "2222212222", "sandra@hotmail.com", "dentist",MD5.hexdigest("sandra")]
@@ -118,6 +130,5 @@ describe "Doctor" do
     diagnosis = stdin.gets
     doctor.add_exam_result(patient_system_id,doctor_system_id,diagnosis)
   end
-
 
 end

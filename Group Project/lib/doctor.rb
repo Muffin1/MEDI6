@@ -30,12 +30,10 @@ class Doctor < Person
   end
 
 
-
   def update_doctor_data(new_doctor, id)
     csv_contents = CSV.read("../csv/doctor.csv")
     file = File.open("../csv/doctor.csv", "w+")
 
-    return_updated_row=nil
     csv_contents.each do |row|
       CSV::Writer.generate(file) do |csv|
 
@@ -68,17 +66,45 @@ class Doctor < Person
             new_doctor.specialization =row[8]
           end
           if(new_doctor.password == nil)
-            new_doctor.password =row[9]
+            new_doctor.password = new_doctor.change_password(row[0],row[9])
           end
-          return_updated_row  = [row[0] ,new_doctor.id_number, new_doctor.first_name, new_doctor.last_name, new_doctor.address, new_doctor.date_of_birth, new_doctor.phone_number, new_doctor.email, new_doctor.specialization, new_doctor.password]
           csv << [row[0] ,new_doctor.id_number, new_doctor.first_name, new_doctor.last_name, new_doctor.address, new_doctor.date_of_birth, new_doctor.phone_number, new_doctor.email, new_doctor.specialization, new_doctor.password]
 
         end
+        if(new_doctor.first_name == nil)
+          new_doctor.first_name =row[2]
+        end
+        if(new_doctor.last_name == nil)
+          new_doctor.last_name =row[3]
+        end
+        if(new_doctor.address == nil)
+          new_doctor.address =row[4]
+        end
+        if(new_doctor.date_of_birth == nil)
+          new_doctor.date_of_birth =row[5]
+        end
+        if(new_doctor.phone_number == nil)
+          new_doctor.phone_number =row[6]
+        end
+        if(new_doctor.email == nil)
+          new_doctor.email =row[7]
+        end
+        if(new_doctor.specialization == nil)
+          new_doctor.specialization =row[8]
+        end
+        if(new_doctor.password == nil)
+          new_doctor.password =row[9]
+        end
+        return_updated_row  = [row[0] ,new_doctor.id_number, new_doctor.first_name, new_doctor.last_name, new_doctor.address, new_doctor.date_of_birth, new_doctor.phone_number, new_doctor.email, new_doctor.specialization, new_doctor.password]
+        csv << [row[0] ,new_doctor.id_number, new_doctor.first_name, new_doctor.last_name, new_doctor.address, new_doctor.date_of_birth, new_doctor.phone_number, new_doctor.email, new_doctor.specialization, new_doctor.password]
+
       end
     end
     file.close
     return_updated_row
   end
+
+
 
 
   def display_doctor_data(aID)
@@ -272,6 +298,5 @@ class Doctor < Person
 
     add_exam_result(patient_id,doctor_id,diagnosis)
   end
-
 end
 
