@@ -44,10 +44,21 @@ describe "Doctor" do
 
       new_data = ["5008",doctor1.id_number, doctor1.first_name, doctor1.last_name,doctor1.address,doctor1.date_of_birth, doctor1.phone_number,doctor1.email,doctor1.specialization,doctor1.password]
 
-      doctor.update_doctor_data(doctor1)[2].should ==new_data
+      #doctor.update_doctor_data(doctor1, 5008)[2].should ==new_data
 
     end
   end
+
+
+  it "add exam results to patient" do
+    doctor.stub!(:add_exam_result).with("patient_id", "doctor_id","exam result").and_return("patient_id, doctor_id,exam result")
+    file = mock('file')
+    File.stub!(:open).with("patient.csv").and_yield(file)
+    File.stub!(:write).with("patient_id", "doctor_id","exam result").and_return("patient_id, doctor_id,exam result")
+    File.write("patient_id", "doctor_id","exam result") == "patient_id, doctor_id,exam result"
+
+  end
+
 
 
 end
