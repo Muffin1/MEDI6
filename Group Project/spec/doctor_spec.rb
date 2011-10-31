@@ -6,6 +6,8 @@ describe "Doctor" do
 
   doctor = Doctor.new
   let(:doctor){mock('Doctor')}
+    let(:stdin){mock('STDIN')}
+
   context "attributes of class doctor" do
     it "Doctor should have a speciality" do
       doctor.specialization = "pathologist"
@@ -48,7 +50,87 @@ describe "Doctor" do
     end
   end
 
+    describe "methods of class doctor" do
+    it "should get the UI input" do
+        doctor.display_modify_options().should_not == nil
+    end
 
+    it "should display user data" do
+     CSV = ["5002","4325","baidy","diawr","32, oxford road","03/09/2005","0798534355","diae@yahoo.com","therrpist","paswor1"]
+       puts "----------------------------"
+    puts "Doctor details :\n"
+    if not(CSV==nil)
+      puts "\n"
+      if not(CSV[1] == nil)
+        puts "ID number : " + CSV[1]
+      end
+      if not(CSV[2] == nil)
+        puts "First name : " + CSV[2]
+      end
+      if not(CSV[3] == nil)
+        puts "Last name : " + CSV[3]
+      end
+      if not(CSV[4] == nil)
+        puts "Address : "+ CSV[4]
+      end
+      if not(CSV[5] == nil)
+        puts "Date of birth : "+ CSV[5]
+      end
+      if not(CSV[6] == nil)
+        puts "Phone number : "+ CSV[6]
+      end
+      if not(CSV[7] == nil)
+        puts "Email : "+ CSV[7]
+      end
+      if not(CSV[8] == nil)
+        puts "Speciality : " + CSV[8]
+      end
+      if not(CSV[9] == nil)
+        puts "Password : " + CSV[9]
+      end
+      puts "\n"
+
+    else puts "Error! Record not found!"
+    end
+      #------------------------------------------------------
+      #modify details
+      stdin.stub!(:gets).and_return("2")
+        input = stdin.gets
+      stdin.stub!(:gets).and_return("farhard")
+        changed_value = stdin.gets
+       if (input == "1")
+      puts "Changing ID number.. Please type the new value :"
+      CSV[0] = changed_value
+    elsif (input == "2")
+      puts "Changing First name.. Please type the new value :"
+      CSV[1] = changed_value
+    elsif (input == "3")
+      puts "Changing Last name.. Please type the new value :"
+      CSV[2] = changed_value
+    elsif (input == "4")
+      puts "Changing Address.. Please type the new value :"
+      CSV[3] = changed_value
+    elsif (input == "5")
+      puts "Changing Date of birth.. Please type the new value :"
+     CSV[4] = changed_value
+    elsif (input == "6")
+      puts "Changing Phone number.. Please type the new value :"
+      CSV[5] = changed_value
+    elsif (input == "7")
+      puts "Changing Email.. Please type the new value :"
+      CSV[6] = changed_value
+    elsif (input == "8")
+      puts "Changing Speciality.. Please type the new value :"
+     CSV[7] = changed_value
+    elsif (input == "9")
+      puts "Changing Password.. Please type the new value :"
+         CSV[8] = changed_value
+    end
+      puts "updated  record: "
+      puts CSV
+    end
+
+    end
   it "add exam results to patient" do
     doctor.stub!(:add_exam_result).with("patient_id", "doctor_id","exam result").and_return("patient_id, doctor_id,exam result")
     file = mock('file')
@@ -57,7 +139,5 @@ describe "Doctor" do
     File.write("patient_id", "doctor_id","exam result") == "patient_id, doctor_id,exam result"
 
   end
-
-
 
 end

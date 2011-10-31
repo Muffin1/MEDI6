@@ -26,11 +26,7 @@ class Doctor < Person
     @id_number = id_number
     @specialization = specialization
     @password = password
-
-
   end
-
-
 
   def update_doctor_data(new_doctor, id)
      csv_contents = CSV.read("../csv/doctor.csv")
