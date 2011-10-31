@@ -31,7 +31,6 @@ class Login
       return 'Welcome doctor!'
 
     elsif user_type == "r" then
-
       return 'Welcome receptionist!'
 
     else return nil

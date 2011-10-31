@@ -27,77 +27,45 @@ class Doctor < Person
     @id_number = id_number
     @specialization = specialization
     @password = password
-
-  end
-
-  def update_doctor_data(doctor, id)
-
-    csv_contents = CSV.read("../csv/doctor.csv")
-    old_data = Array.new
-    csv_contents.each do |row|
-      if(row[0] == id)
-        old_data = [row[1],row[2],row[3],row[4],row[5],row[6],row[7],row[8],row[9]]
-      end
-    end
-    # file = File.open("../csv/doctor.csv", "a+")
-
-    new_data = [doctor.id_number, doctor.first_name, doctor.last_name,doctor.address,doctor.date_of_birth, doctor.phone_number,doctor.email,doctor.specialization, doctor.password]
-    counter = 0;
-    new_data.each do |data|
-      counter += 1
-      if not(data == nil)  then
-        new_data[counter] =  old_data[counter]
-      end
-    end
-
-    return old_data
-
-    csv_contents = CSV.read("../csv/doctor.csv")
-    file = File.open("../csv/doctor.csv", "w+")
-
-    csv_contents.each do |row|
-      CSV::Writer.generate(file) do |csv|
-        if not(row[1] == doctor.id_number)
-          csv << row
-        else
-          csv << [row[0],doctor.id_number, doctor.first_name, doctor.last_name, doctor.address, doctor.date_of_birth, doctor.phone_number, doctor.email, doctor.specialization, doctor.password]
-        end
-      end
-    end
-  end
-  def update_doctor_data(doctor, id)
-     csv_contents = CSV.read("../csv/doctor.csv")
-     file = File.open("../csv/doctor.csv", "w+")
-
-     csv_contents.each do |row|
-       CSV::Writer.generate(file) do |csv|
-          if not(row[0] == id)
-             csv << row
-          else
-             csv << [row[0],doctor.id_number, doctor.first_name, doctor.last_name, doctor.address, doctor.date_of_birth, doctor.phone_number, doctor.email, doctor.specialization, doctor.password]
-          end
-       end
-     end
-
   end
 
   def display_doctor_data(aID)
     filename = "../csv/doctor.csv"
     record = search_by_id(aID, filename)
+
     puts "----------------------------"
     puts "Doctor details :\n"
     if not(record==nil)
       puts "\n"
-      puts "ID number : " + record[1]
-      puts "First name : " + record[2]
-      puts "Last name : " + record[3]
-      puts "Address : "+ record[4]
-      puts "Date of birth : "+ record[5]
-      puts "Phone number : "+ record[6]
-      puts "Email : "+ record[7]
-      puts "Speciality : " + record[8]
-      puts "Password : " + record[9]
+      if not(record[1] == nil)
+        puts "ID number : " + record[1]
+      end
+      if not(record[2] == nil)
+        puts "First name : " + record[2]
+      end
+      if not(record[3] == nil)
+        puts "Last name : " + record[3]
+      end
+      if not(record[4] == nil)
+        puts "Address : "+ record[4]
+      end
+      if not(record[5] == nil)
+        puts "Date of birth : "+ record[5]
+      end
+      if not(record[6] == nil)
+        puts "Phone number : "+ record[6]
+      end
+      if not(record[7] == nil)
+        puts "Email : "+ record[7]
+      end
+      if not(record[8] == nil)
+        puts "Speciality : " + record[8]
+      end
+      if not(record[9] == nil)
+        puts "Password : " + record[9]
+      end
       puts "\n"
+
     else puts "Error! Record not found!"
     end
   end
