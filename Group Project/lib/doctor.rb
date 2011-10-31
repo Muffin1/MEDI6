@@ -69,7 +69,7 @@ class Doctor < Person
                new_doctor.specialization =row[8]
             end
               if(new_doctor.password == nil)
-               new_doctor.password =row[9]
+               new_doctor.password = new_doctor.change_password(row[0],row[9])
             end
             csv << [row[0] ,new_doctor.id_number, new_doctor.first_name, new_doctor.last_name, new_doctor.address, new_doctor.date_of_birth, new_doctor.phone_number, new_doctor.email, new_doctor.specialization, new_doctor.password]
           end

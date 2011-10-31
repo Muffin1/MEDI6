@@ -39,11 +39,11 @@ describe "Doctor" do
       doctor1.phone_number= "078376766"
       doctor1.email = nil
       doctor1.specialization = "mamadou"
-      doctor1.password="password"
+      doctor1.password=nil
 
-      new_data = ["5005",doctor1.id_number, doctor1.first_name, doctor1.last_name,doctor1.address,doctor1.date_of_birth, doctor1.phone_number,doctor1.email,doctor1.specialization,doctor1.password]
+      new_data = ["5003",doctor1.id_number, doctor1.first_name, doctor1.last_name,doctor1.address,doctor1.date_of_birth, doctor1.phone_number,doctor1.email,doctor1.specialization,doctor1.password]
 
-      doctor.update_doctor_data(doctor1,"5005")
+      doctor.update_doctor_data(doctor1,"5003")
 
     end
   end
@@ -57,7 +57,5 @@ describe "Doctor" do
     File.write("patient_id", "doctor_id","exam result") == "patient_id, doctor_id,exam result"
 
   end
-
-
 
 end
