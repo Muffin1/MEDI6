@@ -13,7 +13,6 @@ class Doctor < Person
       csv << [doctor_id,id_number, first_name, last_name, address, date_of_birth, phone_number, email, specialization, password]
     end
 
-
     file.close
   end
 
@@ -154,7 +153,5 @@ class Doctor < Person
       end
     end
   end
-
-
 
 end
