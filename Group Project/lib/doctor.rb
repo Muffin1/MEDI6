@@ -33,26 +33,23 @@ class Doctor < Person
   end
 
   def update_doctor_data(doctor)
- csv_contents = CSV.read("../csv/doctor.csv")
- old_data = Array.new
- csv_contents.each do |row|
-      if(row[1] == doctor.id_number)
-       old_data = [row[1],row[2],row[3],row[4],row[5],row[6],row[7],row[8],row[9]]
-      end
+       csv_contents = CSV.read("../csv/doctor.csv")
+       file = File.open("../csv/doctor.csv", "w+")
+
+       csv_contents.each do |row|
+            if not(row[1] == doctor.id_number)
+               CSV::Writer.generate(file) do |csv|
+                csv << row
+               end
+            else
+              CSV::Writer.generate(file) do |csv|
+                csv <<  [row[0],doctor.id_number, doctor.first_name, doctor.last_name, doctor.address, doctor.date_of_birth, doctor.phone_number, doctor.email, doctor.specialization, doctor.password]
+               end
+            end
+       end
+
     end
- # file = File.open("../csv/doctor.csv", "a+")
 
-  new_data = [doctor.id_number, doctor.first_name, doctor.last_name,doctor.address,doctor.date_of_birth, doctor.phone_number,doctor.email,doctor.specialization, doctor.password]
-  counter = 0;
-   new_data.each do |data|
-     counter += 1
-     if not(data == nil)  then
-       new_data[counter] =  old_data[counter]
-     end
-   end
-
-     return old_data
-  end
 
   def display_doctor_data(aID)
     filename = "../csv/doctor.csv"
