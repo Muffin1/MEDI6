@@ -29,6 +29,27 @@ describe "Doctor" do
   end
 
 
+  describe "methods of class doctor" do
+
+    it "should update doctor data" do
+      doctor1 = Doctor.new
+      doctor1.id_number = nil
+      doctor1.first_name = "baidy"
+      doctor1.last_name=  nil
+      doctor1.address = "rochdale road"
+      doctor1.date_of_birth = "3123/123/123"
+      doctor1.phone_number= "078376766"
+      doctor1.email = nil
+      doctor1.specialization = "mamadou"
+      doctor1.password="password"
+
+      new_data = ["5005",doctor1.id_number, doctor1.first_name, doctor1.last_name,doctor1.address,doctor1.date_of_birth, doctor1.phone_number,doctor1.email,doctor1.specialization,doctor1.password]
+
+      doctor.update_doctor_data(doctor1,"5005")
+
+    end
+  end
+
 
 
   it "add exam results to patient" do

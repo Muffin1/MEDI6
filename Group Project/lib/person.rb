@@ -23,6 +23,7 @@ class Person
       @id = 5000
       file.write(@id)
       file.close
+
     end
     return @id
 
@@ -71,7 +72,6 @@ class Person
          end
        end
     end
-
 
     file.close
     encrypted_password

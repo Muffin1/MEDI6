@@ -13,7 +13,6 @@ class Doctor < Person
       csv << [doctor_id,id_number, first_name, last_name, address, date_of_birth, phone_number, email, specialization, password]
     end
 
-
     file.close
   end
 
@@ -31,23 +30,95 @@ class Doctor < Person
   end
 
 
+
+
+
+
+
+  def update_doctor_data(new_doctor, id)
+     csv_contents = CSV.read("../csv/doctor.csv")
+     file = File.open("../csv/doctor.csv", "w+")
+
+     csv_contents.each do |row|
+       CSV::Writer.generate(file) do |csv|
+
+          if not(row[0] == id)
+             csv << row
+          else
+
+            if(new_doctor.id_number == nil)
+               new_doctor.id_number =row[1]
+            end
+            if(new_doctor.first_name == nil)
+               new_doctor.first_name =row[2]
+            end
+            if(new_doctor.last_name == nil)
+               new_doctor.last_name =row[3]
+            end
+            if(new_doctor.address == nil)
+               new_doctor.address =row[4]
+            end
+            if(new_doctor.date_of_birth == nil)
+               new_doctor.date_of_birth =row[5]
+            end
+            if(new_doctor.phone_number == nil)
+               new_doctor.phone_number =row[6]
+            end
+            if(new_doctor.email == nil)
+               new_doctor.email =row[7]
+            end
+            if(new_doctor.specialization == nil)
+               new_doctor.specialization =row[8]
+            end
+              if(new_doctor.password == nil)
+               new_doctor.password =row[9]
+            end
+            csv << [row[0] ,new_doctor.id_number, new_doctor.first_name, new_doctor.last_name, new_doctor.address, new_doctor.date_of_birth, new_doctor.phone_number, new_doctor.email, new_doctor.specialization, new_doctor.password]
+          end
+       end
+     end
+    file.close
+
+  end
+
+
   def display_doctor_data(aID)
     filename = "../csv/doctor.csv"
     record = search_by_id(aID, filename)
+
     puts "----------------------------"
     puts "Doctor details :\n"
     if not(record==nil)
       puts "\n"
-      puts "ID number : " + record[1]
-      puts "First name : " + record[2]
-      puts "Last name : " + record[3]
-      puts "Address : "+ record[4]
-      puts "Date of birth : "+ record[5]
-      puts "Phone number : "+ record[6]
-      puts "Email : "+ record[7]
-      puts "Speciality : " + record[8]
-      puts "Password : " + record[9]
+      if not(record[1] == nil)
+        puts "ID number : " + record[1]
+      end
+      if not(record[2] == nil)
+        puts "First name : " + record[2]
+      end
+      if not(record[3] == nil)
+        puts "Last name : " + record[3]
+      end
+      if not(record[4] == nil)
+        puts "Address : "+ record[4]
+      end
+      if not(record[5] == nil)
+        puts "Date of birth : "+ record[5]
+      end
+      if not(record[6] == nil)
+        puts "Phone number : "+ record[6]
+      end
+      if not(record[7] == nil)
+        puts "Email : "+ record[7]
+      end
+      if not(record[8] == nil)
+        puts "Speciality : " + record[8]
+      end
+      if not(record[9] == nil)
+        puts "Password : " + record[9]
+      end
       puts "\n"
+
     else puts "Error! Record not found!"
     end
   end
@@ -174,3 +245,4 @@ class Doctor < Person
   end
 
 end
+
