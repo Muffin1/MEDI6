@@ -2,7 +2,7 @@ require 'csv'
 require 'md5'
 class Person
 
-  attr_accessor :id, :first_name, :last_name, :address, :date_of_birth, :phone_number, :email, :id_number, :password
+  attr_accessor :first_name, :last_name, :address, :date_of_birth, :phone_number, :email, :id_number, :password
 
 
   def id_generator()
@@ -54,9 +54,9 @@ class Person
   end
 
   def change_password(user_id, new_password)
-    file = File.open("../csv/user_temp.csv", "a+")
-    csv_contents = CSV.read("../csv/user.csv")
 
+    csv_contents = CSV.read("../csv/user.csv")
+    file = File.open("../csv/user.csv", "w+")
     encrypted_password  = MD5.hexdigest(new_password)
 
     csv_contents.each do |row|
@@ -74,8 +74,6 @@ class Person
 
 
     file.close
-    File.delete("../csv/user.csv")
-    File.rename("../csv/user_temp.csv","../csv/user.csv")
     encrypted_password
   end
   end

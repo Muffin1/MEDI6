@@ -25,15 +25,11 @@ class Main
     @password = gets.chomp
   end
 
-  def setPrivilege
-    @privilege = @login.validate(@filename, @id, @password)
-  end
-
   def perform_user_login
 
     id = ask_user_for_id
     password = ask_user_for_password
-    setPrivilege()
+    @privilege = @login.validate(@filename, @id, @password)
     @log_in_attempts += 1
 
     if not(@privilege==nil) then
@@ -44,10 +40,10 @@ class Main
         option = gets.chomp
         @admin.select_user_to_add(option)
       elsif (@privilege == "d") then
-         @doctor.display_doctor_data(@id)
-         @doctor.display_doctor_options()
-         option = gets.chomp
-         @doctor.modify_details(option)
+        @doctor.display_doctor_data(@id)
+        @doctor.display_doctor_options()
+        option = gets.chomp
+        @doctor.modify_details(option,@id)
 
       elsif (@privilege == "r") then
 
