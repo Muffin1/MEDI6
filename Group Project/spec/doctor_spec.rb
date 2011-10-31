@@ -32,16 +32,16 @@ describe "Doctor" do
     it "should update doctor data" do
       doctor1 = Doctor.new
       doctor1.id_number = "t070942"
-      doctor1.first_name = "Farhad"
+      doctor1.first_name = "onis"
       doctor1.last_name=  "Ghavam"
       doctor1.address = "Oxford Str"
       doctor1.date_of_birth = "18/10/1980"
       doctor1.phone_number= "6984573957"
-      doctor1.email = "farhad@yahoo.com"
-      doctor1.specialization = "Endocrinologist"
-      doctor1.password="123456"
+      doctor1.email = "diawbaidy.com"
+      doctor1.specialization = "Dental"
+      doctor1.password="baiay222"
 
-    new_data = [doctor1.id_number, doctor1.first_name, doctor1.last_name,doctor1.address,doctor1.date_of_birth, doctor1.phone_number,doctor1.email,doctor1.specialization,doctor1.password]
+      new_data = [doctor1.id_number, doctor1.first_name, doctor1.last_name,doctor1.address,doctor1.date_of_birth, doctor1.phone_number,doctor1.email,doctor1.specialization,doctor1.password]
 
       doctor.update_doctor_data(doctor1).should ==new_data
 

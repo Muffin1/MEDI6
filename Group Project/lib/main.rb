@@ -47,6 +47,7 @@ class Main
          @doctor.display_doctor_data(@id)
          @doctor.display_doctor_options()
          option = gets.chomp
+         @doctor.modify_details(option)
 
       elsif (@privilege == "r") then
 
