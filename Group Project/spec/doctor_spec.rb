@@ -32,7 +32,7 @@ describe "Doctor" do
     it "should update doctor data" do
       doctor1 = Doctor.new
       doctor1.id_number = "t070942"
-      doctor1.first_name = "asdasdasdasd"
+      doctor1.first_name = "onis"
       doctor1.last_name=  "Ghavam"
       doctor1.address = "Oxford Str"
       doctor1.date_of_birth = "18/10/1980"
