@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 5004,nil,onis,muffin,12 oxford street,14/12/1987,3251353,email,458733
 5004,nil,onis,muffin,12 oxford street,14/12/1987,3251353,email,458733
 5005,nil,onis,muffin,12 oxford street,14/12/1987,3251353,email,458733
@@ -9,3 +10,11 @@
 5011,nil,onis,muffin,12 oxford street,14/12/1987,3251353,email,458733
 5012,nil,onis,muffin,12 oxford street,14/12/1987,3251353,email,458733
 5017,nil,onis,muffin,12 oxford street,14/12/1987,3251353,email,458733
+=======
+
+
+500,1000,Bill,Gates,Microsoft,10/10/1950,$$$$$$$$$,Bill@gmail.com,1212123,aponeurosis
+500,1000,Bill,Gates,Microsoft,10/10/1950,$$$$$$$$$,Bill@gmail.com,1212123,aponeurosis
+500,1000,Bill,Gates,Microsoft,10/10/1950,$$$$$$$$$,Bill@gmail.com,1212123,aponeurosis
+500,1000,Bill,Gates,Microsoft,10/10/1950,$$$$$$$$$,Bill@gmail.com,1212123,aponeurosis
+>>>>>>> 3bc89f771fc825f14fb105e887893cd919d95756
