@@ -112,7 +112,7 @@ class Receptionist < Person
 
   end
 
- def display_receptionist_data(aID)
+  def display_receptionist_data(aID)
     filename = "../csv/receptionist.csv"
     record = search_by_id(aID, filename)
 
@@ -185,6 +185,7 @@ class Receptionist < Person
 
       add_patient(first_name, last_name, address, date_of_birth, phone_number, email, id_number)
     elsif (option=="e") or (option=="E") then
+
     end
   end
 
@@ -231,6 +232,7 @@ class Receptionist < Person
         modify_selection = display_modify_options()
         modify_selections(modify_selection, system_id)
       end
+
     end
   end
 
