@@ -29,6 +29,7 @@ class Doctor < Person
 
   end
 
+
 def update_doctor_data(new_doctor, id)
 
     csv_contents = CSV.read("../csv/doctor.csv")
@@ -75,7 +76,6 @@ def update_doctor_data(new_doctor, id)
           csv << [row[0] ,new_doctor.id_number, new_doctor.first_name, new_doctor.last_name, new_doctor.address, new_doctor.date_of_birth, new_doctor.phone_number, new_doctor.email, new_doctor.specialization, new_doctor.password]
 
         end
-
 
       end
     end
