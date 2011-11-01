@@ -99,7 +99,7 @@ class Receptionist < Person
     if (option=="m") or (option=="M") then
 
 
-    elsif (option=="a") or (modify_data=="A") then
+    elsif (option=="a") or (option=="A") then
       puts "Patient' s first name :"
       first_name = gets.chomp
 
@@ -122,7 +122,7 @@ class Receptionist < Person
       id_number = gets.chomp
 
       add_patient(first_name, last_name, address, date_of_birth, phone_number, email, id_number)
-    elsif (option=="e") or (modify_data=="E") then
+    elsif (option=="e") or (option=="E") then
     end
   end
 end
