@@ -45,11 +45,12 @@ class Main
         @doctor.display_doctor_data(@id)
         @doctor.display_doctor_options()
         option = gets.chomp
-        @doctor.modify_details(option,@id)
+        @doctor.select_options(option,@id)
 
       elsif (@privilege == "r") then
          @receptionist.display_receptionist_options()
          option = gets.chomp
+         @receptionist.select_options(option,@id)
       end
 
     else

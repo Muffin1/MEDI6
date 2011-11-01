@@ -142,7 +142,7 @@ def update_doctor_data(new_doctor, id)
           modify_selections(modify_selection,doctor_id)
         end
 
-      elsif (option=="p") or (modify_data=="P") then
+      elsif (option=="p") or (option=="P") then
         add_exam_result_interface()
       end
 

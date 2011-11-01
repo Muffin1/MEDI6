@@ -79,13 +79,13 @@ describe "Receptionist" do
 
   it "receptionist.select_option should get the option of the receptionist and act accordingly" do
 
-    receptionist.stub!(:option).and_return("n")
+    receptionist.stub!(:option).and_return("a")
     receptionist.stub!(:modify_receptionist_info)
     receptionist.stub!(:add_patient)
     receptionist.stub!(:edit_patient)
     if (receptionist.option=="m")
       receptionist.modify_receptionist_info
-    elsif (receptionist.option=="n")
+    elsif (receptionist.option=="a")
       receptionist.edit_patient
     elsif (receptionist.option=="e")
       receptionist.add_patient
