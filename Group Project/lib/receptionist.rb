@@ -105,7 +105,7 @@ class Receptionist < Person
   end
 
   def display_receptionist_options()
-    puts 'Options:/n-------------------'
+    puts "Options:\n-------------------"
     puts '1)Please enter "m" to modify your details.'
     puts "2)Please enter 'a' to add a new patient to the system."
     puts "3)Please enter 'e' to edit information of an existing patient in the system."
@@ -117,7 +117,7 @@ class Receptionist < Person
     record = search_by_id(aID, filename)
 
     puts "----------------------------"
-    puts "Receptionist details :\n"
+    puts "Receptionist details :"
     if not(record==nil)
       puts "\n"
       if not(record[1].nil?)

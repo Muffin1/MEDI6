@@ -4,6 +4,7 @@ require '../lib/person.rb'
 
 describe "Receptionist" do
   let(:receptionist){Receptionist.new}
+  let(:stdin){mock('STDIN')}
   patient_file = "../csv/patient.csv"
 
   it "Receptionist should have a first name" do
@@ -53,28 +54,6 @@ describe "Receptionist" do
     end
     found_it.should =="458733"
   end
-
-
-
-  #describe "methods of class receptionist" do
-  #
-  #  it "should update receptionist data" do
-  #    recep1 = Receptionist.new
-  #    recep1.id_number = nil
-  #    recep1.first_name = "baidy"
-  #    recep1.last_name=  nil
-  #    recep1.address = "rochdale road"
-  #    recep1.date_of_birth = "3123/123/123"
-  #    recep1.phone_number= "078376766"
-  #    recep1.email = nil
-  #    recep1.password=nil
-  #
-  #    record = ["5014",recep1.id_number, recep1.first_name, recep1.last_name,recep1.address,recep1.date_of_birth, recep1.phone_number,recep1.email,recep1.password]
-  #
-  #    receptionist.update_receptionist_data(recep1,"5014")
-  #
-  #  end
-  #end
 
 
   describe "methods of class receptionist" do
@@ -187,5 +166,83 @@ describe "Receptionist" do
     File.write(row[0],row[1],row[2], row[3], row[4], row[5], row[6])== row
   end
 
+
+
+
+  describe "methods of class receptionist" do
+    it "should get the UI input" do
+      receptionist.display_modify_options().should_not == nil
+    end
+
+    it "should display user data" do
+      CSV_row = ["5002","4325","baidy","diawr","32, oxford road","03/09/2005","0798534355","diae@yahoo.com","paswor1"]
+      puts "----------------------------"
+      puts "Receptionist details :\n"
+      if not(CSV_row==nil)
+        puts "\n"
+        if not(CSV_row[1] == nil)
+          puts "ID number : " + CSV_row[1]
+        end
+        if not(CSV_row[2] == nil)
+          puts "First name : " + CSV_row[2]
+        end
+        if not(CSV_row[3] == nil)
+          puts "Last name : " + CSV_row[3]
+        end
+        if not(CSV_row[4] == nil)
+          puts "Address : "+ CSV_row[4]
+        end
+        if not(CSV_row[5] == nil)
+          puts "Date of birth : "+ CSV_row[5]
+        end
+        if not(CSV_row[6] == nil)
+          puts "Phone number : "+ CSV_row[6]
+        end
+        if not(CSV_row[7] == nil)
+          puts "Email : "+ CSV_row[7]
+        end
+        if not(CSV_row[8] == nil)
+          puts "Password : " + CSV_row[8]
+        end
+        puts "\n"
+
+      else puts "Error! Record not found!"
+      end
+      #------------------------------------------------------
+      #modify details
+      stdin.stub!(:gets).and_return("2")
+      input = stdin.gets
+      stdin.stub!(:gets).and_return("farhard")
+      changed_value = stdin.gets
+      if (input == "1")
+        puts "Changing ID number.. Please type the new value :"
+        CSV_row[0] = changed_value
+      elsif (input == "2")
+        puts "Changing First name.. Please type the new value :"
+        CSV_row[1] = changed_value
+      elsif (input == "3")
+        puts "Changing Last name.. Please type the new value :"
+        CSV_row[2] = changed_value
+      elsif (input == "4")
+        puts "Changing Address.. Please type the new value :"
+        CSV_row[3] = changed_value
+      elsif (input == "5")
+        puts "Changing Date of birth.. Please type the new value :"
+        CSV_row[4] = changed_value
+      elsif (input == "6")
+        puts "Changing Phone number.. Please type the new value :"
+        CSV_row[5] = changed_value
+      elsif (input == "7")
+        puts "Changing Email.. Please type the new value :"
+        CSV_row[6] = changed_value
+      elsif (input == "8")
+        puts "Changing Password.. Please type the new value :"
+        CSV_row[7] = changed_value
+      end
+      puts "updated  record: "
+      puts CSV_row
+    end
+
+  end
 
 end
