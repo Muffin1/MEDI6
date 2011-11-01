@@ -86,6 +86,52 @@ class Receptionist < Person
     return_updated_row
   end
 
+
+   def update_patient_data(patient, id)
+    csv_contents = CSV.read("../csv/patient.csv")
+    file = File.open("../csv/patient.csv", "w+")
+
+    return_updated_row=nil
+
+    csv_contents.each do |row|
+      CSV::Writer.generate(file) do |csv|
+
+        if not(row[0] == id)
+          csv << row
+        else
+
+          if(patient.first_name.nil?)
+            patient.first_name =row[2]
+          end
+          if(patient.last_name.nil?)
+            patient.last_name =row[3]
+          end
+          if(patient.address.nil?)
+            patient.address =row[4]
+          end
+          if(patient.date_of_birth.nil?)
+            patient.date_of_birth =row[5]
+          end
+          if(patient.phone_number.nil?)
+            patient.phone_number =row[6]
+          end
+          if(patient.email.nil?)
+            patient.email =row[7]
+          end
+         if(patient.id_number.nil?)
+            patient.id_number =row[7]
+          end
+
+
+          return_updated_row  = [row[0] ,row[1], patient.first_name, patient.last_name, patient.address, patient.date_of_birth,patient.phone_number,patient.email,patient.id_number]
+          csv << [row[0] ,row[1], patient.first_name, patient.last_name, patient.address, patient.date_of_birth,patient.phone_number,patient.email,patient.id_number]
+        end
+      end
+    end
+    file.close
+    return_updated_row
+   end
+
   def display_modify_options()
     puts"\n"
     puts"Please select the following keys to modify your data :"
@@ -97,6 +143,24 @@ class Receptionist < Person
     puts "Press (6) to change your Phone number.. "
     puts "Press (7) to change your Email.. "
     puts "Press (8) to change your Password.. "
+    puts "Press any other key to exit.."
+
+    modify_selection = gets.chomp()
+    return modify_selection
+
+  end
+
+  def display_edit_patient_options()
+    puts"\n"
+    puts"Please select the following keys to modify your data :"
+
+    puts "Press (1) to change patient' s First name.. "
+    puts "Press (2) to change patient' s Last name.. "
+    puts "Press (3) to change patient' s Address.. "
+    puts "Press (4) to change patient' s Date of birth.. "
+    puts "Press (5) to change patient' s Phone number.. "
+    puts "Press (6) to change patient' s Email.. "
+    puts "Press (7) to change patient' s ID number.. "
     puts "Press any other key to exit.."
 
     modify_selection = gets.chomp()
@@ -151,6 +215,45 @@ class Receptionist < Person
     end
   end
 
+
+  def display_patient_data(aID)
+    filename = "../csv/patient.csv"
+    record = search_by_id(aID, filename)
+
+    puts "----------------------------"
+    puts "Patient details :\n"
+    if not(record==nil)
+      puts "\n"
+
+      if not(record[2].nil?)
+        puts "First name : " + record[2]
+      end
+      if not(record[3].nil?)
+        puts "Last name : " + record[3]
+      end
+      if not(record[4].nil?)
+        puts "Address : "+ record[4]
+      end
+      if not(record[5].nil?)
+        puts "Date of birth : "+ record[5]
+      end
+      if not(record[6].nil?)
+        puts "Phone number : "+ record[6]
+      end
+      if not(record[7].nil?)
+        puts "Email : "+ record[7]
+      end
+
+      if not(record[8].nil?)
+        puts "Id number : "+ record[8]
+      end
+
+      puts "\n"
+
+    else puts "Error! Record not found!"
+    end
+  end
+
   def select_options (option,receptionist_id)
     if (option=="m") or (option=="M") then
       modify_selection = display_modify_options()
@@ -185,6 +288,19 @@ class Receptionist < Person
 
       add_patient(first_name, last_name, address, date_of_birth, phone_number, email, id_number)
     elsif (option=="e") or (option=="E") then
+
+      puts "Insert patient' s id number :"
+      patient_id = gets.chomp
+
+      display_patient_data(patient_id)
+
+      edit_selection = display_edit_patient_options()
+
+      if (edit_selection =="1" or edit_selection =="2" or edit_selection =="3" or edit_selection =="4" or edit_selection =="5" or
+          edit_selection =="6" or edit_selection =="7" )
+
+        edit_patient(edit_selection,patient_id)
+      end
 
     end
   end
@@ -231,6 +347,50 @@ class Receptionist < Person
       if selection == "y" or selection == "Y"
         modify_selection = display_modify_options()
         modify_selections(modify_selection, system_id)
+      end
+
+    end
+  end
+
+  def edit_patient (modify_selection,system_id)
+    puts "\n"
+    more_changes = true
+    patient = Patient.new
+
+    if (modify_selection == "1")
+      puts "Changing patient' s first name.. Please type the new value :"
+      patient.first_name = gets.chomp
+    elsif (modify_selection == "2")
+      puts "Changing  patient' s last name.. Please type the new value :"
+      patient.last_name = gets.chomp
+    elsif (modify_selection == "3")
+      puts "Changing patient' s address.. Please type the new value :"
+      patient.address = gets.chomp
+    elsif (modify_selection == "4")
+      puts "Changing patient' s date of birth.. Please type the new value :"
+      patient.date_of_birth = gets.chomp
+    elsif (modify_selection == "5")
+      puts "Changing patient' s phone number.. Please type the new value :"
+      patient.phone_number = gets.chomp
+    elsif (modify_selection == "6")
+      puts "Changing patient' s email.. Please type the new value :"
+      patient.email = gets.chomp
+    elsif (modify_selection == "7")
+      puts "Changing patient' s id number.. Please type the new value :"
+      patient.id_number = gets.chomp
+    else more_changes=false
+    end
+
+
+    update_patient_data(patient, system_id)
+
+    if (more_changes)
+      puts"\n"
+      puts "Do you want to make other changes? (Y/N) "
+      selection = gets.chomp()
+      if selection == "y" or selection == "Y"
+        edit_selection = display_edit_patient_options()
+        edit_patient(modify_selection, system_id)
       end
 
     end
