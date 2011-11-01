@@ -138,10 +138,12 @@ class Doctor < Person
 
       if (modify_selection =="1" or modify_selection =="2" or modify_selection =="3" or modify_selection =="4" or modify_selection =="5" or
           modify_selection =="6" or modify_selection =="7" or modify_selection =="8" or modify_selection =="9")
-          modify_selections(modify_selection,doctor_id)
-      elsif (option=="p") or (option=="P") then
-        add_exam_result_interface()
+
+        modify_selections(modify_selection,doctor_id)
       end
+
+    elsif (option=="p") or (option=="P") then
+      add_exam_result_interface()
 
     end
   end
