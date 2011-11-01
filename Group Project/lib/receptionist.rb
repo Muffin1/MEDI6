@@ -38,10 +38,12 @@ class Receptionist < Person
 
   end
 
-
   def update_receptionist_data(new_receptionist, id)
     csv_contents = CSV.read("../csv/receptionist.csv")
     file = File.open("../csv/receptionist.csv", "w+")
+
+
+    return_updated_row=nil
 
     csv_contents.each do |row|
       CSV::Writer.generate(file) do |csv|
@@ -50,36 +52,39 @@ class Receptionist < Person
           csv << row
         else
 
-          if(new_receptionist.id_number == nil)
+          if(new_receptionist.id_number.nil?)
             new_receptionist.id_number =row[1]
           end
-          if(new_receptionist.first_name == nil)
+          if(new_receptionist.first_name.nil?)
             new_receptionist.first_name =row[2]
           end
-          if(new_receptionist.last_name == nil)
+          if(new_receptionist.last_name.nil?)
             new_receptionist.last_name =row[3]
           end
-          if(new_receptionist.address == nil)
+          if(new_receptionist.address.nil?)
             new_receptionist.address =row[4]
           end
-          if(new_receptionist.date_of_birth == nil)
+          if(new_receptionist.date_of_birth.nil?)
             new_receptionist.date_of_birth =row[5]
           end
-          if(new_receptionist.phone_number == nil)
+          if(new_receptionist.phone_number.nil?)
             new_receptionist.phone_number =row[6]
           end
-          if(new_receptionist.email == nil)
+          if(new_receptionist.email.nil?)
             new_receptionist.email =row[7]
           end
-          if(new_receptionist.password == nil)
-            new_receptionist.password = new_receptionist.change_password(row[0],row[8])
+          if (new_receptionist.password.nil?)
+            new_receptionist.password = row[8]
+          else
+            new_receptionist.password = new_receptionist.change_password(row[0],new_receptionist.password)
           end
+          return_updated_row  = [row[0] ,new_receptionist.id_number, new_receptionist.first_name, new_receptionist.last_name, new_receptionist.address, new_receptionist.date_of_birth, new_receptionist.phone_number, new_receptionist.email, new_receptionist.password]
           csv << [row[0] ,new_receptionist.id_number, new_receptionist.first_name, new_receptionist.last_name, new_receptionist.address, new_receptionist.date_of_birth, new_receptionist.phone_number, new_receptionist.email, new_receptionist.password]
         end
       end
     end
     file.close
-
+    return_updated_row
   end
 
   def display_receptionist_options()
@@ -95,28 +100,28 @@ class Receptionist < Person
 
 
     elsif (option=="a") or (modify_data=="A") then
-        puts "Patient' s first name :"
-        first_name = gets.chomp
+      puts "Patient' s first name :"
+      first_name = gets.chomp
 
-        puts "Patient' s last name :"
-        last_name = gets.chomp
+      puts "Patient' s last name :"
+      last_name = gets.chomp
 
-        puts "Patient' s address :"
-        address = gets.chomp
+      puts "Patient' s address :"
+      address = gets.chomp
 
-        puts "Patient' s date of birth :"
-        date_of_birth = gets.chomp
+      puts "Patient' s date of birth :"
+      date_of_birth = gets.chomp
 
-        puts "Patient' s telephone number :"
-        phone_number = gets.chomp
+      puts "Patient' s telephone number :"
+      phone_number = gets.chomp
 
-        puts "Patient' s email :"
-        email = gets.chomp
+      puts "Patient' s email :"
+      email = gets.chomp
 
-        puts "Patient' s id number :"
-        id_number = gets.chomp
+      puts "Patient' s id number :"
+      id_number = gets.chomp
 
-        add_patient(first_name, last_name, address, date_of_birth, phone_number, email, id_number)
+      add_patient(first_name, last_name, address, date_of_birth, phone_number, email, id_number)
     elsif (option=="e") or (modify_data=="E") then
     end
   end
