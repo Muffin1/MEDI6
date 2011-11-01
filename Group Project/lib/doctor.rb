@@ -128,8 +128,8 @@ def update_doctor_data(new_doctor, id)
 
     def display_doctor_options()
       puts 'Options:/n-------------------'
-      puts '1)Please enter "m" to modify your details'
-      puts "2)Please enter 'p' to add a patient' s diagnosis"
+      puts '1)Please enter "m" to modify your details.'
+      puts "2)Please enter 'p' to add a patient' s diagnosis."
     end
 
     def select_options(option, doctor_id)
@@ -168,7 +168,6 @@ def update_doctor_data(new_doctor, id)
     end
 
 
-  #comment
     def modify_selections (modify_selection,system_id)
       puts "\n"
       more_changes = true
