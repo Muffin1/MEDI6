@@ -142,11 +142,10 @@ class Doctor < Person
         modify_selections(modify_selection,doctor_id)
       end
 
-
     elsif (option=="p") or (option=="P") then
       add_exam_result_interface()
-    end
 
+    end
   end
 
   def display_modify_options()
