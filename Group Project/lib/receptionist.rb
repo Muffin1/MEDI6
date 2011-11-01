@@ -173,6 +173,7 @@ class Receptionist < Person
     puts '1)Please enter "m" to modify your details.'
     puts "2)Please enter 'a' to add a new patient to the system."
     puts "3)Please enter 'e' to edit information of an existing patient in the system."
+    puts "3)Press any key to logout."
 
   end
 
@@ -205,9 +206,6 @@ class Receptionist < Person
       end
       if not(record[7].nil?)
         puts "Email : "+ record[7]
-      end
-      if not(record[8].nil?)
-        puts "Password : " + record[8]
       end
       puts "\n"
 

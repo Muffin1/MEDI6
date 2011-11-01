@@ -76,4 +76,6 @@ class Person
     file.close
     encrypted_password
   end
+
+
   end
