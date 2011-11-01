@@ -57,22 +57,56 @@ describe "Receptionist" do
 
 
 
+  #describe "methods of class receptionist" do
+  #
+  #  it "should update receptionist data" do
+  #    recep1 = Receptionist.new
+  #    recep1.id_number = nil
+  #    recep1.first_name = "baidy"
+  #    recep1.last_name=  nil
+  #    recep1.address = "rochdale road"
+  #    recep1.date_of_birth = "3123/123/123"
+  #    recep1.phone_number= "078376766"
+  #    recep1.email = nil
+  #    recep1.password=nil
+  #
+  #    record = ["5014",recep1.id_number, recep1.first_name, recep1.last_name,recep1.address,recep1.date_of_birth, recep1.phone_number,recep1.email,recep1.password]
+  #
+  #    recep1.update_receptionist_data(recep1,"5014")
+  #
+  #  end
+  #end
+
+
   describe "methods of class receptionist" do
+    file = File.open("../csv/receptionist.csv", "a+")
+    CSV::Writer.generate(file) do |csv|
+      csv << ["2000","2000", "Sandra", "Alkivias", "my address you know", "can't tell'", "2222212222", "sandra@hotmail.com", "dentist",MD5.hexdigest("sandra")]
+    end
+    file.close
 
-    it "should update receptionist data" do
-      recep1 = Receptionist.new
-      recep1.id_number = nil
-      recep1.first_name = "baidy"
-      recep1.last_name=  nil
-      recep1.address = "rochdale road"
-      recep1.date_of_birth = "3123/123/123"
-      recep1.phone_number= "078376766"
-      recep1.email = nil
-      recep1.password=nil
+    file = File.open("../csv/user.csv", "a+")
+    CSV::Writer.generate(file) do |csv|
+     csv << ["1000",MD5.hexdigest("sandra"), "d"]
+    end
+    file.close
 
-      record = ["5014",recep1.id_number, recep1.first_name, recep1.last_name,recep1.address,recep1.date_of_birth, recep1.phone_number,recep1.email,recep1.password]
+    it "should update doctor data" do
+      doctor1 = Doctor.new
+      doctor1.id_number = "2000"
+      doctor1.first_name = "Sandra"
+      doctor1.last_name=  "Alkivias"
+      doctor1.address = "rochdale road"
+      doctor1.date_of_birth = "3123/123/123"
+      doctor1.phone_number= "078376766"
 
-      receptionist.update_receptionist_data(recep1,"5014")
+      doctor1.email = "sandra@hotmail.com"
+      doctor1.specialization = "dentist"
+      doctor1.password="sandra"
+
+
+
+      doctor.update_doctor_data(doctor1,"1000").should ==  ["1000",doctor1.id_number, doctor1.first_name, doctor1.last_name,doctor1.address,doctor1.date_of_birth, doctor1.phone_number,doctor1.email,doctor1.specialization,MD5.hexdigest("sandra")]
 
     end
   end

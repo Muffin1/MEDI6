@@ -35,7 +35,7 @@ describe "Doctor" do
   describe "methods of class doctor" do
     file = File.open("../csv/doctor.csv", "a+")
     CSV::Writer.generate(file) do |csv|
-      csv << ["1001","2000", "Sandra", "Alkivias", "my address you know", "can't tell'", "2222212222", "sandra@hotmail.com", "dentist",MD5.hexdigest("sandra")]
+      csv << ["1000","2000", "Sandra", "Alkivias", "my address you know", "can't tell'", "2222212222", "sandra@hotmail.com", "dentist",MD5.hexdigest("sandra")]
     end
     file.close
 
