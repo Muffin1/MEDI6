@@ -29,12 +29,8 @@ class Doctor < Person
 
   end
 
-<<<<<<< HEAD
-  def update_doctor_data(new_doctor, id)
-=======
-
 def update_doctor_data(new_doctor, id)
->>>>>>> 88c1170657ebbe805cf7e73bf3e45e088032360b
+
     csv_contents = CSV.read("../csv/doctor.csv")
     file = File.open("../csv/doctor.csv", "w+")
     return_updated_row = nil
@@ -79,7 +75,8 @@ def update_doctor_data(new_doctor, id)
           csv << [row[0] ,new_doctor.id_number, new_doctor.first_name, new_doctor.last_name, new_doctor.address, new_doctor.date_of_birth, new_doctor.phone_number, new_doctor.email, new_doctor.specialization, new_doctor.password]
 
         end
-<<<<<<< HEAD
+
+
       end
     end
     file.close
@@ -125,8 +122,7 @@ def update_doctor_data(new_doctor, id)
         puts "\n"
 
       else puts "Error! Record not found!"
-=======
->>>>>>> 88c1170657ebbe805cf7e73bf3e45e088032360b
+
       end
     end
 
@@ -136,8 +132,8 @@ def update_doctor_data(new_doctor, id)
       puts "2)Please enter 'p' to add a patient' s diagnosis"
     end
 
-    def modify_details(modify_data, doctor_id)
-      if (modify_data=="m") or (modify_data=="M") then
+    def select_options(option, doctor_id)
+      if (option=="m") or (option=="M") then
         modify_selection = display_modify_options()
 
         if (modify_selection =="1" or modify_selection =="2" or modify_selection =="3" or modify_selection =="4" or modify_selection =="5" or
@@ -146,9 +142,7 @@ def update_doctor_data(new_doctor, id)
           modify_selections(modify_selection,doctor_id)
         end
 
-      end
-
-      if (modify_data=="p") or (modify_data=="P") then
+      elsif (option=="p") or (modify_data=="P") then
         add_exam_result_interface()
       end
 
@@ -173,6 +167,8 @@ def update_doctor_data(new_doctor, id)
 
     end
 
+
+  #comment
     def modify_selections (modify_selection,system_id)
       puts "\n"
       more_changes = true

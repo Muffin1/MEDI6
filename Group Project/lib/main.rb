@@ -1,6 +1,7 @@
 require 'user_account.rb'
 require 'admin.rb'
 require "doctor.rb"
+require "receptionist.rb"
 require 'csv'
 
 class Main
@@ -9,6 +10,7 @@ class Main
     @login = Login.new
     @admin = Admin.new
     @doctor = Doctor.new
+    @receptionist = Receptionist.new
     @filename = "../csv/user.csv"
     @log_in_attempts = 0
   end
@@ -46,7 +48,8 @@ class Main
         @doctor.modify_details(option,@id)
 
       elsif (@privilege == "r") then
-
+         @receptionist.display_receptionist_options()
+         option = gets.chomp
       end
 
     else

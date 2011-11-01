@@ -82,5 +82,14 @@ end
 
   end
 
+      def display_receptionist_options()
+      puts 'Options:/n-------------------'
+      puts '1)Please enter "m" to modify your details.'
+      puts "2)Please enter 'a' to add a new patient to the system."
+      puts "3)Please enter 'e' to edit information of an existing patient in the system."
+      end
 
+  def select_options
+
+  end
 end
