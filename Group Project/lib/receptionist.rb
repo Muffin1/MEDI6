@@ -96,7 +96,7 @@ class Receptionist < Person
     csv_contents.each do |row|
       CSV::Writer.generate(file) do |csv|
 
-        if not(row[0] == id)
+        if not(row[0] == id.to_s)
           csv << row
         else
 
@@ -119,7 +119,7 @@ class Receptionist < Person
             patient.email =row[7]
           end
          if(patient.id_number.nil?)
-            patient.id_number =row[7]
+            patient.id_number =row[8]
           end
 
 

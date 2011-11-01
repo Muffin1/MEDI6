@@ -1,6 +1,7 @@
 require "rspec"
 require '../lib/receptionist.rb'
 require '../lib/person.rb'
+require '../lib/patient.rb'
 
 describe "Receptionist" do
   let(:receptionist){Receptionist.new}
@@ -65,7 +66,7 @@ describe "Receptionist" do
 
     file = File.open("../csv/user.csv", "w+")
     CSV::Writer.generate(file) do |csv|
-     csv << ["1001",MD5.hexdigest("alex"), "d"]
+      csv << ["1001",MD5.hexdigest("alex"), "d"]
     end
     file.close
 
@@ -166,7 +167,32 @@ describe "Receptionist" do
     File.write(row[0],row[1],row[2], row[3], row[4], row[5], row[6])== row
   end
 
+  it "update_patient_data should change the existing information about a patient" do
 
+
+    patient = Patient.new
+    patient.add_patient(2121, "nil","Onisiforos","Onoufriou","12 oxford street", "14/12/1987", "0789060666", "onis@email.com", "12341234")
+
+    patient.first_name = nil
+    patient.last_name = nil
+    patient.address = nil
+    patient.date_of_birth = nil
+    patient.phone_number = nil
+    patient.email = "onisiforos20@gmail.com"
+    patient.id_number =  nil
+
+    receptionist.update_patient_data(patient, 2121)
+
+    csv_contents = CSV.read("../csv/patient.csv")
+
+    found_it=nil
+    csv_contents.each do |row|
+      if(row[0] == "2121")
+        found_it= row
+      end
+    end
+   found_it.should ==["2121", "nil","Onisiforos","Onoufriou","12 oxford street", "14/12/1987", "0789060666", "onisiforos20@gmail.com", "12341234"]
+  end
 
 
   describe "methods of class receptionist" do
