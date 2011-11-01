@@ -84,18 +84,24 @@ class Main
           end
         elsif (@privilege == "r") then
           @receptionist.display_receptionist_data(@id)
-          @receptionist.display_receptionist_options()
-          option = gets.chomp
 
-          if (not((option=="m") or (option=="M")) and not((option=="a")  or (option=="A")) and not((option=="e")  or (option=="E")))
-            puts "\n"
-            puts"logging out.."
-            break
+          while(true)
+            @receptionist.display_receptionist_options()
+            option = gets.chomp
+            if (not((option=="m") or (option=="M")) and not((option=="a")  or (option=="A")) and not((option=="e")  or (option=="E")))
+              puts "\n"
+              puts"logging out.."
+              break
 
-          else @receptionist.select_options(option,@id)
-
+            else
+              if not(@receptionist.select_options(option,@id))
+                puts "\n"
+                puts"logging out.."
+                break
+              end
+            end
           end
-
+          break
         end
 
       else

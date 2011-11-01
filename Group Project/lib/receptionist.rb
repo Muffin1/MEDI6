@@ -87,7 +87,7 @@ class Receptionist < Person
   end
 
 
-   def update_patient_data(patient, id)
+  def update_patient_data(patient, id)
     csv_contents = CSV.read("../csv/patient.csv")
     file = File.open("../csv/patient.csv", "w+")
 
@@ -118,7 +118,7 @@ class Receptionist < Person
           if(patient.email.nil?)
             patient.email =row[7]
           end
-         if(patient.id_number.nil?)
+          if(patient.id_number.nil?)
             patient.id_number =row[8]
           end
 
@@ -130,7 +130,7 @@ class Receptionist < Person
     end
     file.close
     return_updated_row
-   end
+  end
 
   def display_modify_options()
     puts"\n"
@@ -253,6 +253,10 @@ class Receptionist < Person
   end
 
   def select_options (option,receptionist_id)
+
+
+    result = true
+
     if (option=="m") or (option=="M") then
       modify_selection = display_modify_options()
 
@@ -260,6 +264,9 @@ class Receptionist < Person
           modify_selection =="6" or modify_selection =="7" or modify_selection =="8")
 
         modify_selections(modify_selection,receptionist_id)
+
+      else
+        result= false
       end
 
     elsif (option=="a") or (option=="A") then
@@ -301,6 +308,8 @@ class Receptionist < Person
       end
 
     end
+
+    return result
   end
 
   def modify_selections (modify_selection,system_id)
@@ -378,7 +387,6 @@ class Receptionist < Person
       patient.id_number = gets.chomp
     else more_changes=false
     end
-
 
     update_patient_data(patient, system_id)
 
