@@ -18,13 +18,23 @@ class Main
   attr_accessor :id , :password, :privilege
 
   def ask_user_for_id
-    puts "ID: "
+    puts "User ID: "
     @id = gets.chomp
   end
 
   def ask_user_for_password
-    puts "password: "
+    puts "Password: "
     @password = gets.chomp
+  end
+
+  def show_initial_login_messages
+    puts "\n"
+    puts "Welcome to MEDI6! "
+    puts "\n"
+    puts "Performing user login.."
+    puts "Please provide your details.."
+    puts "\n"
+
   end
 
   def perform_user_login
@@ -75,4 +85,5 @@ class Main
 end
 
 main = Main.new()
+main.show_initial_login_messages()
 main.perform_user_login()
