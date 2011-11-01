@@ -117,9 +117,6 @@ class Doctor < Person
       if not(record[8].nil?)
         puts "Speciality : " + record[8]
       end
-      if not(record[9].nil?)
-        puts "Password : " + record[9]
-      end
       puts "\n"
 
     else puts "Error! Record not found!"
@@ -127,9 +124,11 @@ class Doctor < Person
   end
 
   def display_doctor_options()
-    puts 'Options:/n-------------------'
+    puts "Options:\n-------------------"
     puts '1)Please enter "m" to modify your details'
     puts "2)Please enter 'p' to add a patient' s diagnosis"
+    puts "3)Press any key to log out"
+
   end
 
   def select_options(option, doctor_id)

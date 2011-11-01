@@ -29,9 +29,10 @@ class Main
 
   def show_initial_login_messages
     puts "\n"
-    puts "Welcome to MEDI6! "
+    puts "**************************** "
+    puts "********** MEDI6 *********** "
+    puts "**************************** "
     puts "\n"
-    puts "Performing user login.."
     puts "Please provide your details.."
     puts "\n"
 
@@ -39,51 +40,89 @@ class Main
 
   def perform_user_login
 
-    id = ask_user_for_id
-    password = ask_user_for_password
-    @privilege = @login.validate(@filename, @id, @password)
-    @log_in_attempts += 1
+    while(true)
 
-    if not(@privilege==nil) then
-      puts @login.user_login(@privilege)
+      id = ask_user_for_id
+      password = ask_user_for_password
+      @privilege = @login.validate(@filename, @id, @password)
+      @log_in_attempts += 1
 
-      if(@privilege == "a") then
-        puts @admin.display_admin_options()
-        option = gets.chomp
-        @admin.select_user_to_add(option)
-      elsif (@privilege == "d") then
-        @doctor.display_doctor_data(@id)
-        @doctor.display_doctor_options()
-        option = gets.chomp
-        @doctor.select_options(option,@id)
+      if not(@privilege==nil) then
+        puts @login.user_login(@privilege)
 
-      elsif (@privilege == "r") then
-        @receptionist.display_receptionist_data(@id)
-        @receptionist.display_receptionist_options()
-         option = gets.chomp
-         @receptionist.select_options(option,@id)
-      end
+        if(@privilege == "a") then
+          puts @admin.display_admin_options()
+          option = gets.chomp
 
-    else
-      if (@log_in_attempts < 3) then
+          if (not(option=="1") and not(option=="2"))
+            puts "\n"
+            puts"logging out.."
+            break
 
-        puts "Error: Wrong ID or password !"
-        puts "Please try again..."
-        puts "----------------------------"
-        perform_user_login()
+          else
+            @admin.select_user_to_add(option)
+            puts "\n"
+            puts"logging out.."
+
+            break
+          end
+
+        elsif (@privilege == "d") then
+          @doctor.display_doctor_data(@id)
+          @doctor.display_doctor_options()
+          option = gets.chomp
+
+          if (not((option=="m") or (option=="M")) and not((option=="p")  or (option=="P")))
+            puts "\n"
+            puts"logging out.."
+            break
+
+          else @doctor.select_options(option,@id)
+          puts "\n"
+          puts"logging out.."
+          break
+          end
+        elsif (@privilege == "r") then
+          @receptionist.display_receptionist_data(@id)
+          @receptionist.display_receptionist_options()
+          option = gets.chomp
+
+          if (not((option=="m") or (option=="M")) and not((option=="a")  or (option=="A")) and not((option=="e")  or (option=="E")))
+            puts "\n"
+            puts"logging out.."
+            break
+
+          else @receptionist.select_options(option,@id)
+
+          end
+
+        end
 
       else
-        puts "\n"
-        puts "\n"
-        puts "Sorry, check if your username and password are correct \n"
-        puts "Try again later, application will exit..."
+        if (@log_in_attempts < 3) then
 
+          puts "Error: Wrong ID or password !"
+          puts "Please try again..."
+          puts "----------------------------"
+          perform_user_login()
+
+        else
+          puts "\n"
+          puts "\n"
+          puts "Sorry, check if your username and password are correct \n"
+          puts "Try again later, application will exit..."
+
+        end
       end
     end
+
   end
 
 end
 
-main = Main.new()
-main.show_initial_login_messages()
-main.perform_user_login()
+while (true)
+  main = Main.new()
+  main.show_initial_login_messages()
+  main.perform_user_login()
+end
+
