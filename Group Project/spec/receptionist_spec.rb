@@ -57,38 +57,69 @@ describe "Receptionist" do
 
 
 
+  #describe "methods of class receptionist" do
+  #
+  #  it "should update receptionist data" do
+  #    recep1 = Receptionist.new
+  #    recep1.id_number = nil
+  #    recep1.first_name = "baidy"
+  #    recep1.last_name=  nil
+  #    recep1.address = "rochdale road"
+  #    recep1.date_of_birth = "3123/123/123"
+  #    recep1.phone_number= "078376766"
+  #    recep1.email = nil
+  #    recep1.password=nil
+  #
+  #    record = ["5014",recep1.id_number, recep1.first_name, recep1.last_name,recep1.address,recep1.date_of_birth, recep1.phone_number,recep1.email,recep1.password]
+  #
+  #    receptionist.update_receptionist_data(recep1,"5014")
+  #
+  #  end
+  #end
+
+
   describe "methods of class receptionist" do
+    file = File.open("../csv/receptionist.csv", "w+")
+    CSV::Writer.generate(file) do |csv|
+      csv << ["1001","2000", "Alex", "Zorzovilis", "Greece", "Age", "1231", "Alex@gmail.com", MD5.hexdigest("alex")]
+    end
+    file.close
+
+    file = File.open("../csv/user.csv", "w+")
+    CSV::Writer.generate(file) do |csv|
+     csv << ["1001",MD5.hexdigest("alex"), "d"]
+    end
+    file.close
 
     it "should update receptionist data" do
-      recep1 = Receptionist.new
-      recep1.id_number = nil
-      recep1.first_name = "baidy"
-      recep1.last_name=  nil
-      recep1.address = "rochdale road"
-      recep1.date_of_birth = "3123/123/123"
-      recep1.phone_number= "078376766"
-      recep1.email = nil
-      recep1.password=nil
+      receptionist1= Receptionist.new
+      receptionist1.id_number = "2351"
+      receptionist1.first_name = "Onis"
+      receptionist1.last_name=  "Zorzovilis"
+      receptionist1.address = "Iran"
+      receptionist1.date_of_birth = "12/12/1980"
+      receptionist1.phone_number= "078376766"
+      receptionist1.email = "alex@gmail.com"
+      receptionist1.password="1234"
 
-      record = ["5014",recep1.id_number, recep1.first_name, recep1.last_name,recep1.address,recep1.date_of_birth, recep1.phone_number,recep1.email,recep1.password]
-
-      receptionist.update_receptionist_data(recep1,"5014")
+      receptionist.update_receptionist_data(receptionist1,"1001").should ==  ["1001",receptionist1.id_number, receptionist1.first_name, receptionist1.last_name,receptionist1.address,receptionist1.date_of_birth, receptionist1.phone_number,receptionist1.email,MD5.hexdigest("1234")]
 
     end
   end
 
   it "receptionist.select_option should get the option of the receptionist and act accordingly" do
 
-    receptionist.stub!(:option).and_return("a")
-    receptionist.stub!(:modify_receptionist_info)
-    receptionist.stub!(:add_patient)
-    receptionist.stub!(:edit_patient)
-    if (receptionist.option=="m")
-      receptionist.modify_receptionist_info
-    elsif (receptionist.option=="a")
-      receptionist.edit_patient
-    elsif (receptionist.option=="e")
-      receptionist.add_patient
+    recep = mock("Receptionist")
+    recep.stub!(:option).and_return("a")
+    recep.stub!(:modify_receptionist_info)
+    recep.stub!(:add_patient)
+    recep.stub!(:edit_patient)
+    if (recep.option=="m")
+      recep.modify_receptionist_info
+    elsif (recep.option=="a")
+      recep.edit_patient
+    elsif (recep.option=="e")
+      recep.add_patient
     end
   end
 end

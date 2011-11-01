@@ -162,25 +162,25 @@ class Receptionist < Person
       end
 
     elsif (option=="a") or (option=="A") then
-      puts "Patient' s first name :"
+      puts "Patient's first name :"
       first_name = gets.chomp
 
-      puts "Patient' s last name :"
+      puts "Patient's last name :"
       last_name = gets.chomp
 
-      puts "Patient' s address :"
+      puts "Patient's address :"
       address = gets.chomp
 
-      puts "Patient' s date of birth :"
+      puts "Patient's date of birth :"
       date_of_birth = gets.chomp
 
-      puts "Patient' s telephone number :"
+      puts "Patient's telephone number :"
       phone_number = gets.chomp
 
-      puts "Patient' s email :"
+      puts "Patient's email :"
       email = gets.chomp
 
-      puts "Patient' s id number :"
+      puts "Patient's id number :"
       id_number = gets.chomp
 
       add_patient(first_name, last_name, address, date_of_birth, phone_number, email, id_number)
