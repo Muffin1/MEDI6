@@ -48,7 +48,8 @@ class Main
         @doctor.select_options(option,@id)
 
       elsif (@privilege == "r") then
-         @receptionist.display_receptionist_options()
+        @receptionist.display_receptionist_data(@id)
+        @receptionist.display_receptionist_options()
          option = gets.chomp
          @receptionist.select_options(option,@id)
       end
