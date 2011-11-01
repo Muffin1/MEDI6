@@ -82,7 +82,10 @@ class Admin < Person
   end
 
   def display_admin_options()
-    return 'Please enter "1" to add a doctor "2" to add a receptionist or press any key to logout..'
+    puts "\n"
+    puts "1)Please enter 1 to add a doctor.."
+    puts "2)Please enter 2 to add a receptionist.."
+    puts "3)Press any key to logout.."
   end
 
   def create_doctor()

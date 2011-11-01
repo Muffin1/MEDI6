@@ -132,6 +132,7 @@ class Doctor < Person
   end
 
   def select_options(option, doctor_id)
+    result = true
     if (option=="m") or (option=="M") then
       modify_selection = display_modify_options()
 
@@ -139,12 +140,15 @@ class Doctor < Person
           modify_selection =="6" or modify_selection =="7" or modify_selection =="8" or modify_selection =="9")
 
         modify_selections(modify_selection,doctor_id)
+      else
+        result = false
       end
 
     elsif (option=="p") or (option=="P") then
       add_exam_result_interface()
 
     end
+    return result
   end
 
   def display_modify_options()

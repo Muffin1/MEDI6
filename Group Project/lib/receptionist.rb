@@ -254,9 +254,7 @@ class Receptionist < Person
 
   def select_options (option,receptionist_id)
 
-
     result = true
-
     if (option=="m") or (option=="M") then
       modify_selection = display_modify_options()
 

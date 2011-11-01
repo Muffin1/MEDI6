@@ -51,7 +51,7 @@ class Main
         puts @login.user_login(@privilege)
 
         if(@privilege == "a") then
-          puts @admin.display_admin_options()
+          @admin.display_admin_options()
           option = gets.chomp
 
           if (not(option=="1") and not(option=="2"))
@@ -69,19 +69,26 @@ class Main
 
         elsif (@privilege == "d") then
           @doctor.display_doctor_data(@id)
-          @doctor.display_doctor_options()
-          option = gets.chomp
 
-          if (not((option=="m") or (option=="M")) and not((option=="p")  or (option=="P")))
-            puts "\n"
-            puts"logging out.."
-            break
+          while(true)
+            @doctor.display_doctor_options()
+            option = gets.chomp
 
-          else @doctor.select_options(option,@id)
-          puts "\n"
-          puts"logging out.."
-          break
+            if (not((option=="m") or (option=="M")) and not((option=="p")  or (option=="P")))
+              puts "\n"
+              puts"logging out.."
+              break
+
+            else
+              if not(@doctor.select_options(option,@id))
+                puts "\n"
+                puts"logging out.."
+                break
+              end
+            end
           end
+          break
+
         elsif (@privilege == "r") then
           @receptionist.display_receptionist_data(@id)
 
