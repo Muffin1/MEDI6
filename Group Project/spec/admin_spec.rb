@@ -34,7 +34,7 @@ describe "Administrator" do
   end
 
   it "checking receptionist insertion" do
-    admin.add_receptionist("104144", "Yiannis", "Jacobson", "22 Mambo Street", "03/2/1985", "01234119","aemail@yahoo.com", "34m43")
+    admin.add_receptionist("104144", "Yiannis", "Jacobson", "22 Mambo Street", "03/2/1985", "01234119","aemail@yahoo.com", "rec")
     csv_contents = CSV.read("../csv/receptionist.csv")
 
     found_it=nil
