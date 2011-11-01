@@ -17,7 +17,6 @@ describe "Doctor" do
 
   describe "methods of class doctor" do
 
-
     it "should register a new doctor to the system" do
       doctor.stub!(:add_doctor)
       doctor.add_doctor(1,2, "John", "James", "27 Cherry Street", "dateofbirth", "12345678910", "doctor@emal.com", "pathologist",  "34m43")
