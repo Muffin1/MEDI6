@@ -136,6 +136,7 @@ class Receptionist < Person
   end
 
   def display_modify_options()
+    clear_screen
     puts"\n"
     puts"Please select the following keys to modify your data :"
     puts "-------------------------------------------------------\n"
@@ -290,6 +291,7 @@ class Receptionist < Person
     result = true
 
     if (option=="v") or (option=="V") then
+      clear_screen()
       display_receptionist_data(receptionist_id,"false")
 
     elsif (option=="m") or (option=="M") then

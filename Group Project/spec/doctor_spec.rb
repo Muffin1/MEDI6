@@ -1,5 +1,6 @@
 require "rspec"
 require "../lib/doctor.rb"
+require "../lib/patient.rb"
 require "csv"
 require "md5"
 
@@ -42,35 +43,25 @@ describe "Doctor" do
   end
 
 
-
-
   describe "methods of class doctor that need a csv record to work" do
     doctor = Doctor.new
-    system_id = doctor.id_generator()
+    doctor_system_id = doctor.id_generator()
     it "add_doctor should add a doctor in the doctor csv file" do
       doctor = Doctor.new
 
-      doctor.add_doctor(system_id,"2005", "Sandra", "Alkivias", "24 Cherry street", "12/10/1978'", "2222212222", "sandra@hotmail.com", "dentist",MD5.hexdigest("sandra"))
+      doctor.add_doctor(doctor_system_id,"2005", "Sandra", "Alkivias", "24 Cherry street", "12/10/1978'", "2222212222", "sandra@hotmail.com", "dentist",MD5.hexdigest("sandra"))
 
       csv_contents = CSV.read("../csv/doctor.csv")
       found_it=nil
       csv_contents.each do |row|
-        if(row[0] == system_id.to_s and row[1] == "2005")
+        if(row[0] == doctor_system_id.to_s and row[1] == "2005")
 
           found_it = row
         end
       end
-      found_it.should ==[system_id.to_s,"2005", "Sandra", "Alkivias", "24 Cherry street", "12/10/1978'", "2222212222", "sandra@hotmail.com", "dentist",MD5.hexdigest("sandra")]
+      found_it.should ==[doctor_system_id.to_s,"2005", "Sandra", "Alkivias", "24 Cherry street", "12/10/1978'", "2222212222", "sandra@hotmail.com", "dentist",MD5.hexdigest("sandra")]
 
     end
-
-    #
-    #file = File.open("../csv/user.csv", "w+")
-    #  CSV::Writer.generate(file) do |csv|
-    #    csv << ["999",MD5.hexdigest("sandra"), "d"]
-    #  end
-    #  file.close
-
 
     it "update_doctor_data should update an existing doctor' s information in the doctor csv file" do
       update_doctor = Doctor.new
@@ -84,29 +75,54 @@ describe "Doctor" do
       update_doctor.specialization = "dentist"
       update_doctor.password ="sandra"
 
-      doctor.update_doctor_data(update_doctor,system_id.to_s)
+      doctor.update_doctor_data(update_doctor,doctor_system_id.to_s)
 
       csv_contents = CSV.read("../csv/doctor.csv")
       found_it=nil
       csv_contents.each do |row|
-        if(row[0] == system_id.to_s and row[1] == "2000")
+        if(row[0] == doctor_system_id.to_s and row[1] == "2000")
 
           found_it = row
         end
       end
 
 
-      found_it.should == [system_id.to_s,update_doctor.id_number.to_s, update_doctor.first_name, update_doctor.last_name,update_doctor.address,update_doctor.date_of_birth, update_doctor.phone_number,update_doctor.email,update_doctor.specialization,MD5.hexdigest("sandra")]
+      found_it.should == [doctor_system_id.to_s,update_doctor.id_number.to_s, update_doctor.first_name, update_doctor.last_name,update_doctor.address,update_doctor.date_of_birth, update_doctor.phone_number,update_doctor.email,update_doctor.specialization,MD5.hexdigest("sandra")]
 
     end
+
+
+    it "doctor adds exam results to patient" do
+    #in order to check the association of a patient and a doctor we create a new patient
+    patient = Patient.new
+    patient_system_id = patient.id_generator()
+    patient.add_patient(patient_system_id.to_s,"nil", "Bill", "Gates", "Microsoft 98", "10/10/1950", "234567788", "Bill@gmail.com", "1212123")
+
+    #we stub those already implemented interface methods in order to check the function add_exam_result
+    doctor.stub!(:display_error_handling_information)
+    doctor.stub!(:display_diagnosis_information)
+
+    doctor.add_exam_result(patient_system_id,doctor_system_id,"adding a bridge")
+
+    csv_contents = CSV.read("../csv/patient.csv")
+    found_it=nil
+    csv_contents.each do |row|
+      if(row[0] == patient_system_id.to_s and row[1] == doctor_system_id.to_s)
+        found_it= row
+      end
+    end
+    found_it.should ==[patient_system_id.to_s, doctor_system_id.to_s, "Bill", "Gates", "Microsoft 98", "10/10/1950", "234567788", "Bill@gmail.com", "1212123","adding a bridge"]
   end
+  end
+
+
+
+
 
   #
   #
   #describe "methods of class doctor" do
-  #  it "should get the UI input" do
-  #    doctor.display_modify_options().should_not == nil
-  #  end
+
   #
   #  it "should display user data" do
   #    CSV_row = ["5002","4325","baidy","diawr","32, oxford road","03/09/2005","0798534355","diae@yahoo.com","therrpist","paswor1"]

@@ -129,7 +129,7 @@ class Admin < Person
     puts"--------------------------------------------------\n"
     puts "Identification details: "
     print"System id:#{doctor.system_id}\n"
-    print"Password:#{password}\n"
+    print"Password:#{details[8]}\n"
     puts"--------------------------------------------------\n"
 
   end
@@ -163,7 +163,7 @@ class Admin < Person
     puts"--------------------------------------------------\n"
     puts "Identification details: "
     print"System id:#{receptionist.system_id}\n"
-    print"Password:#{password}\n"
+    print"Password:#{details[7]}\n"
     puts"--------------------------------------------------\n"
 
   end

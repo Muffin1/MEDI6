@@ -152,6 +152,7 @@ class Doctor < Person
     clear_screen()
     result = true
     if ((option=="v") or (option=="V"))then
+      clear_screen
       display_doctor_data(doctor_id,"false")
 
     elsif (option=="m") or (option=="M") then
@@ -296,14 +297,9 @@ class Doctor < Person
     end
 
     if(inserted=="false")
-      display_error_handling_information
+      display_error_handling_information()
     else
-      #puts "----------------------------------------"
-      #puts "Diagnosis for patient with system id: " +patient_system_id.to_s
-      #puts "\n"
-      #puts "Diagnosis results : "+exam_results
-      #puts("\n")
-      #system('pause')
+      display_diagnosis_information(patient_system_id,exam_results)
     end
   end
 
@@ -314,6 +310,15 @@ class Doctor < Person
       puts "\n"
       puts "1)Patient is not registered to the system."
       puts "2)Incorrect patient system id."
+      puts("\n")
+      system('pause')
+  end
+
+    def display_diagnosis_information(patient_system_id,exam_results)
+      puts "----------------------------------------"
+      puts "Diagnosis for patient with system id: " +patient_system_id.to_s
+      puts "\n"
+      puts "Diagnosis results : "+exam_results
       puts("\n")
       system('pause')
   end
@@ -335,19 +340,19 @@ class Doctor < Person
   def show_all_unassociated_patients()
     puts "Other patients records:"
     puts"\n"
-    puts "ID                  Name"
-    puts"---------------------------------------"
+    puts "ID                  Name                  Diagnosis"
+    puts"----------------------------------------------------"
     csv_contents = CSV.read("../csv/patient.csv")
     file = File.open("../csv/patient.csv", "r+")
 
     csv_contents.each do |row|
 
       if (row[1]== 'nil')
-        puts row[0]+"           "+row[2]+" "+row[3]
+        puts row[0]+"           "+row[2]+" "+row[3]+"           "+row[9]
       end
     end
     file.close
-    puts"---------------------------------------"
+    puts"----------------------------------------------------"
     puts"\n"
   end
 
@@ -355,19 +360,19 @@ class Doctor < Person
   def show_all_associated_patients(doctor_id)
     puts "Your patients records:"
     puts"\n"
-    puts "ID                  Name"
-    puts"---------------------------------------"
+    puts "ID                  Name                  Diagnosis"
+    puts"----------------------------------------------------"
     csv_contents = CSV.read("../csv/patient.csv")
     file = File.open("../csv/patient.csv", "r+")
 
     csv_contents.each do |row|
 
       if (row[1]== doctor_id)
-        puts row[0]+"           "+row[2]+" "+row[3]
+        puts row[0]+"           "+row[2]+" "+row[3] +"           "+ row[9]
       end
     end
     file.close
-    puts"---------------------------------------"
+    puts"----------------------------------------------------"
     puts"\n"
   end
 end
