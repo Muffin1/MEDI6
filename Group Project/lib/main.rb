@@ -72,7 +72,7 @@ class Main
           end
 
         elsif (@privilege == "d") then
-          @doctor.display_doctor_data(@id)
+          @doctor.display_doctor_data(@id,"false")
           while(true)
             clear_screen()
             @doctor.display_doctor_options()
@@ -80,7 +80,7 @@ class Main
             print "Your option:> "
             option = gets.chomp
 
-            if (not((option=="m") or (option=="M")) and not((option=="p")  or (option=="P")))
+            if (not((option=="m") or (option=="M")) and not((option=="p")  or (option=="P")) and not((option=="v")  or (option=="V")))
               puts "\n"
               clear_screen()
               break
@@ -96,7 +96,7 @@ class Main
           break
 
         elsif (@privilege == "r") then
-          @receptionist.display_receptionist_data(@id)
+          @receptionist.display_receptionist_data(@id,"false")
 
           while(true)
             clear_screen()
@@ -104,7 +104,7 @@ class Main
             puts "\n"
             print "Your option:> "
             option = gets.chomp
-            if (not((option=="m") or (option=="M")) and not((option=="a")  or (option=="A")) and not((option=="e")  or (option=="E")))
+            if (not((option=="m") or (option=="M")) and not((option=="a")  or (option=="A")) and not((option=="e")  or (option=="E")) and not((option=="v")  or (option=="V")))
               puts "\n"
               clear_screen()
               break
