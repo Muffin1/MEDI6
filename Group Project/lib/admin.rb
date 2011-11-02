@@ -101,40 +101,28 @@ class Admin < Person
 
 
   def create_doctor()
+
+    #------------------------------------------------------------------
+    #--------------------------after refactoring--------------------------------
+
     clear_screen
     puts "You may now register a new doctor"
     puts"--------------------------------------------------\n"
     puts "Please provide doctor' s information below"
     puts "\n"
-    print "Id number:> "
-    id = gets.chomp()
-    puts ""
-    print "First name:> "
-    first_name = gets.chomp()
-    puts ""
-    print "Last name:> "
-    last_name  = gets.chomp()
-    puts ""
-    print "Address:> "
-    address = gets.chomp()
-    puts ""
-    print "Date of birth:> "
-    date_of_birth = gets.chomp()
-    puts ""
-    print "Telephone number:> "
-    phone_number = gets.chomp()
-    puts ""
-    print "Email:> "
-    email = gets.chomp()
-    puts ""
-    print "Specialization:> "
-    specialization = gets.chomp()
-    puts ""
-    print "Password:> "
-    password = gets.chomp()
-    puts ""
 
-    doctor = add_doctor(id,first_name, last_name, address, date_of_birth ,phone_number, email, specialization,  password)
+    details = Array.new
+    index = 0
+    prompts = ["Id number:> ","First name:> ","Last name:> ","Address:> ","Date of birth:> ","Telephone number:> ","Email:> ","Specialization:> ","Password:> "]
+
+    prompts.each do |prompt|
+      print prompt
+      details[index] = gets.chomp()
+      puts ""
+      index += 1
+    end
+
+    doctor = add_doctor(details[0],details[1],details[2],details[3],details[4],details[5],details[6],details[7],details[8])
     puts "\n"
     puts"==================================================\n"
     puts  "Doctor '#{doctor.first_name}' has registered!"
@@ -147,37 +135,28 @@ class Admin < Person
   end
 
   def create_receptionist()
- clear_screen
+
+    #------------------------------------------------------------------
+    #--------------------------after refactoring--------------------------------
+
+    clear_screen
     puts "You may now register a new receptionist"
     puts"--------------------------------------------------\n"
     puts "Please provide receptionist' s information below"
     puts "\n"
-    print "Id number:> "
-    id = gets.chomp()
-    puts ""
-    print "First name:> "
-    first_name = gets.chomp()
-    puts ""
-    print "Last name:> "
-    last_name  = gets.chomp()
-    puts ""
-    print "Address:> "
-    address = gets.chomp()
-    puts ""
-    print "Date of birth:> "
-    date_of_birth = gets.chomp()
-    puts ""
-    print "Telephone number:> "
-    phone_number = gets.chomp()
-    puts ""
-    print "Email:> "
-    email = gets.chomp()
-    puts ""
-    print "Password:> "
-    password = gets.chomp()
-    puts ""
 
-    receptionist = add_receptionist(id,first_name, last_name, address, date_of_birth ,phone_number, email,   password)
+    details = Array.new
+    index = 0
+    prompts = ["Id number:> ","First name:> ","Last name:> ","Address:> ","Date of birth:> ","Telephone number:> ","Email:> ","Password:> "]
+
+    prompts.each do |prompt|
+      print prompt
+      details[index] = gets.chomp()
+      puts ""
+      index += 1
+    end
+
+    receptionist = add_receptionist(details[0],details[1],details[2],details[3],details[4],details[5],details[6],details[7])
     puts "\n"
     puts"==================================================\n"
     puts "Receptionist '#{receptionist.first_name}' has registered!"
@@ -188,6 +167,5 @@ class Admin < Person
     puts"--------------------------------------------------\n"
 
   end
-
 
 end
