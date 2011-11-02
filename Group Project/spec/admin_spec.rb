@@ -8,41 +8,8 @@ describe "Administrator" do
 
   context "the admin should be able to register new doctors or receptionists in the system" do
 
-    let(:doctor){mock('Doctor')}
-    let(:receptionist){mock('Receptionist')}
     let(:stdin){mock('stdin')}
 
-    it "defining add_doctor method and assign privileges" do
-      doctor.stub!(:id_generator).and_return("500")        #stub: create a fake method which return 1
-      id = doctor.id_generator
-      doctor.stub_chain(:MD5,:hexdigest).with("password").and_return("hexdigest_password")
-      doctor.stub!(:set_privileges).with(id, "5000", "d").and_return[id, "5000", "d"]
-      file = File.open("../csv/user.csv", "w+")
-      record = [id, "5000", "d"]
-      CSV::Writer.generate(file) do |csv|
-      csv << record
-      end
-      file.close
-      csv_contents = CSV.read("../csv/user.csv")
-      record_exit=false
-      csv_contents.each do |row|
-        if((row[0] == id) and (row[1]=="5000") and (row[2]=="d"))
-
-          record_exit=true
-        end
-      end
-      record_exit.should == true
-    end
-
-    it "defining add_receptionist method and assign privileges" do
-      id = receptionist.stub!(:id_generator).and_return(1)
-      doctor.stub_chain(:MD5,:hexdigest).with("password").and_return("hexdigest_password")
-      encrypted_password = doctor.MD5.hexdigest("password")
-      receptionist.stub!(:add_receptionist).with(id, "Marina", "Jacobson", "22 Mambo Street", "0123456789", encrypted_password)
-      receptionist.stub!(:set_privileges).with(id, "5000", "r")
-      receptionist.add_receptionist(id, "Marina", "Jacobson", "22 Mambo Street", "0123456789", encrypted_password)
-      receptionist.set_privileges(id, "5000", "r")
-    end
 
     it "checking receptionist insertion" do
       admin = Admin.new

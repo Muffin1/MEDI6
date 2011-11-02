@@ -51,3 +51,5 @@
 5164,2000,Sandra,Alkivias,Rochdale road,31/10/1990,078376766,sandra@hotmail.com,dentist,f40a37048732da05928c3d374549c832
 111,idNumber,firstName,lastName,address,date_of_birth,phoneNumber,email,specialization,5f4dcc3b5aa765d61d8327deb882cf99
 111,idNumber,firstName,lastName,address,date_of_birth,phoneNumber,email,specialization,5f4dcc3b5aa765d61d8327deb882cf99
+5173,2323,John,James,27 Cherry Street,01/01/1953,12345678910,anyname@yahoo.com,pathologist,21232f297a57a5a743894a0e4a801fc3
+5174,AI555200,Baidy,Diaw,"70, Oxford Street",01/01/1953,1234567890,anyname@yahoo.com,Surgeon,abe7786d606b15b0d5b6626ed9e1ae57
