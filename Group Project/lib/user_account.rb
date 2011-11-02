@@ -42,7 +42,7 @@ end
 
 def clear_screen
   system "cls"
-  #system ("clear")
+  system ("clear")
 end
 
 
