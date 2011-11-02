@@ -29,6 +29,8 @@ class Main
   end
 
   def show_initial_login_messages
+    clear_screen()
+    puts "\n"
     puts "\n"
     puts "**************************** "
     puts "********** MEDI6 *********** "
@@ -130,8 +132,8 @@ class Main
           puts "\n"
           puts "\n"
           puts "Sorry, check if your username and password are correct \n"
-          puts "Try again later, application will exit..."
-
+          puts "Try again later, application will now exit..."
+          exit()
         end
       end
     end

@@ -287,30 +287,30 @@ class Receptionist < Person
 
     elsif (option=="a") or (option=="A") then
       clear_screen()
-      puts "Insert patient' s' information below:"
+      puts "Insert patient' s information below:"
       puts "---------------------------------"
       puts "\n"
       print "First name :> "
       first_name = gets.chomp
-
+      puts "\n"
       print "Last name :> "
       last_name = gets.chomp
-
+      puts "\n"
       print "Address :> "
       address = gets.chomp
-
+      puts "\n"
       print "Date of birth :> "
       date_of_birth = gets.chomp
-
-      puts "Telephone number :> "
+      puts "\n"
+      print "Telephone number :> "
       phone_number = gets.chomp
-
+      puts "\n"
       print "Email :> "
       email = gets.chomp
-
+      puts "\n"
       print "Id number :"
       id_number = gets.chomp
-
+      puts "\n"
       add_patient(first_name, last_name, address, date_of_birth, phone_number, email, id_number)
     elsif (option=="e") or (option=="E") then
       clear_screen()
