@@ -133,9 +133,10 @@ class Doctor < Person
     puts "\n"
     puts "Doctor options:"
     puts"--------------------------------------------------"
-    puts "1)Enter (m) to modify your details..  "
-    puts "2)Enter (p) to add a patient' s diagnosis.. "
-    puts "3)Enter any key to logout..                      "
+    puts "1)Enter (v) to view your details..  "
+    puts "2)Enter (m) to modify your details..  "
+    puts "3)Enter (p) to add a patient' s diagnosis.. "
+    puts "4)Enter any key to logout..                      "
     puts"--------------------------------------------------"
 
 
@@ -144,7 +145,10 @@ class Doctor < Person
   def select_options(option, doctor_id)
     clear_screen()
     result = true
-    if (option=="m") or (option=="M") then
+    if ((option=="v") or (option=="V"))then
+      display_doctor_data(doctor_id)
+
+    elsif (option=="m") or (option=="M") then
       modify_selection = display_modify_options()
 
       if (modify_selection =="1" or modify_selection =="2" or modify_selection =="3" or modify_selection =="4" or modify_selection =="5" or
@@ -156,6 +160,7 @@ class Doctor < Person
       end
 
     elsif (option=="p") or (option=="P") then
+
       add_exam_result_interface()
 
     end
@@ -305,5 +310,6 @@ class Doctor < Person
     puts"\n"
     add_exam_result(patient_id,doctor_id,diagnosis)
   end
+
 end
 

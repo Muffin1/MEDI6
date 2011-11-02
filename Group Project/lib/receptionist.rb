@@ -180,10 +180,11 @@ class Receptionist < Person
     puts "\n"
     puts "Receptionist options:"
     puts"------------------------------------------------------------------------"
-    puts "1)Enter (m) to modify your details..  "
-    puts "2)Enter (a) to add a new patient to the system.. "
-    puts "3)Enter (e) to edit information of an existing patient in the system.."
-    puts "4)Enter any key to logout..                      "
+    puts "1)Enter (v) to view your details..  "
+    puts "2)Enter (m) to modify your details..  "
+    puts "3)Enter (a) to add a new patient to the system.. "
+    puts "4)Enter (e) to edit information of an existing patient in the system.."
+    puts "5)Enter any key to logout..                      "
     puts"------------------------------------------------------------------------"
 
   end
@@ -273,7 +274,11 @@ class Receptionist < Person
   def select_options (option,receptionist_id)
 
     result = true
-    if (option=="m") or (option=="M") then
+
+    if (option=="v") or (option=="V") then
+      display_receptionist_data(receptionist_id)
+
+    elsif (option=="m") or (option=="M") then
       modify_selection = display_modify_options()
 
       if (modify_selection =="1" or modify_selection =="2" or modify_selection =="3" or modify_selection =="4" or modify_selection =="5" or
