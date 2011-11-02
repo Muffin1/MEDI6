@@ -139,9 +139,10 @@ class Doctor < Person
     puts "\n"
     puts "Doctor options:"
     puts"--------------------------------------------------"
-    puts "1)Enter (m) to modify your details..  "
-    puts "2)Enter (p) to add a patient' s diagnosis.. "
-    puts "3)Enter any key to logout..                      "
+    puts "1)Enter (v) to view your details..  "
+    puts "2)Enter (m) to modify your details..  "
+    puts "3)Enter (p) to add a patient' s diagnosis.. "
+    puts "4)Enter any key to logout..                      "
     puts"--------------------------------------------------"
 
 
@@ -150,7 +151,10 @@ class Doctor < Person
   def select_options(option, doctor_id)
     clear_screen()
     result = true
-    if (option=="m") or (option=="M") then
+    if ((option=="v") or (option=="V"))then
+      display_doctor_data(doctor_id,"false")
+
+    elsif (option=="m") or (option=="M") then
       modify_selection = display_modify_options()
 
       if (modify_selection =="1" or modify_selection =="2" or modify_selection =="3" or modify_selection =="4" or modify_selection =="5" or
@@ -164,7 +168,12 @@ class Doctor < Person
       end
 
     elsif (option=="p") or (option=="P") then
+
+      puts "\n"
+      show_all_associated_patients(doctor_id)
+      show_all_unassociated_patients()
       add_exam_result_interface(doctor_id)
+
 
     end
     return result
@@ -317,6 +326,45 @@ class Doctor < Person
     diagnosis = gets.chomp
     puts"\n"
     add_exam_result(patient_id,doctor_id,diagnosis)
+  end
+
+  def show_all_unassociated_patients()
+    puts "Other patients records:"
+    puts"\n"
+    puts "ID                  Name"
+    puts"---------------------------------------"
+    csv_contents = CSV.read("../csv/patient.csv")
+    file = File.open("../csv/patient.csv", "r+")
+
+    csv_contents.each do |row|
+
+      if (row[1]== 'nil')
+        puts row[0]+"           "+row[2]+" "+row[3]
+      end
+    end
+    file.close
+    puts"---------------------------------------"
+    puts"\n"
+  end
+
+
+  def show_all_associated_patients(doctor_id)
+    puts "Your patients records:"
+    puts"\n"
+    puts "ID                  Name"
+    puts"---------------------------------------"
+    csv_contents = CSV.read("../csv/patient.csv")
+    file = File.open("../csv/patient.csv", "r+")
+
+    csv_contents.each do |row|
+
+      if (row[1]== doctor_id)
+        puts row[0]+"           "+row[2]+" "+row[3]
+      end
+    end
+    file.close
+    puts"---------------------------------------"
+    puts"\n"
   end
 end
 
