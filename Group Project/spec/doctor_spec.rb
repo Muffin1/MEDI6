@@ -6,9 +6,6 @@ require "md5"
 
 describe "Doctor" do
 
-  let(:person){mock('Person')}
-  let(:stdin){mock('STDIN')}
-
   context "initialization of doctor attribute" do
     it "Doctor should be able to set a first name" do
       doctor =  Doctor.new
