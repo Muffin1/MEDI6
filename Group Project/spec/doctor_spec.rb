@@ -197,4 +197,56 @@ describe "Doctor" do
     doctor.add_exam_result(patient_system_id,doctor_system_id,diagnosis)
   end
 
+  it "should show the patients associated with a doctor" do
+
+    file = File.open("../csv/doctor.csv", "a+")
+    CSV::Writer.generate(file) do |csv|
+      csv << ["1005","2011", "Alex", "Zorz", "aAddress", "age'", "2222212222", "alex@hotmail.com", "surgeon",MD5.hexdigest("alex")]
+    end
+    file.close
+
+    file = File.open("../csv/user.csv", "a+")
+    CSV::Writer.generate(file) do |csv|
+      csv << ["1005",MD5.hexdigest("alex"), "d"]
+    end
+    file.close
+
+    file = File.open("../csv/patient.csv", "a+")
+    CSV::Writer.generate(file) do |csv|
+      csv << ["505", "1005", "Peter", "Rob", "Company", "18/1/1975", "data", "Peter@gmail.com", "132454657"]
+    end
+    file.close
+
+    doctor.add_exam_result(505,1005,"liver surgery")
+
+    csv_contents = CSV.read("../csv/patient.csv")
+
+    patient_found=nil
+    csv_contents.each do |row|
+      if(row[0] == "505" and row[1] == "1005")
+        patient_found= row
+      end
+    end
+    patient_found.should ==["505", "1005", "Peter", "Rob", "Company", "18/1/1975", "data", "Peter@gmail.com", "132454657","liver surgery"]
+  end
+
+  it "should show the all the patients without a doctor" do
+    file = File.open("../csv/patient.csv", "a+")
+    CSV::Writer.generate(file) do |csv|
+      csv << ["506", "nil", "John", "Smith", "Job", "31/3/1980", "other info", "smith@gmail.com", "5455"]
+    end
+    file.close
+
+  csv_contents = CSV.read("../csv/patient.csv")
+
+    patient_without_doctor="nil"
+    csv_contents.each do |row|
+      if(not(row[0].nil?) and row[1] == "nil")
+        patient_without_doctor = row
+      end
+    end
+    patient_without_doctor.should_not == "nil"
+
+  end
+
 end
