@@ -3,18 +3,12 @@ require "../lib/patient"
 
 describe "Patient" do
 
-  describe "methods of class patient" do
-    let(:patient){mock('Patient')}
 
-    it "should register a new patient to the system" do
-      patient.stub!(:add_patient)
-      patient.add_patient("1235", "12", "costas", "ioannou", "2 marlboro street", "date_of_birth", "15475213", "email", "1245125")
+  it "should insert a new patient in patient.csv" do
+    patient = Patient.new
+    patient_system_id = patient.id_generator()
+    patient.add_patient(patient_system_id.to_s,"nil", "Kwstas", "Prekas", "Ellas 98", "10/10/1950", "234567788", "KPrekas@gmail.com", "3242434223")
 
-      file = mock('file')
-      File.stub!(:open).with("filename", "privilege").and_yield(file)
-      File.stub!(:write).with("1235", "12", "costas", "ioannou", "2 marlboro street", "date_of_birth", "15475213", "email", "1245125").and_return("1235,12,costas,ioannou,2 marlboro street,date_of_birth,15475213,email,1245125")
-      File.write("1235", "12", "costas", "ioannou", "2 marlboro street", "date_of_birth", "15475213", "email", "1245125") == "1235,12,costas,ioannou,2 marlboro street,date_of_birth,15475213,email,1245125"
-    end
   end
 
 end
