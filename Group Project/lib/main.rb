@@ -72,7 +72,7 @@ class Main
           end
 
         elsif (@privilege == "d") then
-          @doctor.display_doctor_data(@id)
+          @doctor.display_doctor_data(@id,"false")
           while(true)
             clear_screen()
             @doctor.display_doctor_options()
@@ -96,7 +96,7 @@ class Main
           break
 
         elsif (@privilege == "r") then
-          @receptionist.display_receptionist_data(@id)
+          @receptionist.display_receptionist_data(@id,"false")
 
           while(true)
             clear_screen()

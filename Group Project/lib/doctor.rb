@@ -86,13 +86,19 @@ class Doctor < Person
     return_updated_row
   end
 
-  def display_doctor_data(aID)
+  def display_doctor_data(aID,update)
     filename = "../csv/doctor.csv"
     record = search_by_id(aID, filename)
 
 
-    puts "\nYour details :"
-    puts"--------------------------------------------------"
+     if(update=="false")
+      puts "\nYour details :\n"
+      puts"--------------------------------------------------"
+    else
+      puts "\nYour updated details :\n"
+      puts"--------------------------------------------------"
+    end
+
     if not(record==nil)
       puts "\n"
       if not(record[1].nil?)
@@ -151,12 +157,14 @@ class Doctor < Person
           modify_selection =="6" or modify_selection =="7" or modify_selection =="8" or modify_selection =="9")
 
         modify_selections(modify_selection,doctor_id)
+        clear_screen()
+        display_doctor_data(doctor_id,"true")
       else
         result = false
       end
 
     elsif (option=="p") or (option=="P") then
-      add_exam_result_interface()
+      add_exam_result_interface(doctor_id)
 
     end
     return result
@@ -238,13 +246,13 @@ class Doctor < Person
 
     csv_contents = CSV.read("../csv/patient.csv")
     file = File.open("../csv/patient.csv", "w+")
-    inserted = false
+    inserted = "false"
 
     csv_contents.each do |row|
 
       if (row[0]==patient_system_id.to_s && row[1]== 'nil')
 
-        inserted=true
+        inserted="true"
         CSV::Writer.generate(file) do |csv|
           csv <<  [patient_system_id,doctor_system_id,row[2], row[3], row[4], row[5], row[6], row[7], row[8],exam_results]
         end
@@ -257,14 +265,15 @@ class Doctor < Person
     file.close
 
 
-    if(inserted==false)
+    if(inserted=="false")
       csv_contents = CSV.read("../csv/patient.csv")
       file = File.open("../csv/patient.csv", "w+")
 
 
       csv_contents.each do |row|
         if (row[0]==patient_system_id.to_s && row[1]== doctor_system_id.to_s)
-          inserted=true
+          inserted="true"
+
           CSV::Writer.generate(file) do |csv|
             csv <<  [patient_system_id,doctor_system_id,row[2], row[3], row[4], row[5], row[6], row[7], row[8],exam_results]
           end
@@ -277,29 +286,33 @@ class Doctor < Person
       file.close
     end
 
-    if(inserted==false)
-      puts "Invalid data input!"
-      puts "-------------------"
+    if(inserted=="false")
+      puts "Error:Invalid data input!"
+      puts "-------------------------"
       puts "Possible causes:"
       puts "\n"
       puts "1)Patient is not registered to the system."
       puts "2)Incorrect patient system id."
-      puts "3)Incorrect doctor system id."
+      puts("\n")
+      system('pause')
+    else
+      puts "----------------------------------------"
+      puts "Diagnosis for patient with system id: " +patient_system_id
+      puts "\n"
+      puts "Diagnosis results : "+exam_results
       puts("\n")
       system('pause')
       end
   end
 
-  def add_exam_result_interface()
+  def add_exam_result_interface(doctor_id)
     puts "Insert exam results to patient record:"
     puts"---------------------------------------"
     puts"\n"
     print "Insert Patient system id :>"
     patient_id = gets.chomp
     puts"\n"
-    print "Insert Doctor system id :>"
-    doctor_id = gets.chomp
-    puts"\n"
+
     print "Insert your diagnosis :>"
     diagnosis = gets.chomp
     puts"\n"

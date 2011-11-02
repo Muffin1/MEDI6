@@ -12,6 +12,7 @@ class Receptionist < Person
     a_id = patient.id_generator()
 
     patient.add_patient(a_id, "nil", first_name, last_name, address, date_of_birth, phone_number, email, id_number)
+    return patient
   end
 
   def add_receptionist(receptionist_id,id_number, first_name, last_name, address, date_of_birth, phone_number, email, password)
@@ -159,13 +160,14 @@ class Receptionist < Person
     puts"\n"
     puts"Please select the following keys to modify patient' s data :"
     puts "-----------------------------------------------------------\n"
-    puts "Press (1) to change patient' s ID number.. "
-    puts "Press (2) to change patient' s First name.. "
-    puts "Press (3) to change patient' s Last name.. "
-    puts "Press (4) to change patient' s Address.. "
-    puts "Press (5) to change patient' s Date of birth.. "
-    puts "Press (6) to change patient' s Phone number.. "
-    puts "Press (7) to change patient' s Email.. "
+
+    puts "Press (1) to change patient' s First name.. "
+    puts "Press (2) to change patient' s Last name.. "
+    puts "Press (3) to change patient' s Address.. "
+    puts "Press (4) to change patient' s Date of birth.. "
+    puts "Press (5) to change patient' s Phone number.. "
+    puts "Press (6) to change patient' s Email.. "
+    puts "Press (7) to change patient' s ID number.. "
     puts "Press any other key to exit..\n"
     puts "\n"
     print "Your option:> "
@@ -188,13 +190,18 @@ class Receptionist < Person
 
   end
 
-  def display_receptionist_data(aID)
+  def display_receptionist_data(aID, update)
     filename = "../csv/receptionist.csv"
     record = search_by_id(aID, filename)
 
 
-    puts "\nYour details :"
-    puts"--------------------------------------------------"
+    if(update=="false")
+      puts "\nYour details :\n"
+      puts"--------------------------------------------------"
+    else
+      puts "\nYour updated details :\n"
+      puts"--------------------------------------------------"
+    end
     if not(record==nil)
       puts "\n"
       if not(record[1].nil?)
@@ -229,35 +236,42 @@ class Receptionist < Person
     end
   end
 
-  def display_patient_data(aID)
+  def display_patient_data(aID, update)
     filename = "../csv/patient.csv"
     record = search_by_id(aID, filename)
 
-    puts "\nPatient details :\n"
-    puts"--------------------------------------------------"
-
+    if(update=="false")
+      puts "\nPatient details :\n"
+      puts"--------------------------------------------------"
+    else
+      puts "\nUpdated patient details :\n"
+      puts"--------------------------------------------------"
+    end
     if not(record==nil)
       puts "\n"
+
+      puts "System id number  : "+ aID.to_s
+
       if not(record[8].nil?)
-        puts "Id number     : "+ record[8]
+        puts "Id number         : "+ record[8]
       end
       if not(record[2].nil?)
-        puts "First name    : " + record[2]
+        puts "First name        : " + record[2]
       end
       if not(record[3].nil?)
-        puts "Last name     : " + record[3]
+        puts "Last name         : " + record[3]
       end
       if not(record[4].nil?)
-        puts "Address       : "+ record[4]
+        puts "Address           : "+ record[4]
       end
       if not(record[5].nil?)
-        puts "Date of birth : "+ record[5]
+        puts "Date of birth     : "+ record[5]
       end
       if not(record[6].nil?)
-        puts "Phone number  : "+ record[6]
+        puts "Phone number      : "+ record[6]
       end
       if not(record[7].nil?)
-        puts "Email         : "+ record[7]
+        puts "Email             : "+ record[7]
       end
 
 
@@ -280,7 +294,8 @@ class Receptionist < Person
           modify_selection =="6" or modify_selection =="7" or modify_selection =="8")
 
         modify_selections(modify_selection,receptionist_id)
-
+        clear_screen()
+        display_receptionist_data(receptionist_id,"true")
       else
         result= false
       end
@@ -311,17 +326,20 @@ class Receptionist < Person
       print "Id number :"
       id_number = gets.chomp
       puts "\n"
-      add_patient(first_name, last_name, address, date_of_birth, phone_number, email, id_number)
+      patient = add_patient(first_name, last_name, address, date_of_birth, phone_number, email, id_number)
+      clear_screen()
+      display_patient_data(patient.system_id,"false")
+
     elsif (option=="e") or (option=="E") then
       clear_screen()
-      puts "Edit patient' s' information below:"
+      puts "Edit patient' s information below:"
       puts "---------------------------------"
       puts "\n"
 
       print "Insert patient' s id number :> "
       patient_id = gets.chomp
 
-      display_patient_data(patient_id)
+      display_patient_data(patient_id,"false")
 
       edit_selection = display_edit_patient_options()
 
@@ -329,6 +347,8 @@ class Receptionist < Person
           edit_selection =="6" or edit_selection =="7" )
 
         edit_patient(edit_selection,patient_id)
+        clear_screen()
+        display_patient_data(patient_id,"true")
       end
 
     end
