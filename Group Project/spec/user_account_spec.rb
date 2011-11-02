@@ -37,5 +37,13 @@ end
   login = Login.new
   authorization = login.validate("../csv/user.csv",static_id, password)
   authorization.should_not == nil
-end
+  end
+
+   it "should return the appropriate message"   do
+     login = Login.new
+     login.user_login("a").should == 'Welcome admin!' +"\n"+"=========================="
+     login.user_login("d").should == 'Welcome doctor!' +"\n"+"=========================="
+     login.user_login("r").should == 'Welcome receptionist!' +"\n"+"=========================="
+     login.user_login("x").should == nil
+   end
 end
