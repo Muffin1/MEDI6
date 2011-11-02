@@ -3,7 +3,7 @@ require '../lib/receptionist.rb'
 require '../lib/patient.rb'
 
 describe "Receptionist" do
-  let(:stdin){mock('STDIN')}
+
   patient_file = "../csv/patient.csv"
 
   it "Receptionist should have a first name" do
@@ -31,19 +31,7 @@ describe "Receptionist" do
     receptionist = Receptionist.new
     receptionist.phone_number = "123456789"
     phone_number = receptionist.phone_number
-    receptionist.phone_number.should == "123456789"
-  end
-
-  it "should register a new patient to the system" do
-    receptionist = Receptionist.new
-    receptionist.stub!(:add_patient)
-    receptionist.add_patient("jerry","cheng","12 oxford street", "14/12/1985", "3251353", "email", "654321")
-
-    file = mock('File')
-    #file.stub!(:open).with("filename", "privilege").and_yield(file)
-    file.stub!(:write).with("jerry","cheng","12 oxford street", "14/12/1985", "3251353", "email", "654321").and_return("jerry,cheng,12 oxford street,14/12/1985,3251353, email,654321")
-    record = file.write("jerry","cheng","12 oxford street", "14/12/1985", "3251353", "email", "654321")
-    record.should == "jerry,cheng,12 oxford street,14/12/1985,3251353, email,654321"
+    phone_number.should == "123456789"
   end
 
   it "checking patient insertion" do
@@ -86,73 +74,6 @@ describe "Receptionist" do
     receptionist1.password="1234"
 
     receptionist.update_receptionist_data(receptionist1,"1001").should ==  ["1001",receptionist1.id_number, receptionist1.first_name, receptionist1.last_name,receptionist1.address,receptionist1.date_of_birth, receptionist1.phone_number,receptionist1.email,MD5.hexdigest("1234")]
-
-  end
-
-  it "mock update_patient_data" do
-    receptionist = Receptionist.new
-    patient = mock("Patient")
-    patient.stub!(:patient_id).and_return("2000")
-    receptionist.stub!(:search_by_id).with(patient.patient_id,patient_file).and_return(mock("existing patient"))
-    patient_info = receptionist.search_by_id(patient.patient_id, patient_file)
-    row = Array.new
-    patient_info.stub!(:first_name).and_return("Kwstas")
-    row[0] = patient_info.first_name
-    patient_info.stub!(:last_name).and_return("Kwsta")
-    row[1] = patient_info.last_name
-    patient_info.stub!(:address).and_return("Thermopilwn 80")
-    row[2] = patient_info.address
-    patient_info.stub!(:date_of_birth).and_return("12/12/1990")
-    row[3] = patient_info.date_of_birth
-    patient_info.stub!(:phone_number).and_return("21212121212")
-    row[4] = patient_info.phone_number
-    patient_info.stub!(:email).and_return("KKwstas@gmail.com")
-    row[5] = patient_info.email
-    patient_info.stub!(:id_number).and_return("12132545")
-    row[6] = patient_info.id_number
-
-    #changing some data of patient record
-    stdin = mock('stdin')
-
-    stdin.stub!(:gets).and_return("nil")
-    new_info = stdin.gets
-    if(new_info!="nil")
-      row[0] = new_info
-    end
-    stdin.stub!(:gets).and_return("nil")
-    new_info = stdin.gets
-    if(new_info!="nil")
-      row[1] = new_info
-    end
-    stdin.stub!(:gets).and_return("Nelsonos 12")
-    new_info = stdin.gets
-    if(new_info!="nil")
-      row[2] = new_info
-    end
-    stdin.stub!(:gets).and_return("nil")
-    new_info = stdin.gets
-    if(new_info!="nil")
-      row[3] = new_info
-    end
-    stdin.stub!(:gets).and_return("nil")
-    new_info = stdin.gets
-    if(new_info!="nil")
-      row[4] = new_info
-    end
-    stdin.stub!(:gets).and_return("new@email.com")
-    new_info = stdin.gets
-    if(new_info!="nil")
-      row[5] = new_info
-    end
-    stdin.stub!(:gets).and_return("nil")
-    new_info = stdin.gets
-    if(new_info!="nil")
-      row[6] = new_info
-    end
-    file = mock('File')
-    file.stub!(:write).with(row[0],row[1],row[2], row[3], row[4], row[5], row[6]).and_return(row)
-    record = file.write(row[0],row[1],row[2], row[3], row[4], row[5], row[6])
-    record.should == row
 
   end
 
