@@ -7,6 +7,11 @@ class Person
 
   def id_generator()
 
+
+    if (File.exists?('../lib/id_file.txt') and File.zero?('../lib/id_file.txt') )
+        File.delete('../lib/id_file.txt')
+    end
+
     if File.exists?('../lib/id_file.txt')
       file = File.open('../lib/id_file.txt','r')
       file.each {|line|

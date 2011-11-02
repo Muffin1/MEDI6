@@ -41,7 +41,7 @@ class Login
 end
 
 def clear_screen
-  #system "cls"
+  system "cls"
   #system ("clear")
 end
 

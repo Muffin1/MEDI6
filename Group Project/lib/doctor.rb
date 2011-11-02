@@ -296,6 +296,18 @@ class Doctor < Person
     end
 
     if(inserted=="false")
+      display_error_handling_information
+    else
+      #puts "----------------------------------------"
+      #puts "Diagnosis for patient with system id: " +patient_system_id.to_s
+      #puts "\n"
+      #puts "Diagnosis results : "+exam_results
+      #puts("\n")
+      #system('pause')
+    end
+  end
+
+  def display_error_handling_information
       puts "Error:Invalid data input!"
       puts "-------------------------"
       puts "Possible causes:"
@@ -304,14 +316,6 @@ class Doctor < Person
       puts "2)Incorrect patient system id."
       puts("\n")
       system('pause')
-    else
-      puts "----------------------------------------"
-      puts "Diagnosis for patient with system id: " +patient_system_id
-      puts "\n"
-      puts "Diagnosis results : "+exam_results
-      puts("\n")
-      system('pause')
-      end
   end
 
   def add_exam_result_interface(doctor_id)
