@@ -32,13 +32,13 @@ describe "Doctor" do
   describe "methods of class doctor" do
     file = File.open("../csv/doctor.csv", "w+")
     CSV::Writer.generate(file) do |csv|
-      csv << ["1000","2000", "Sandra", "Alkivias", "my address you know", "can't tell'", "2222212222", "sandra@hotmail.com", "dentist",MD5.hexdigest("sandra")]
+      csv << ["999","2000", "Sandra", "Alkivias", "my address you know", "can't tell'", "2222212222", "sandra@hotmail.com", "dentist",MD5.hexdigest("sandra")]
     end
     file.close
 
     file = File.open("../csv/user.csv", "w+")
     CSV::Writer.generate(file) do |csv|
-      csv << ["1001",MD5.hexdigest("sandra"), "d"]
+      csv << ["999",MD5.hexdigest("sandra"), "d"]
     end
     file.close
 
@@ -54,7 +54,7 @@ describe "Doctor" do
       doctor1.specialization = "dentist"
       doctor1.password="sandra"
 
-      doctor.update_doctor_data(doctor1,"1001").should ==  ["1001",doctor1.id_number, doctor1.first_name, doctor1.last_name,doctor1.address,doctor1.date_of_birth, doctor1.phone_number,doctor1.email,doctor1.specialization,MD5.hexdigest("sandra")]
+      doctor.update_doctor_data(doctor1,"999").should ==  ["999",doctor1.id_number, doctor1.first_name, doctor1.last_name,doctor1.address,doctor1.date_of_birth, doctor1.phone_number,doctor1.email,doctor1.specialization,MD5.hexdigest("sandra")]
 
     end
   end

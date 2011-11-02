@@ -25,13 +25,13 @@ class Login
 
   def user_login(user_type)
     if user_type == "a" then
-      return 'Welcome admin!'
+      return 'Welcome admin!' +"\n"+"=========================="
 
     elsif user_type == "d" then
-      return 'Welcome doctor!'
+      return 'Welcome doctor!' +"\n"+"=========================="
 
     elsif user_type == "r" then
-      return 'Welcome receptionist!'
+      return 'Welcome receptionist!' +"\n"+"=========================="
 
     else return nil
 
@@ -39,4 +39,10 @@ class Login
   end
 
 end
+
+def clear_screen
+  system "cls"
+  system "clear"
+end
+
 

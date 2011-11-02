@@ -4,10 +4,6 @@ require "doctor.rb"
 require "receptionist.rb"
 require 'csv'
 
-  def clear_screen
-    system "cls"
-    system "clear"
-  end
 
 class Main
 
@@ -23,12 +19,12 @@ class Main
   attr_accessor :id , :password, :privilege
 
   def ask_user_for_id
-    puts "User ID: "
+    print "User ID:> "
     @id = gets.chomp
   end
 
   def ask_user_for_password
-    puts "Password: "
+    print "Password:> "
     @password = gets.chomp
   end
 
@@ -36,7 +32,7 @@ class Main
     puts "\n"
     puts "**************************** "
     puts "********** MEDI6 *********** "
-    puts "**************************** "
+    puts "*************************(R) "
     puts "\n"
     puts "Please provide your details.."
     puts "\n"
@@ -52,60 +48,74 @@ class Main
       @privilege = @login.validate(@filename, @id, @password)
       @log_in_attempts += 1
 
-      clear_screen
+      clear_screen()
 
       if not(@privilege==nil) then
         puts @login.user_login(@privilege)
 
         if(@privilege == "a") then
-          puts @admin.display_admin_options()
+          @admin.display_admin_options()
+          puts "\n"
+          print "Your option:> "
           option = gets.chomp
 
           if (not(option=="1") and not(option=="2"))
             puts "\n"
-            puts"logging out.."
+            clear_screen()
             break
 
           else
             @admin.select_user_to_add(option)
-            puts "\n"
-            puts"logging out.."
-
             break
           end
 
         elsif (@privilege == "d") then
           @doctor.display_doctor_data(@id)
-          @doctor.display_doctor_options()
-          option = gets.chomp
-
-
-
-
-          if (not((option=="m") or (option=="M")) and not((option=="p")  or (option=="P")))
+          while(true)
+            clear_screen()
+            @doctor.display_doctor_options()
             puts "\n"
-            puts"logging out.."
-            break
+            print "Your option:> "
+            option = gets.chomp
 
-          else @doctor.select_options(option,@id)
-          puts "\n"
-          puts"logging out.."
-          break
+            if (not((option=="m") or (option=="M")) and not((option=="p")  or (option=="P")))
+              puts "\n"
+              clear_screen()
+              break
+
+            else
+              if not(@doctor.select_options(option,@id))
+                puts "\n"
+                clear_screen()
+                break
+              end
+            end
           end
+          break
+
         elsif (@privilege == "r") then
           @receptionist.display_receptionist_data(@id)
-          @receptionist.display_receptionist_options()
-          option = gets.chomp
 
-          if (not((option=="m") or (option=="M")) and not((option=="a")  or (option=="A")) and not((option=="e")  or (option=="E")))
+          while(true)
+            clear_screen()
+            @receptionist.display_receptionist_options()
             puts "\n"
-            puts"logging out.."
-            break
+            print "Your option:> "
+            option = gets.chomp
+            if (not((option=="m") or (option=="M")) and not((option=="a")  or (option=="A")) and not((option=="e")  or (option=="E")))
+              puts "\n"
+              clear_screen()
+              break
 
-          else @receptionist.select_options(option,@id)
-
+            else
+              if not(@receptionist.select_options(option,@id))
+                puts "\n"
+                clear_screen()
+                break
+              end
+            end
           end
-
+          break
         end
 
       else

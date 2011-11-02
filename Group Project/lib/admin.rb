@@ -2,13 +2,16 @@ require 'person.rb'
 require 'doctor.rb'
 require 'receptionist.rb'
 require 'md5'
+require 'user_account.rb'
 
 
 class Admin < Person
   attr_accessor :id, :password
 
   def initialize()
-
+    if(search_by_id(5000,"../csv/user.csv")==nil)
+      set_privileges(5000,MD5.hexdigest("admin"),"a")
+    end
   end
 
   def add_doctor(idNumber,firstName, lastName, address, date_of_birth ,phoneNumber, email, specialization,  password)
@@ -22,9 +25,7 @@ class Admin < Person
     return doctor
   end
 
-  def delete_doctor(doctor)
 
-  end
 
   def add_receptionist(idNumber, firstName, lastName, address, date_of_birth, phoneNumber, email, password)
     receptionist = Receptionist.new()
@@ -37,39 +38,44 @@ class Admin < Person
     return receptionist
   end
 
-  def deleteReceptionist(receptionist)
-
-  end
 
   def select_user_to_add(option)
-
+    answer =option
     while (true)
 
-      if (option == "1") then
+      if (answer=="1") then
 
 
         create_doctor()
         puts "\n"
-        puts "----------------------"
-        puts "\n"
-        puts 'add another doctor : press "y" or "n" to exit'
-        answer = gets.chomp()
-        if  (answer=="n")
-          break
 
+
+        system("pause")
+        clear_screen
+
+        display_admin_options()
+        print "Your option:> "
+        answer = gets.chomp()
+        if ((answer!="1" and answer!="2") or answer=="\n")
+          clear_screen
+          break
         end
 
-      elsif(option == "2") then
+      elsif(answer=="2") then
 
         create_receptionist()
-        puts "\n"
-        puts "----------------------"
-        puts "\n"
-        puts 'add another receptionist : press "y" or "n" to exit'
-        answer = gets.chomp()
-        if  (answer=="n")
-          break
 
+        puts "\n"
+
+        system("pause")
+        clear_screen
+
+        display_admin_options()
+        print "Your option:> "
+        answer = gets.chomp()
+        if  ((answer!="1" and answer!="2") or answer=="\n")
+          clear_screen
+          break
         end
 
       else
@@ -82,62 +88,104 @@ class Admin < Person
   end
 
   def display_admin_options()
-    return 'Please enter "1" to add a doctor "2" to add a receptionist or press any key to logout..'
+    puts "\n"
+    puts "Administrator options:"
+    puts"--------------------------------------------------"
+    puts "1)Enter (1) to register a doctor..  "
+    puts "2)Enter (2) to register a receptionist.. "
+    puts "3)Enter any key to logout..                      "
+    puts"--------------------------------------------------"
+
   end
 
-  def create_doctor()
-    puts "Adding a doctor.."
-    puts "Please provide the values.."
-    puts "\n"
-    puts "doctor id number: "
-    id = gets.chomp()
-    puts "doctor first name: "
-    first_name = gets.chomp()
-    puts "doctor last name: "
-    last_name  = gets.chomp()
-    puts "doctor address: "
-    address = gets.chomp()
-    puts "doctor date of birth: "
-    date_of_birth = gets.chomp()
-    puts "doctor phone number: "
-    phone_number = gets.chomp()
-    puts "doctor email: "
-    email = gets.chomp()
-    puts "doctor specialization: "
-    specialization = gets.chomp()
-    puts "doctor password"
-    password = gets.chomp()
 
-    add_doctor(id,first_name, last_name, address, date_of_birth ,phone_number, email, specialization,  password)
+
+  def create_doctor()
+    clear_screen
+    puts "You may now register a new doctor"
+    puts"--------------------------------------------------\n"
+    puts "Please provide doctor' s information below"
     puts "\n"
-    puts  "Doctor #{first_name} added!"
+    print "Id number:> "
+    id = gets.chomp()
+    puts ""
+    print "First name:> "
+    first_name = gets.chomp()
+    puts ""
+    print "Last name:> "
+    last_name  = gets.chomp()
+    puts ""
+    print "Address:> "
+    address = gets.chomp()
+    puts ""
+    print "Date of birth:> "
+    date_of_birth = gets.chomp()
+    puts ""
+    print "Telephone number:> "
+    phone_number = gets.chomp()
+    puts ""
+    print "Email:> "
+    email = gets.chomp()
+    puts ""
+    print "Specialization:> "
+    specialization = gets.chomp()
+    puts ""
+    print "Password:> "
+    password = gets.chomp()
+    puts ""
+
+    doctor = add_doctor(id,first_name, last_name, address, date_of_birth ,phone_number, email, specialization,  password)
+    puts "\n"
+    puts"==================================================\n"
+    puts  "Doctor '#{doctor.first_name}' has registered!"
+    puts"--------------------------------------------------\n"
+    puts "Identification details: "
+    print"System id:#{doctor.system_id}\n"
+    print"Password:#{password}\n"
+    puts"--------------------------------------------------\n"
 
   end
 
   def create_receptionist()
-    puts "Adding a receptionist.."
-    puts "Please provide the values.."
+ clear_screen
+    puts "You may now register a new receptionist"
+    puts"--------------------------------------------------\n"
+    puts "Please provide receptionist' s information below"
     puts "\n"
-    puts "receptionist id number: "
+    print "Id number:> "
     id = gets.chomp()
-    puts "receptionist first name: "
+    puts ""
+    print "First name:> "
     first_name = gets.chomp()
-    puts "receptionist last name: "
+    puts ""
+    print "Last name:> "
     last_name  = gets.chomp()
-    puts "receptionist address: "
+    puts ""
+    print "Address:> "
     address = gets.chomp()
-    puts "receptionist date of birth: "
+    puts ""
+    print "Date of birth:> "
     date_of_birth = gets.chomp()
-    puts "receptionist phone number: "
+    puts ""
+    print "Telephone number:> "
     phone_number = gets.chomp()
-    puts "receptionist email: "
+    puts ""
+    print "Email:> "
     email = gets.chomp()
-    puts "receptionist password"
+    puts ""
+    print "Password:> "
     password = gets.chomp()
+    puts ""
 
-    add_receptionist(id,first_name, last_name, address, date_of_birth ,phone_number, email, password)
+    receptionist = add_receptionist(id,first_name, last_name, address, date_of_birth ,phone_number, email,   password)
     puts "\n"
-    puts  "Receptionist #{first_name} added!"
+    puts"==================================================\n"
+    puts "Receptionist '#{receptionist.first_name}' has registered!"
+    puts"--------------------------------------------------\n"
+    puts "Identification details: "
+    print"System id:#{receptionist.system_id}\n"
+    print"Password:#{password}\n"
+    puts"--------------------------------------------------\n"
 
   end
 
