@@ -105,7 +105,7 @@ class Main
             print "Your option:> "
             option = gets.chomp
             if (not((option=="m") or (option=="M")) and not((option=="a")  or (option=="A")) and not((option=="e")  or (option=="E")) and not((option=="v")  or (option=="V")))
-              puts "\n"
+
               clear_screen()
               break
 

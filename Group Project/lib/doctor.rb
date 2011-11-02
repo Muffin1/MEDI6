@@ -91,7 +91,7 @@ class Doctor < Person
     record = search_by_id(aID, filename)
 
 
-     if(update=="false")
+    if(update=="false")
       puts "\nYour details :\n"
       puts"--------------------------------------------------"
     else
@@ -304,75 +304,111 @@ class Doctor < Person
   end
 
   def display_error_handling_information
-      puts "Error:Invalid data input!"
-      puts "-------------------------"
-      puts "Possible causes:"
-      puts "\n"
-      puts "1)Patient is not registered to the system."
-      puts "2)Incorrect patient system id."
-      puts("\n")
-      system('pause')
+    puts "Error:Invalid data input!"
+    puts "-------------------------"
+    puts "Possible causes:"
+    puts "\n"
+    puts "1)Patient is not registered to the system."
+    puts "2)Incorrect patient system id."
+    puts("\n")
+    system('pause')
   end
 
-    def display_diagnosis_information(patient_system_id,exam_results)
-      puts "----------------------------------------"
-      puts "Diagnosis for patient with system id: " +patient_system_id.to_s
-      puts "\n"
-      puts "Diagnosis results : "+exam_results
-      puts("\n")
-      system('pause')
+  def display_diagnosis_information(patient_system_id,exam_results)
+    puts "----------------------------------------"
+    puts "Diagnosis for patient with system id: " +patient_system_id.to_s
+    puts "\n"
+    puts "Diagnosis results : "+exam_results
+    puts("\n")
+    system('pause')
   end
 
   def add_exam_result_interface(doctor_id)
     puts "Insert exam results to patient record:"
     puts"---------------------------------------"
     puts"\n"
-    print "Insert Patient system id :>"
+    print "Insert Patient system id :> "
     patient_id = gets.chomp
     puts"\n"
 
-    print "Insert your diagnosis :>"
+    print "Insert your diagnosis :> "
     diagnosis = gets.chomp
     puts"\n"
     add_exam_result(patient_id,doctor_id,diagnosis)
   end
 
-  def show_all_unassociated_patients()
-    puts "Other patients records:"
-    puts"\n"
-    puts "ID                  Name                  Diagnosis"
-    puts"----------------------------------------------------"
+
+  def get_all_unassociated_patients()
+    array = []
     csv_contents = CSV.read("../csv/patient.csv")
     file = File.open("../csv/patient.csv", "r+")
 
     csv_contents.each do |row|
 
       if (row[1]== 'nil')
-        puts row[0]+"           "+row[2]+" "+row[3]+"           "+row[9]
+        row_array = [row[0],row[1],row[2],row[3],row[9]]
+        array.push(row_array)
       end
     end
     file.close
-    puts"----------------------------------------------------"
-    puts"\n"
+    return array
   end
 
-
-  def show_all_associated_patients(doctor_id)
-    puts "Your patients records:"
-    puts"\n"
-    puts "ID                  Name                  Diagnosis"
-    puts"----------------------------------------------------"
+  def get_all_associated_patients(doctor_id)
+    array = []
     csv_contents = CSV.read("../csv/patient.csv")
     file = File.open("../csv/patient.csv", "r+")
 
     csv_contents.each do |row|
 
-      if (row[1]== doctor_id)
-        puts row[0]+"           "+row[2]+" "+row[3] +"           "+ row[9]
+      if (row[1] == doctor_id.to_s)
+        row_array = [row[0],row[1],row[2],row[3],row[9]]
+        array.push(row_array)
       end
     end
     file.close
-    puts"----------------------------------------------------"
+    return array
+  end
+
+  def show_all_unassociated_patients()
+    patients = get_all_unassociated_patients()
+    puts "Other patients records:"
+    puts"\n"
+    puts "ID                  Name                  Diagnosis"
+    puts"-----------------------------------------------------"
+    patients.each do |row|
+      print row[0].to_s+"           "+   row[2].to_s+" "+ row[3].to_s
+      length = 26 - (row[2].to_s.length  + row[3].to_s.length )
+      while(length>0)
+        print " "
+        length = length -1
+      end
+      print "unexamined"
+      puts ""
+    end
+    puts"-----------------------------------------------------"
+    puts"\n"
+  end
+
+
+  def show_all_associated_patients(doctor_id)
+
+    patients = get_all_associated_patients(doctor_id)
+    puts "Your patients records:"
+    puts"\n"
+    puts "ID                  Name                  Diagnosis"
+    puts"-----------------------------------------------------"
+    patients.each do |row|
+      print row[0].to_s+"           "+   row[2].to_s+" "+ row[3].to_s
+      length = 26 - (row[2].to_s.length  + row[3].to_s.length )
+      while(length>0)
+        print " "
+        length = length -1
+      end
+      print row[4].to_s
+      puts ""
+    end
+    puts"-----------------------------------------------------"
     puts"\n"
   end
 end
