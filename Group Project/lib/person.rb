@@ -1,5 +1,6 @@
 require 'csv'
 require 'md5'
+require '../lib/admin.rb'
 class Person
 
   attr_accessor :system_id,:first_name, :last_name, :address, :date_of_birth, :phone_number, :email, :id_number, :password
