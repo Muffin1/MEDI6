@@ -10,6 +10,26 @@ describe "Administrator" do
 
     let(:stdin){mock('stdin')}
 
+    let(:doctor){mock('Doctor')}
+
+
+       #it "defining add_doctor method and assign privileges" do
+       #  admin = Admin.new
+       #  doctor.stub!(:id_generator).and_return("500")
+       #  id = doctor.id_generator
+       #  MD5.stub!(:hexdigest).with("password").and_return("password")
+       #  password = MD5.hexdigest("password")
+       #  doctor.stub!(:set_privileges).with(id, password, "d").and_return[id, password, "d"]
+       #  privilege =  doctor.set_privileges(id,password, "d")
+       #  doctor.stub!(:add_doctor).and_return(id.to_s ,"2323","John", "James", "27 Cherry Street", "01/01/1953", "12345678910", "anyname@yahoo.com", "pathologist",  password.to_s)
+       #  data =  doctor.add_doctor
+       #  Doctor.stub!(:new).and_return(doctor)
+       #
+       #
+       #  created_doctor = admin.add_doctor("2323","John", "James", "27 Cherry Street", "01/01/1953", "12345678910", "anyname@yahoo.com", "pathologist", password.to_s)
+       #
+       #  created_doctor.should == mock('Doctor')
+       #end
 
     it "checking receptionist insertion" do
       admin = Admin.new
